@@ -1,0 +1,92 @@
+/* ===== Hero (full-bleed, centered title) ===== */
+.collection-hero {
+  position: relative;
+  width: 100vw;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  min-height: 520px;
+  background: center/cover no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.collection-hero-inner {
+  max-width: 1240px;
+  width: 100%;
+  padding: 0 24px;
+  text-align: center;
+  color: #fff;
+  text-shadow: 2px 2px 6px rgba(0,0,0,.45);
+}
+
+.collection-title {
+  font-size: clamp(44px, 6vw, 72px);
+  font-weight: 200;
+  margin: 0 0 10px 0;
+  letter-spacing: .4px;
+}
+
+.collection-underline {
+  width: 56px;
+  height: 4px;
+  margin: 0 auto;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #f6a, #f9e36b, #7ae1c9, #8ab6ff);
+}
+
+/* ===== Toolbar (sort) ===== */
+.collection-toolbar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  margin: 28px 0 12px;
+}
+
+.collection-toolbar select {
+  padding: 10px 14px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  background: #fff;
+}
+
+/* ===== Grid (3-up → 2-up → 1-up) ===== */
+.collection-grid {
+  max-width: 1240px;
+  margin: 0 auto 64px;
+  padding: 0 24px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px 24px;
+}
+@media (max-width: 980px)  { .collection-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 560px)  { .collection-grid { grid-template-columns: 1fr; } }
+
+/* ===== Cards ===== */
+.collection-card { text-decoration: none; color: inherit; }
+.collection-imgwrap { overflow: hidden; background: #f7f7f7; }
+.collection-img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1 / 1;     /* square tiles across all pages */
+  object-fit: cover;
+  display: block;
+  transition: transform 220ms ease;
+}
+.collection-card:hover .collection-img { transform: scale(1.02); }
+
+.collection-name  { margin-top: 12px; font-weight: 500; }
+.collection-price { margin-top: 4px;  font-size: 14px; opacity: .85; }
+
+/* ===== Helper: empty-collection message ===== */
+.collection-empty {
+  max-width: 1240px;
+  margin: 40px auto 80px;
+  padding: 0 24px;
+  text-align: center;
+  font-size: 18px;
+  color: #3f3f3f;
+}

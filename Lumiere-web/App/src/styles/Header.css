@@ -1,0 +1,194 @@
+:root {
+  --header-h: 72px;
+  --flyout-w: 220px;
+  --flyout-radius: 10px;
+  --hover-bg: #e9ecf1;
+
+  /* ✅ equal side column width (logo + right actions) */
+  --side-col: 260px; /* same as max search width */
+}
+
+/* Header shell */
+.site-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  background: #fff;
+  border-bottom: 1px solid #eee;
+  transition: box-shadow .2s ease;
+}
+.site-header.is-scrolled {
+  box-shadow: 0 2px 18px rgba(0,0,0,.06);
+}
+
+.header-bar {
+  width: 100%;
+  padding: 10px 0;
+}
+
+/* 3 columns: logo | centered nav | right reserved space */
+.header-grid {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 0 24px;
+  display: grid;
+  grid-template-columns: var(--side-col) auto var(--side-col); /* ✅ keep nav centered */
+  align-items: center;
+  column-gap: 16px;
+}
+
+/* Logo */
+.logo-box { display: flex; align-items: center; justify-content: flex-start; }
+.logo-link { display: inline-flex; align-items: center; }
+.logo-img { height: 75px; width: auto; display: block; }
+
+/* Nav */
+.nav-wrap { justify-self: center; }
+.nav {
+  display: flex;
+  align-items: center;
+  gap: clamp(12px,3vw,36px);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.nav-item { position: relative; }
+.nav-link {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  height: 44px;
+  padding: 0 6px;
+  color: #202020;
+  text-decoration: none;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+/* underline */
+.nav-underline {
+  position: absolute;
+  left: 6px;
+  right: 6px;
+  bottom: -10px;
+  height: 4px;
+  border-radius: 999px;
+  background: linear-gradient(90deg,#f6a,#f9e36b,#7ae1c9,#8ab6ff);
+  transform: scaleX(.45);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .16s ease, transform .16s ease;
+}
+.nav-underline.visible {
+  transform: scaleX(1);
+  opacity: 1;
+}
+
+/* Dropdown */
+.eb { position: relative;}
+.dropdown {
+  position: absolute;
+  top: 100%;
+  margin-top: 6px;
+  left: -12px;
+  width: var(--flyout-w);
+  background: #fff;
+  padding: 10px 0;
+  border: 1px solid #ececec;
+  border-radius: var(--flyout-radius);
+  box-shadow: 0 10px 20px rgba(0,0,0,.08),
+              0 2px 6px rgba(0,0,0,.06);
+  opacity: 0;
+  transform: translateY(6px);
+  pointer-events: none;
+  transition: opacity .16s ease, transform .16s ease;
+  z-index: 200;
+}
+.eb.open .dropdown,
+.eb:hover .dropdown,
+.eb:focus-within .dropdown {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+.dropdown::before {
+  content: "";
+  position: absolute;
+  left: 0; right: 0; top: -6px; height: 6px;
+}
+.dropdown-link {
+  display: block;
+  padding: 12px 16px;
+  text-decoration: none;
+  color: #222;
+  white-space: nowrap;
+  border-radius: 6px;
+  margin: 2px 8px;
+  outline: none;
+  transition: background .14s ease, padding-left .14s ease;
+}
+.dropdown-link:hover,
+.dropdown-link:focus-visible {
+  background: var(--hover-bg);
+  padding-left: 18px;
+}
+
+/* Right side (reserve width so center nav never moves) */
+.right {
+  justify-self: end;
+  position: relative;
+  height: 36px;
+  width: var(--side-col); /* ✅ matches left column */
+  display: flex;
+  align-items: center;
+}
+
+/* Search */
+.search {
+  position: absolute;
+  right: 0;
+  top: 0;
+  display: flex;
+  align-items: center;
+  height: 36px;
+  border-radius: 999px;
+  border: 1px solid #e6e6e6;
+  padding-left: 10px;
+  padding-right: 8px;
+  width: 36px;
+  overflow: hidden;
+  background: #fff;
+  transition: box-shadow .15s ease, width .15s ease;
+}
+.search.is-open {
+  width: 260px;
+  box-shadow: 0 4px 12px rgba(0,0,0,.06);
+}
+.search-btn {
+  background: transparent;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  line-height: 0;
+}
+.search-input {
+  border: none;
+  outline: none;
+  width: 100%;
+  height: 100%;
+  font-size: 14px;
+  color: #222;
+  background: transparent;
+  padding-left: 6px;
+}
+
+/* Responsive tweak */
+@media (max-width: 1024px) {
+  :root { --side-col: 220px; }
+}
+@media (max-width: 768px) {
+  .logo-img { height: 58px; }
+  :root { --side-col: 180px; }
+}
