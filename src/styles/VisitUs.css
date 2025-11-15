@@ -1,0 +1,40 @@
+.visit-section {
+  padding: 90px 0 70px;
+  position: relative;
+  isolation: isolate;  /* own stacking context */
+  z-index: 1;
+}
+
+.visit-wrap { max-width: 1240px; margin: 0 auto; padding: 0 24px; }
+
+.visit-title {
+  font-size: 56px; line-height: 1.1; font-weight: 400; color: #2f2f2f;
+  margin: 0; letter-spacing: -0.01em;
+}
+
+.visit-blurb {
+  margin-top: 18px; max-width: 760px;
+  font-size: 18px; line-height: 1.8; color: #4b4b4b;
+}
+
+.visit-row {
+  margin-top: 28px; display: flex; gap: 18px; flex-wrap: wrap;
+  position: relative; z-index: 5;
+}
+
+.visit-btn {
+  appearance: none; cursor: pointer; border-radius: 10px;
+  padding: 14px 22px; font-weight: 700; font-size: 14px; letter-spacing: .05em;
+  border: 1px solid transparent; text-decoration: none; display: inline-block;
+  transition: transform .15s ease, box-shadow .2s ease, background .2s ease;
+  position: relative; z-index: 10; pointer-events: auto;
+}
+.visit-btn:hover { transform: translateY(-2px); box-shadow: 0 12px 28px rgba(0,0,0,0.12); }
+
+.visit-btn-filled {
+  background: linear-gradient(90deg,#fbc2eb 0%,#a6c1ee 100%);
+  color: #000; box-shadow: 0 8px 24px rgba(0,0,0,.08);
+}
+.visit-btn-outline {
+  background: #fff; color: #1e1e1e; border: 2px solid #1e1e1e;
+}
