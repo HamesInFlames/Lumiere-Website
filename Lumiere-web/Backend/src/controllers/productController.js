@@ -9,8 +9,22 @@ const toClient = (p) => ({
   price: p.price,
   imageUrl: p.imageUrl,
   slug: p.slug,
-  category: p.category
+  category: p.category,
+
+  // 🔥 FIX: send all extra fields to frontend
+  description: p.description ?? "",
+  ingredients: p.ingredients ?? "",
+  allergens: p.allergens ?? "",
+  serving_size: p.serving_size ?? "",
+
+  // 🔥 Fix image arrays
+  images: Array.isArray(p.images)
+    ? p.images
+    : p.imageUrl
+    ? [p.imageUrl]
+    : []
 });
+
 
 function filterSortPaginate(list, { category, q, sort = "name", page = 1, limit = 50 }) {
   let items = [...list];
@@ -70,20 +84,26 @@ export async function getProduct(req, res, next) {
     const { idOrSlug } = req.params;
     const connected = mongoose.connection.readyState === 1;
 
+    // DEV MODE — USE SAMPLES
     if (!connected) {
-      const found = samples.find(p => p.id === idOrSlug || p.slug === idOrSlug);
+      const found = samples.find(
+        p => p.slug === idOrSlug || p.id === idOrSlug
+      );
       if (!found) return res.status(404).json({ message: "Product not found" });
       return res.json(toClient(found));
     }
 
+    // DATABASE MODE
     const byId = /^[a-f\d]{24}$/i.test(idOrSlug) ? { _id: idOrSlug } : null;
     const prod = await Product.findOne(byId || { slug: idOrSlug }).lean();
     if (!prod) return res.status(404).json({ message: "Product not found" });
-    res.json(toClient(prod));
+
+    return res.json(toClient(prod));
   } catch (err) {
     next(err);
   }
 }
+
 
 // (Optional) dev/admin CRUD:
 export async function createProduct(req, res, next) {

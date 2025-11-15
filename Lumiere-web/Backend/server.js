@@ -8,7 +8,7 @@ import mongoose from 'mongoose';
 import { connectDB, disconnectDB } from './src/config/db.js';
 import productRoutes from './src/routes/productRoutes.js';
 import { notFound, errorHandler } from './src/middleware/errorMiddleware.js';
-import contactRoutes from './src/routes/contactRoutes.js';
+import contactRoutes from "./src/routes/contactRoutes.js";
 
 dotenv.config();
 
@@ -37,7 +37,7 @@ app.get('/healthz', (_req, res) => res.json({
 }));
 
 app.use('/api/products', productRoutes);
-app.use('/api/contact', contactRoutes);
+app.use("/api/contact", contactRoutes);
 
 // 404 + error handlers
 app.use(notFound);

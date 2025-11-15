@@ -15,7 +15,7 @@ const raw = [
     imageUrl: "/Lumiere/12 One Biters.png",
     category: "onebite",
   },
-  // 🩷 CAKES (from /Lumiere/Cake)
+  // CAKES (from /Lumiere/Cake)
   {
     name: "Blackcurrant Queen Cake",
     price: 50.0,
@@ -80,7 +80,7 @@ const raw = [
     description: "Light No-Bake Cheesecake, Buttery Crumble, Graham Cracker Crust.",
   },
 
-  // 🍓 PERSONAL DESSERTS (from /Lumiere/Personal Desserts)
+  // PERSONAL DESSERTS (from /Lumiere/Personal Desserts)
   {
     name: "Sweet Pleasure",
     price: 11.5,
@@ -296,7 +296,7 @@ const raw = [
 
   // 🍞 BREADS (from /Lumiere/Breads)
   {
-    name: "Multigrain Sourdough",
+    name: "Wholewheat & Seeds Sourdough",
     price: 7.5,
     imageUrl: "/Lumiere/Breads/Multigrain Sourdough.png",
     category: "bread",
@@ -317,7 +317,7 @@ const raw = [
     description: "Classic country-style sourdough with a crispy crust and chewy crumb.",
   },
   {
-    name: "Rye Sourdough",
+    name: "Rye & Walnut Sourdough",
     price: 7.0,
     imageUrl: "/Lumiere/Breads/Rye Sourdough.png",
     category: "bread",

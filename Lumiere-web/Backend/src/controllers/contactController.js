@@ -3,12 +3,20 @@ import nodemailer from "nodemailer";
 
 function validate({ name, email, phone, message }) {
   const errors = [];
+
   if (!name || name.trim().length < 2) errors.push("name");
   if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) errors.push("email");
-  if (!phone || phone.trim().length < 7) errors.push("phone");
+
+  // phone optional — only validate if provided
+  if (phone && phone.trim().length > 0 && phone.trim().length < 7) {
+    errors.push("phone");
+  }
+
   if (!message || message.trim().length < 5) errors.push("message");
+
   return errors;
 }
+
 
 export async function submitContact(req, res, next) {
   try {

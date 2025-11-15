@@ -80,8 +80,8 @@ function GiftBoxes() {
             Immerse yourself in the artistry of taste and embark on a journey of unparalleled pleasure
           </p>
           {/* Link to a relevant category in the new products index */}
-          <Link to="/products?category=personal-desserts" className="home-giftBtn">
-            SEE OUR GIFT BOXES
+          <Link to="/e-boutique" className="home-giftBtn">
+            SEE OUR MENU
           </Link>
         </div>
       </div>
