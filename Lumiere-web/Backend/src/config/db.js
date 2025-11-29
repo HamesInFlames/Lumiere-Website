@@ -2,9 +2,9 @@
 import mongoose from "mongoose";
 
 export async function connectDB() {
-  const uri = process.env.MONGO_URI;
+  const uri = process.env.MONGODB_URI || process.env.MONGO_URI;
   if (!uri) {
-    console.warn("⚠️  MONGO_URI not set; continuing without DB connection");
+    console.warn("⚠️  MONGODB_URI not set; continuing without DB connection");
     // Disable buffering so queries fail fast instead of hanging
     mongoose.set("bufferCommands", false);
     return;

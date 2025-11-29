@@ -5,12 +5,13 @@
 .menu-page {
   max-width: 1400px;
   margin: 0 auto;
-  padding: 40px 24px 80px;
+  padding: 0 24px 80px;
   text-align: center;
 }
 
 .menu-header {
-  padding: 0 16px;
+  padding: 32px 16px 0;
+  margin-bottom: 0;
 }
 
 .menu-title {
@@ -22,7 +23,7 @@
 .menu-subtitle {
   font-size: 18px;
   color: #666;
-  margin-bottom: 32px;
+  margin-bottom: 0;
   max-width: 600px;
   margin-left: auto;
   margin-right: auto;
@@ -34,15 +35,19 @@
 
 .menu-tabs {
   position: sticky;
-  top: 118px; /* below header with top bar */
+  top: var(--header-h, 90px); /* Stick directly below header */
   z-index: 50;
   background: #fff;
-  padding: 12px 0;
-  border-bottom: 1px solid #eee;
+  padding: 24px 0 20px;
+  border-bottom: none;
+  box-shadow: none;
+  margin-top: 0;
+  margin-bottom: 0;
 }
 
 .menu-tabs-spacer {
-  height: 12px;
+  height: 0;
+  display: none;
 }
 
 .menu-tab-row {
@@ -50,27 +55,52 @@
   justify-content: center;
   flex-wrap: wrap;
   gap: 10px;
-  padding: 0 16px;
+  padding: 0;
+  max-width: 1400px;
+  margin: 0 auto;
 }
 
 /* Tab buttons */
 .menu-tab {
+  display: inline-block;
   padding: 10px 18px;
   font-size: 15px;
   font-weight: 600;
   border-radius: 20px;
-  border: 1px solid #ccc;
+  border: 1px solid #ddd;
   background: #fafafa;
+  color: #333;
   cursor: pointer;
-  transition: 0.25s;
+  transition: all 0.25s ease;
   white-space: nowrap;
+  font-family: inherit;
+  outline: none;
+  position: relative;
+  margin: 0;
+  text-align: center;
+  text-decoration: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
 }
 
-.menu-tab--active,
 .menu-tab:hover {
-  background: #000;
+  background: #f0f0f0;
+  border-color: #999;
+  transform: translateY(-1px);
+}
+
+.menu-tab--active {
+  background: linear-gradient(135deg, #8e24aa, #6a1b9a);
   color: #fff;
-  border-color: #000;
+  border-color: #8e24aa;
+  box-shadow: 0 2px 8px rgba(142, 36, 170, 0.3);
+}
+
+.menu-tab--active:hover {
+  background: linear-gradient(135deg, #9c27b0, #7b1fa2);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(142, 36, 170, 0.4);
 }
 
 /* -----------------------------------------
@@ -78,8 +108,11 @@
 ------------------------------------------ */
 
 .menu-section {
+  margin-top: 48px;
   margin-bottom: 60px;
   text-align: left;
+  padding-top: 32px;
+  border-top: 1px solid #eee;
 }
 
 .menu-section-header {
@@ -229,7 +262,19 @@
 
 @media (max-width: 768px) {
   .menu-page {
-    padding: 24px 16px 60px;
+    padding: 0 16px 60px;
+  }
+
+  .menu-header {
+    padding: 24px 16px 0;
+  }
+  
+  .menu-subtitle {
+    margin-bottom: 0;
+  }
+  
+  .menu-tabs {
+    padding: 20px 0 16px;
   }
 
   .menu-title {
@@ -243,8 +288,8 @@
 
   /* Scrollable tabs on mobile */
   .menu-tabs {
-    top: 68px; /* shorter header on mobile (no top bar) */
-    padding: 10px 0;
+    top: var(--header-h, 90px); /* Stick directly below header */
+    padding: 12px 0;
   }
 
   .menu-tab-row {
@@ -255,6 +300,7 @@
     scrollbar-width: none;
     padding: 0 16px;
     gap: 8px;
+    max-width: 100%;
   }
 
   .menu-tab-row::-webkit-scrollbar {
@@ -265,6 +311,7 @@
     padding: 8px 14px;
     font-size: 13px;
     flex-shrink: 0;
+    min-width: auto;
   }
 
   .menu-section {

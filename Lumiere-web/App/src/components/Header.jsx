@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
+import CartIcon from "./CartIcon";
 import "../styles/Header.css";
 
 // Icon components
@@ -204,8 +205,9 @@ export default function Header({ onHeight }) {
             </ul>
           </nav>
 
-          {/* RIGHT SIDE - Phone CTA (desktop) */}
+          {/* RIGHT SIDE - Cart & Phone CTA (desktop) */}
           <div className="header-right">
+            <CartIcon />
             <a href="tel:+16472938815" className="header-cta">
               <PhoneIcon />
               <span>Call Us</span>

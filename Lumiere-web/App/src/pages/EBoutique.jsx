@@ -167,13 +167,13 @@ export default function EBoutique() {
               className={`menu-tab ${active === sec.id ? "menu-tab--active" : ""}`}
               type="button"
               onClick={() => handleTabClick(sec.id)}
+              aria-pressed={active === sec.id}
             >
               {sec.label}
             </button>
           ))}
         </div>
       </nav>
-      <div className="menu-tabs-spacer"></div>
 
       {loading && <div className="menu-loading">Loading menu…</div>}
 

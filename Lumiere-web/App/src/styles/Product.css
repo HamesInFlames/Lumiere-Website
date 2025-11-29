@@ -107,6 +107,156 @@
   filter: brightness(.98); 
 }
 
+/* Back link */
+.product__back {
+  display: inline-block;
+  color: #888;
+  text-decoration: none;
+  font-size: 14px;
+  margin-bottom: 16px;
+  transition: color 0.2s;
+}
+
+.product__back:hover {
+  color: #8e24aa;
+}
+
+/* Notice */
+.product__notice {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 16px;
+  background: #fef3cd;
+  color: #856404;
+  border-radius: 8px;
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+
+/* Cake options */
+.product__options {
+  margin-bottom: 24px;
+  padding: 20px;
+  background: #f9f9f9;
+  border-radius: 12px;
+}
+
+.option-group {
+  margin-bottom: 16px;
+}
+
+.option-label {
+  display: block;
+  font-weight: 500;
+  font-size: 14px;
+  margin-bottom: 8px;
+  color: #333;
+}
+
+.option-input {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 15px;
+  transition: border-color 0.2s;
+}
+
+.option-input:focus {
+  outline: none;
+  border-color: #8e24aa;
+}
+
+.option-hint {
+  display: block;
+  font-size: 12px;
+  color: #888;
+  margin-top: 6px;
+}
+
+.option-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  font-size: 15px;
+}
+
+.option-checkbox input {
+  display: none;
+}
+
+.checkbox-custom {
+  width: 22px;
+  height: 22px;
+  border: 2px solid #ddd;
+  border-radius: 6px;
+  position: relative;
+  transition: all 0.2s;
+}
+
+.option-checkbox input:checked + .checkbox-custom {
+  background: #8e24aa;
+  border-color: #8e24aa;
+}
+
+.option-checkbox input:checked + .checkbox-custom::after {
+  content: "✓";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #fff;
+  font-size: 14px;
+}
+
+/* Add to cart button */
+.btn-add-cart {
+  flex: 1;
+  padding: 14px 24px;
+  border-radius: 10px;
+  border: 0;
+  color: #fff;
+  cursor: pointer;
+  background: linear-gradient(135deg, #8e24aa, #6a1b9a);
+  box-shadow: 0 4px 16px rgba(142, 36, 170, 0.2);
+  font-size: 16px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.btn-add-cart:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(142, 36, 170, 0.3);
+}
+
+.btn-add-cart.btn-added {
+  background: linear-gradient(135deg, #2ecc71, #27ae60);
+}
+
+.btn-price {
+  background: rgba(255, 255, 255, 0.2);
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+/* Pre-order note */
+.product__preorder-note {
+  font-size: 14px;
+  color: #666;
+  text-align: center;
+  margin: 16px 0 24px;
+  padding: 12px;
+  background: #f5f5f5;
+  border-radius: 8px;
+}
+
 /* Accordion */
 .acc { 
   margin-top: 8px;

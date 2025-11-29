@@ -6,9 +6,16 @@ import cors from 'cors';
 import morgan from 'morgan';
 import mongoose from 'mongoose';
 import { connectDB, disconnectDB } from './src/config/db.js';
+
+// Routes
 import productRoutes from './src/routes/productRoutes.js';
-import { notFound, errorHandler } from './src/middleware/errorMiddleware.js';
 import contactRoutes from "./src/routes/contactRoutes.js";
+import authRoutes from './src/routes/authRoutes.js';
+import orderRoutes from './src/routes/orderRoutes.js';
+import inventoryRoutes from './src/routes/inventoryRoutes.js';
+
+// Middleware
+import { notFound, errorHandler } from './src/middleware/errorMiddleware.js';
 
 dotenv.config();
 
@@ -16,35 +23,59 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-
 // CORS allow-list via CORS_ORIGIN="http://localhost:5173,https://yourdomain.com"
 const allow = (process.env.CORS_ORIGIN || '').split(',').map(s => s.trim()).filter(Boolean);
 app.use(cors({
   origin: (origin, cb) => {
-    if (!origin) return cb(null, true); // tools like curl/postman
-    if (allow.length === 0 || allow.includes('*') || allow.includes(origin)) return cb(null, true);
+    // Allow requests with no origin (like mobile apps, Postman, etc.)
+    if (!origin) return cb(null, true);
+    
+    // Allow all if no CORS_ORIGIN is set or if * is specified
+    if (allow.length === 0 || allow.includes('*')) return cb(null, true);
+    
+    // Check if origin is in allow list
+    if (allow.includes(origin)) return cb(null, true);
+    
+    // For development, also allow localhost variations
+    if (process.env.NODE_ENV !== 'production') {
+      const localhostPatterns = [
+        /^http:\/\/localhost:\d+$/,
+        /^http:\/\/127\.0\.0\.1:\d+$/,
+      ];
+      if (localhostPatterns.some(pattern => pattern.test(origin))) {
+        return cb(null, true);
+      }
+    }
+    
     return cb(new Error('Not allowed by CORS'));
   },
-  credentials: true
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
 }));
 
 if (process.env.NODE_ENV !== 'production') app.use(morgan('dev'));
 
-app.get('/', (_req, res) => res.json({ ok: true, service: 'Lumière Products API' }));
+// Health checks
+app.get('/', (_req, res) => res.json({ ok: true, service: 'Lumière Pâtisserie API' }));
 app.get('/healthz', (_req, res) => res.json({
   ok: true,
   mongoState: mongoose.connection.readyState // 0=disconnected,1=connected,2=connecting,3=disconnecting
 }));
 
+// API Routes
 app.use('/api/products', productRoutes);
 app.use("/api/contact", contactRoutes);
+app.use('/api/auth', authRoutes);
+app.use('/api/orders', orderRoutes);
+app.use('/api/inventory', inventoryRoutes);
 
 // 404 + error handlers
 app.use(notFound);
 app.use(errorHandler);
 
 const PORT = process.env.PORT || 5000;
-const server = app.listen(PORT, () => console.log(`✅ Products API running on http://localhost:${PORT}`));
+const server = app.listen(PORT, () => console.log(`✅ Lumière API running on http://localhost:${PORT}`));
 
 // Log listen errors (e.g., EADDRINUSE)
 server.on('error', (err) => {

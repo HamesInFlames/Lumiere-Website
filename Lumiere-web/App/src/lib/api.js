@@ -19,18 +19,22 @@ function normalizeList(data) {
     const slug =
       p.slug ||
       (p.title ? p.title.toLowerCase().replace(/\s+/g, "-") : "") ||
+      (p.name ? p.name.toLowerCase().replace(/\s+/g, "-") : "") ||
       p.id ||
       "";
 
     // make sure images array is always an array
     let images = [];
-    if (Array.isArray(p.images)) {
+    if (Array.isArray(p.images) && p.images.length > 0) {
       images = p.images;
     } else if (p.imageUrl) {
       images = [p.imageUrl];
     } else if (p.image) {
       images = [p.image];
     }
+
+    // Get primary image - prioritize imageUrl from backend (backend uses imageUrl, not image)
+    const primaryImage = p.imageUrl || images[0] || p.image || null;
 
     return {
       id: p.id ?? p._id ?? slug,
@@ -41,8 +45,8 @@ function normalizeList(data) {
           ? p.price
           : Number(p.price ?? 0),
 
-      // primary image (first image in array)
-      image: images[0] || null,
+      // primary image (first image in array or imageUrl)
+      image: primaryImage,
       images,
 
       category: p.category ?? "",
@@ -82,4 +86,36 @@ export async function fetchProduct(slug) {
 
   const p = await r.json();
   return normalizeList([p])[0]; // return normalized single item
+}
+
+/**
+ * Submit a pre-order
+ */
+export async function submitOrder(orderData) {
+  const r = await fetch(`${API}/orders`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      ...orderData,
+      orderSource: "website",
+    }),
+  });
+
+  if (!r.ok) {
+    const err = await r.json().catch(() => ({}));
+    throw new Error(err.message || "Failed to submit order");
+  }
+
+  return r.json();
+}
+
+/**
+ * Track order status by order number
+ */
+export async function trackOrder(orderNumber) {
+  const r = await fetch(`${API}/orders/track/${orderNumber}`);
+  if (!r.ok) throw new Error("Order not found");
+  return r.json();
 }
