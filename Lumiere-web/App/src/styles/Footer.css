@@ -65,13 +65,39 @@
 }
 
 .footer-social-btn {
-  width: 36px;
-  height: 36px;
+  width: 40px;
+  height: 40px;
   display: grid;
   place-items: center;
   border-radius: 999px;
   background: #f3f3f3;
   color: #000;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.footer-social-btn:hover {
+  background: #e5e5e5;
+  transform: translateY(-2px);
+}
+
+/* Uber Eats button */
+.footer-uber-btn {
+  width: auto;
+  padding: 0 16px;
+  gap: 8px;
+  display: inline-flex;
+  align-items: center;
+  background: #06C167;
+  color: #fff;
+  font-weight: 700;
+  font-size: 13px;
+  border-radius: 20px;
+}
+
+.footer-uber-btn:hover {
+  background: #05a857;
+  color: #fff;
 }
 
 /* Bottom bar */
@@ -85,4 +111,34 @@
   justify-content: center;
   gap: 16px;
   flex-wrap: wrap;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .footer {
+    padding: 36px 0 24px;
+  }
+
+  .footer-wrap {
+    padding: 0 16px;
+  }
+
+  .footer-grid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  .footer-subtitle {
+    font-size: 18px;
+  }
+
+  .footer-text {
+    font-size: 14px;
+  }
+
+  .footer-small {
+    margin-top: 28px;
+    font-size: 12px;
+    gap: 12px;
+  }
 }

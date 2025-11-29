@@ -1,5 +1,5 @@
 // src/pages/Home.jsx
-import React, { useEffect } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import FavouritesCarousel from "../components/FavouritesCarousel";
 import ShowcaseImage from "../components/ShowcaseImage";
@@ -90,16 +90,6 @@ function GiftBoxes() {
 }
 
 export default function Home() {
-  useEffect(() => {
-    const setSBW = () => {
-      const sbw = window.innerWidth - document.documentElement.clientWidth;
-      document.documentElement.style.setProperty("--sbw", `${sbw}px`);
-    };
-    setSBW();
-    window.addEventListener("resize", setSBW);
-    return () => window.removeEventListener("resize", setSBW);
-  }, []);
-
   return (
     <div>
       <Hero />

@@ -8,12 +8,45 @@
   padding: 40px 24px 100px;
 }
 
+/* Hero banner for category pages */
+.collection-hero {
+  position: relative;
+  height: 280px;
+  margin: -40px -24px 32px;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.collection-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.35);
+}
+
+.collection-hero-inner {
+  position: relative;
+  text-align: center;
+  color: #fff;
+}
+
+.collection-underline {
+  width: 60px;
+  height: 3px;
+  background: linear-gradient(90deg, #f6a6d5, #c7b3ff, #9ad3ff);
+  margin: 12px auto 0;
+  border-radius: 2px;
+}
+
 /* Title Row */
 .collection-toolbar {
   display: flex;
   gap: 12px;
   font-size: 18px;
-  margin-bottom: 32px;
+  margin-bottom: 24px;
 }
 
 /* -------------------------------------------
@@ -34,6 +67,14 @@
   text-align: left;
 }
 
+/* Empty state */
+.collection-empty {
+  text-align: center;
+  padding: 60px 20px;
+  font-size: 18px;
+  color: #666;
+}
+
 /* -------------------------------------------
    PRODUCT GRID — 4 Columns
 ------------------------------------------- */
@@ -41,7 +82,7 @@
 .collection-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 32px;
+  gap: 24px;
 }
 
 @media (max-width: 1200px) {
@@ -53,12 +94,14 @@
 @media (max-width: 900px) {
   .collection-grid {
     grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
   }
 }
 
 @media (max-width: 560px) {
   .collection-grid {
-    grid-template-columns: repeat(1, 1fr);
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
   }
 }
 
@@ -67,9 +110,10 @@
 ------------------------------------------- */
 
 .collection-card {
+  display: block;
   background: #fff;
   border-radius: 16px;
-  padding: 16px;
+  padding: 12px;
   text-decoration: none;
   color: #000;
   box-shadow: 0 4px 14px rgba(0,0,0,0.08);
@@ -86,9 +130,9 @@
   width: 100%;
   aspect-ratio: 1/1;
   background: #f6f6f6;
-  border-radius: 14px;
+  border-radius: 12px;
   overflow: hidden;
-  margin-bottom: 16px;
+  margin-bottom: 12px;
 }
 
 .collection-img {
@@ -97,17 +141,22 @@
   object-fit: cover;
 }
 
+.collection-img.ph {
+  background: linear-gradient(135deg, #f0f0f0, #e0e0e0);
+}
+
 /* Name + Price */
 .collection-name {
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 700;
   margin-bottom: 4px;
+  line-height: 1.3;
 }
 
 .collection-price {
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 600;
-  margin-bottom: 10px;
+  color: #333;
 }
 
 /* -------------------------------------------
@@ -115,7 +164,50 @@
 ------------------------------------------- */
 
 .collection-desc {
-  font-size: 14px;
+  font-size: 13px;
   color: #555;
-  line-height: 1.55;
+  line-height: 1.5;
+  margin-top: 6px;
+}
+
+/* -------------------------------------------
+   MOBILE STYLES
+------------------------------------------- */
+
+@media (max-width: 768px) {
+  .collection-page {
+    padding: 24px 16px 60px;
+  }
+
+  .collection-hero {
+    height: 200px;
+    margin: -24px -16px 24px;
+  }
+
+  .collection-title {
+    font-size: 28px;
+  }
+
+  .collection-toolbar {
+    font-size: 15px;
+    margin-bottom: 20px;
+  }
+
+  .collection-card {
+    padding: 10px;
+    border-radius: 12px;
+  }
+
+  .collection-imgwrap {
+    border-radius: 10px;
+    margin-bottom: 8px;
+  }
+
+  .collection-name {
+    font-size: 14px;
+  }
+
+  .collection-price {
+    font-size: 13px;
+  }
 }

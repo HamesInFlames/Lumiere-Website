@@ -43,9 +43,12 @@ export default function EBoutique() {
   const [err, setErr] = useState("");
   const [active, setActive] = useState("cakes");
 
+  // NEW: lock to prevent the observer from overriding clicked tab highlight
+  const [lockHighlight, setLockHighlight] = useState(false);
+
   const sectionRefs = useRef({});
 
-  // 1) Load ALL products (no category filter)
+  // Load all products (no filter)
   useEffect(() => {
     let ok = true;
     setLoading(true);
@@ -68,46 +71,37 @@ export default function EBoutique() {
     };
   }, []);
 
-  // 2) Group products by category
+  // Group products by category
   const productsByCategory = useMemo(() => {
     const map = {};
-    MENU_SECTIONS.forEach((sec) => {
-      map[sec.id] = [];
+    MENU_SECTIONS.forEach((s) => (map[s.id] = []));
+    items.forEach((p) => {
+      if (map[p.category]) map[p.category].push(p);
     });
-
-    for (const p of items) {
-      if (map[p.category]) {
-        map[p.category].push(p);
-      }
-    }
     return map;
   }, [items]);
 
-  // 3) Observe sections to highlight active tab on scroll
+  // Scroll-based highlighting with lock protection
   useEffect(() => {
     if (!items.length) return;
 
     const observer = new IntersectionObserver(
       (entries) => {
-        let best = null;
+        if (lockHighlight) return; // <-- KEY FIX: stop observer during click scroll
 
-        for (const entry of entries) {
-          if (!entry.isIntersecting) continue;
-          const id = entry.target.getAttribute("data-section-id");
-          if (!id) continue;
-
-          if (!best || entry.intersectionRatio > best.ratio) {
-            best = { id, ratio: entry.intersectionRatio };
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const id = entry.target.getAttribute("data-section-id");
+            if (id && active !== id) {
+              setActive(id);
+            }
           }
-        }
-
-        if (best && best.id !== active) {
-          setActive(best.id);
-        }
+        });
       },
       {
         root: null,
-        threshold: [0.3, 0.6],
+        rootMargin: "-200px 0px -60% 0px",
+        threshold: 0,
       }
     );
 
@@ -117,22 +111,35 @@ export default function EBoutique() {
     });
 
     return () => observer.disconnect();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [items]);
+  }, [items, lockHighlight, active]);
 
-  // 4) Click tab → smooth scroll to section
+  // Clicking a tab = scroll to section + smart lock
   const handleTabClick = (id) => {
     const el = sectionRefs.current[id];
     if (!el) return;
 
-    const headerOffset = 120; // adjust if your header height changes
-    const rect = el.getBoundingClientRect();
-    const offsetTop = rect.top + window.scrollY - headerOffset;
+    setLockHighlight(true); // prevent observer from overriding highlight
 
-    window.scrollTo({ top: offsetTop, behavior: "smooth" });
+    const stickyHeight = document.querySelector(".menu-tabs")?.offsetHeight || 80;
+    const headerHeight = document.querySelector("header")?.offsetHeight || 60;
+    const offset = stickyHeight + headerHeight + 20;
+
+    const rect = el.getBoundingClientRect();
+    const offsetTop = rect.top + window.scrollY - offset;
+
+    // highlight immediately
     setActive(id);
+
+    // smooth scroll
+    window.scrollTo({ top: offsetTop, behavior: "smooth" });
+
+    // unlock after scroll animation finishes
+    setTimeout(() => {
+      setLockHighlight(false);
+    }, 700);
   };
 
+  // Error state
   if (err) {
     return (
       <main className="menu-page">
@@ -143,25 +150,22 @@ export default function EBoutique() {
 
   return (
     <main className="menu-page">
-      {/* Page header */}
+      {/* Header */}
       <header className="menu-header">
         <h1 className="menu-title">Menu</h1>
         <p className="menu-subtitle">
-          Explore our cakes, pastries, breads, and one-bite creations — crafted
-          fresh at Lumière Patisserie.
+          Explore our cakes, pastries, breads, and one-bite creations — crafted fresh at Lumière Patisserie.
         </p>
       </header>
 
-      {/* Sticky horizontal category tabs (Paris Baguette style) */}
+      {/* Sticky tabs */}
       <nav className="menu-tabs" aria-label="Product categories">
         <div className="menu-tab-row">
           {MENU_SECTIONS.map((sec) => (
             <button
               key={sec.id}
+              className={`menu-tab ${active === sec.id ? "menu-tab--active" : ""}`}
               type="button"
-              className={`menu-tab ${
-                active === sec.id ? "menu-tab--active" : ""
-              }`}
               onClick={() => handleTabClick(sec.id)}
             >
               {sec.label}
@@ -170,9 +174,10 @@ export default function EBoutique() {
         </div>
       </nav>
       <div className="menu-tabs-spacer"></div>
+
       {loading && <div className="menu-loading">Loading menu…</div>}
 
-      {/* Sections for each category */}
+      {/* Category sections */}
       {!loading &&
         MENU_SECTIONS.map((sec) => {
           const list = productsByCategory[sec.id] || [];
@@ -183,57 +188,39 @@ export default function EBoutique() {
               key={sec.id}
               className="menu-section"
               data-section-id={sec.id}
-              ref={(el) => {
-                sectionRefs.current[sec.id] = el;
-              }}
+              ref={(el) => (sectionRefs.current[sec.id] = el)}
             >
               <div className="menu-section-header">
                 <div>
                   <h2 className="menu-section-title">{sec.label}</h2>
-                  {sec.blurb && (
-                    <p className="menu-section-blurb">{sec.blurb}</p>
-                  )}
+                  {sec.blurb && <p className="menu-section-blurb">{sec.blurb}</p>}
                 </div>
                 <span className="menu-section-count">
                   {list.length} item{list.length !== 1 ? "s" : ""}
                 </span>
               </div>
 
-            <div className="menu-grid">
-              {list.map((p) => (
-                <Link
-                  key={p.id}
-                  to={`/product/${p.slug}`}
-                  className="menu-card"
-                  aria-label={p.title}
-                >
-                  <div className="menu-imgwrap">
-                    {p.image ? (
-                      <img
-                        src={p.image}
-                        alt={p.title}
-                        className="menu-img"
-                        loading="lazy"
-                      />
-                    ) : (
-                      <div className="menu-img menu-img--placeholder" />
-                    )}
-                  </div>
+              <div className="menu-grid">
+                {list.map((p) => (
+                  <Link key={p.id} to={`/product/${p.slug}`} className="menu-card" aria-label={p.title}>
+                    <div className="menu-imgwrap">
+                      {p.image ? (
+                        <img src={p.image} alt={p.title} className="menu-img" loading="lazy" />
+                      ) : (
+                        <div className="menu-img menu-img--placeholder" />
+                      )}
+                    </div>
 
-                  <div className="menu-card-body">
-                    <div className="menu-name">{p.title}</div>
-
-                    {typeof p.price === "number" && (
-                      <div className="menu-price">${p.price.toFixed(2)}</div>
-                    )}
-
-                    {p.description && (
-                      <div className="menu-desc">{p.description}</div>
-                    )}
-                  </div>
-                </Link>
-              ))}
-            </div>
+                    <div className="menu-card-body">
+                      <div className="menu-name">{p.title}</div>
+                      {typeof p.price === "number" && (
+                        <div className="menu-price">${p.price.toFixed(2)}</div>
+                      )}
+                      {p.description && <div className="menu-desc">{p.description}</div>}
+                    </div>
+                  </Link>
+                ))}
+              </div>
             </section>
           );
         })}

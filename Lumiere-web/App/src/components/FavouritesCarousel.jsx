@@ -6,20 +6,19 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/scrollbar";
 import { fetchProducts } from "../lib/api";
- // ✅ make sure this path matches your setup
 
 const styles = {
-  section: { padding: "72px 0" },
-  container: { maxWidth: 1240, margin: "0 auto", padding: "0 24px" },
+  section: { padding: "48px 0" },
+  container: { maxWidth: 1240, margin: "0 auto", padding: "0 16px" },
 
   headingRow: {
     display: "flex",
     alignItems: "center",
     justifyContent: "space-between",
-    marginBottom: 24,
+    marginBottom: 20,
   },
   h2: {
-    fontSize: 28,
+    fontSize: "clamp(22px, 5vw, 28px)",
     fontWeight: 700,
     letterSpacing: ".02em",
     margin: 0,
@@ -33,7 +32,7 @@ const styles = {
     paddingTop: "100%",
     borderRadius: 12,
     overflow: "hidden",
-    boxShadow: "0 18px 44px rgba(0,0,0,.12)",
+    boxShadow: "0 12px 32px rgba(0,0,0,.10)",
     background: "#f6f6f6",
   },
   img: {
@@ -45,9 +44,9 @@ const styles = {
     transition: "opacity .35s ease",
   },
 
-  captionLink: { display: "block", marginTop: 12, textDecoration: "none", color: "#222" },
-  title: { display: "block", fontWeight: 700, fontSize: 18, marginBottom: 6 },
-  price: { fontWeight: 600, color: "#333" },
+  captionLink: { display: "block", marginTop: 10, textDecoration: "none", color: "#222" },
+  title: { display: "block", fontWeight: 700, fontSize: "clamp(14px, 3vw, 18px)", marginBottom: 4, lineHeight: 1.3 },
+  price: { fontWeight: 600, color: "#333", fontSize: "clamp(13px, 3vw, 16px)" },
 };
 
 /* Utility: pick random unique items */
@@ -123,7 +122,7 @@ export default function FavouritesCarousel() {
       <div style={styles.container}>
         <div style={styles.headingRow}>
           <h2 style={styles.h2}>
-            <Link to="/collections/populaire" style={styles.h2Link}>
+            <Link to="/e-boutique" style={styles.h2Link}>
               Today&apos;s Favourites
             </Link>
           </h2>

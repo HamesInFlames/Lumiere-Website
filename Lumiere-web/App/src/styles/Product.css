@@ -9,14 +9,8 @@
 .product__grid {
   display: grid;
   grid-template-columns: 1.1fr 0.9fr;
-  gap: 28px;
+  gap: 40px;
   align-items: start;
-}
-
-@media (max-width: 900px) {
-  .product__grid { 
-    grid-template-columns: 1fr; 
-  }
 }
 
 /* Media gallery */
@@ -30,9 +24,9 @@
   position: relative;
   aspect-ratio: 1/1;
   background: #f4f4f4;
-  border-radius: 12px;
+  border-radius: 16px;
   overflow: hidden;
-  box-shadow: 0 2px 10px rgba(0,0,0,.05);
+  box-shadow: 0 4px 20px rgba(0,0,0,.08);
 }
 
 .media__item img {
@@ -44,23 +38,26 @@
 .ph { 
   width: 100%; 
   height: 100%; 
-  background: #eee; 
+  background: linear-gradient(135deg, #f0f0f0, #e0e0e0); 
 }
 
 /* Info */
 .product__info { 
-  padding: 8px; 
+  padding: 8px 0; 
 }
 
 .product__title { 
-  margin: 0 0 8px; 
-  font-size: 32px; 
+  margin: 0 0 12px; 
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 1.2;
 }
 
 .product__price { 
   font-weight: 600; 
-  margin-bottom: 16px; 
-  font-size: 20px; 
+  margin-bottom: 20px; 
+  font-size: 22px;
+  color: #333;
 }
 
 /* Buy row */
@@ -111,15 +108,23 @@
 }
 
 /* Accordion */
+.acc { 
+  margin-top: 8px;
+}
+
 .acc details { 
   border-top: 1px solid #eee; 
-  padding: 12px 0; 
+  padding: 14px 0; 
 }
 
 .acc summary { 
   cursor: pointer; 
   font-weight: 600; 
-  list-style: none; 
+  list-style: none;
+  font-size: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .acc summary::-webkit-details-marker { 
@@ -128,8 +133,8 @@
 
 .acc summary::after { 
   content: "▸"; 
-  float: right; 
-  transition: transform .2s; 
+  transition: transform .2s;
+  font-size: 14px;
 }
 
 details[open] > summary::after { 
@@ -137,7 +142,41 @@ details[open] > summary::after {
 }
 
 .acc div { 
-  margin-top: 8px; 
-  color: #444; 
-  line-height: 1.5; 
+  margin-top: 12px; 
+  color: #555; 
+  line-height: 1.6;
+  font-size: 14px;
+}
+
+/* Mobile */
+@media (max-width: 900px) {
+  .wrap {
+    padding: 20px 16px;
+  }
+
+  .product__grid { 
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .media__item {
+    border-radius: 12px;
+  }
+
+  .product__title {
+    font-size: 24px;
+  }
+
+  .product__price {
+    font-size: 20px;
+    margin-bottom: 16px;
+  }
+
+  .acc summary {
+    font-size: 14px;
+  }
+
+  .acc div {
+    font-size: 13px;
+  }
 }
