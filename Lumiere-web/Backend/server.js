@@ -36,11 +36,14 @@ app.use(cors({
     // Check if origin is in allow list
     if (allow.includes(origin)) return cb(null, true);
     
-    // For development, also allow localhost variations
+    // For development, also allow localhost variations and local network IPs
     if (process.env.NODE_ENV !== 'production') {
       const localhostPatterns = [
         /^http:\/\/localhost:\d+$/,
         /^http:\/\/127\.0\.0\.1:\d+$/,
+        /^http:\/\/192\.168\.\d+\.\d+:\d+$/, // Allow local network IPs (192.168.x.x)
+        /^http:\/\/10\.\d+\.\d+\.\d+:\d+$/,  // Allow private network IPs (10.x.x.x)
+        /^http:\/\/172\.(1[6-9]|2[0-9]|3[0-1])\.\d+\.\d+:\d+$/, // Allow private network IPs (172.16-31.x.x)
       ];
       if (localhostPatterns.some(pattern => pattern.test(origin))) {
         return cb(null, true);
@@ -74,8 +77,12 @@ app.use('/api/inventory', inventoryRoutes);
 app.use(notFound);
 app.use(errorHandler);
 
-const PORT = process.env.PORT || 5000;
-const server = app.listen(PORT, () => console.log(`✅ Lumière API running on http://localhost:${PORT}`));
+const PORT = process.env.PORT || 3000;
+// Listen on all network interfaces (0.0.0.0) to allow mobile access
+const server = app.listen(PORT, '0.0.0.0', () => {
+  console.log(`✅ Lumière API running on http://localhost:${PORT}`);
+  console.log(`📱 Accessible from phone at: http://192.168.2.103:${PORT}`);
+});
 
 // Log listen errors (e.g., EADDRINUSE)
 server.on('error', (err) => {
