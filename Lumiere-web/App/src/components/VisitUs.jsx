@@ -7,6 +7,7 @@ export default function VisitUs() {
     <section className="visit-section">
       <div className="visit-wrap">
         <h2 className="visit-title">Visit us</h2>
+        <div className="visit-accent" />
 
         <p className="visit-blurb">
           We are located in Thornhill, Ontario. Come by to experience the rich

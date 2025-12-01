@@ -1,38 +1,48 @@
 .visit-section {
-  padding: 90px 0 70px;
+  padding: 80px 0;
   position: relative;
   isolation: isolate;
   z-index: 1;
+  background: #fafafa;
 }
 
 .visit-wrap { 
-  max-width: 1240px; 
+  max-width: 1440px; 
   margin: 0 auto; 
   padding: 0 24px; 
+  text-align: center;
 }
 
 .visit-title {
-  font-size: 56px; 
-  line-height: 1.1; 
+  font-size: clamp(1.8rem, 4vw, 2.5rem);
+  line-height: 1.2; 
   font-weight: 400; 
-  color: #2f2f2f;
-  margin: 0; 
-  letter-spacing: -0.01em;
+  color: #3a3a3a;
+  margin: 0 0 16px; 
+  letter-spacing: 0.01em;
+}
+
+.visit-accent {
+  width: 44px;
+  height: 3px;
+  border-radius: 2px;
+  margin: 0 auto 24px;
+  background: linear-gradient(90deg, #f6a6d5, #c7b3ff, #9ad3ff);
 }
 
 .visit-blurb {
-  margin-top: 18px; 
-  max-width: 760px;
-  font-size: 18px; 
-  line-height: 1.8; 
-  color: #4b4b4b;
+  margin: 0 auto 28px; 
+  max-width: 600px;
+  font-size: 16px; 
+  line-height: 1.7; 
+  color: #555;
 }
 
 .visit-row {
-  margin-top: 28px; 
   display: flex; 
   gap: 14px; 
   flex-wrap: wrap;
+  justify-content: center;
   position: relative; 
   z-index: 5;
 }
@@ -61,8 +71,8 @@
 }
 
 .visit-btn-filled {
-  background: linear-gradient(90deg,#fbc2eb 0%,#a6c1ee 100%);
-  color: #000; 
+  background: linear-gradient(90deg, #fbc2eb 0%, #f7b3c9 35%, #f1b8a3 100%);
+  color: #111; 
   box-shadow: 0 8px 24px rgba(0,0,0,.08);
 }
 
@@ -75,7 +85,7 @@
 /* Mobile */
 @media (max-width: 768px) {
   .visit-section {
-    padding: 60px 0 50px;
+    padding: 60px 0;
   }
 
   .visit-wrap {
@@ -83,19 +93,17 @@
   }
 
   .visit-title {
-    font-size: 32px;
+    font-size: 28px;
   }
 
   .visit-blurb {
     font-size: 15px;
     line-height: 1.7;
-    margin-top: 14px;
   }
 
   .visit-row {
     flex-direction: column;
     gap: 12px;
-    margin-top: 24px;
   }
 
   .visit-btn {

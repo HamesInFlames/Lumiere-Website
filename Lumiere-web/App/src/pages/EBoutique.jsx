@@ -30,11 +30,6 @@ const MENU_SECTIONS = [
     label: "Breads",
     blurb: "Artisan sourdough and specialty loaves.",
   },
-  {
-    id: "bakery-shelf",
-    label: "Bakery Shelf",
-    blurb: "Cookies, bars, and shelf-stable treats.",
-  },
 ];
 
 export default function EBoutique() {
@@ -153,8 +148,11 @@ export default function EBoutique() {
       {/* Header */}
       <header className="menu-header">
         <h1 className="menu-title">Menu</h1>
-        <p className="menu-subtitle">
-          Explore our cakes, pastries, breads, and one-bite creations — crafted fresh at Lumière Patisserie.
+        <h2 className="menu-subtitle-header">
+          Explore our cakes, pastries, breads, and one-bite creations.
+        </h2>
+        <p className="menu-subtitle-footer">
+          Crafted fresh at Lumière Patisserie.
         </p>
       </header>
 

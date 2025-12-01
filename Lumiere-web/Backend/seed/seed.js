@@ -1,9 +1,11 @@
 // src/seed/seed.js
 import mongoose from "mongoose";
 import dotenv from "dotenv";
-import connectDB from "../src/config/db.js";       // ✅ correct path
-import Product from "../src/models/Product.js";    // ✅ correct path
+import { connectDB, disconnectDB } from "../src/config/db.js";
+import Product from "../src/models/Product.js";
 import samples from "../src/products/productSamples.js";
+
+dotenv.config();
 
 (async () => {
   try {

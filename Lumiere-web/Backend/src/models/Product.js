@@ -12,7 +12,7 @@ const ProductSchema = new mongoose.Schema(
     category: {
       type: String,
       required: true,
-      enum: ["cakes", "personal-desserts", "onebite", "pastries", "bread", "bakery-shelf"]
+      enum: ["cakes", "personal-desserts", "onebite", "pastries", "bread"]
     },
     description: { type: String, default: "" },
     ingredients: { type: String, default: "" },

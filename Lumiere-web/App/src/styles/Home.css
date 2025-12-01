@@ -5,7 +5,7 @@
 
 /* Containers */
 .home-container {
-  max-width: 1240px;
+  max-width: 1440px;
   margin: 0 auto;
   padding: 0 24px;
 }
@@ -66,19 +66,20 @@
   display: inline-block;
   margin-top: 24px;
   padding: 14px 28px;
-  background: #fff;
+  background: linear-gradient(90deg, #fbc2eb 0%, #f7b3c9 35%, #f1b8a3 100%);
   color: #111;
-  border-radius: 6px;
-  border: 1px solid #ddd;
+  border-radius: 8px;
+  border: none;
   font-weight: 700;
   letter-spacing: 0.08em;
   font-size: 14px;
   text-decoration: none;
-  transition: background 0.3s ease, transform 0.2s ease;
+  box-shadow: 0 8px 24px rgba(0,0,0,.15);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 .home-cta:hover {
-  background: #f7f7f7;
   transform: translateY(-2px);
+  box-shadow: 0 12px 32px rgba(0,0,0,.2);
 }
 
 /* ===============================
@@ -87,12 +88,36 @@
 .home-section {
   padding: 72px 0;
 }
-.home-sectionTitle {
-  margin: 0 0 28px;
-  font-size: 28px;
-  font-weight: 500;
-  color: #4b4b4b;
+
+.home-collectionsSection {
+  background: #fafafa;
+  padding: 80px 0;
+}
+
+.home-collectionsSection .home-containerWide {
+  max-width: 1440px;
+}
+
+.home-sectionHeader {
   text-align: center;
+  margin-bottom: 48px;
+}
+
+.home-sectionTitle {
+  margin: 0 0 16px;
+  font-size: clamp(1.8rem, 4vw, 2.5rem);
+  font-weight: 400;
+  color: #3a3a3a;
+  letter-spacing: 0.01em;
+  line-height: 1.2;
+}
+
+.home-sectionAccent {
+  width: 44px;
+  height: 3px;
+  border-radius: 2px;
+  margin: 0 auto;
+  background: linear-gradient(90deg, #f6a6d5, #c7b3ff, #9ad3ff);
 }
 
 /* ===============================
@@ -110,51 +135,78 @@
   color: inherit;
   position: relative;
   overflow: hidden;
-  border-radius: 8px;
+  border-radius: 16px;
   cursor: pointer;
   background: #fff;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.06);
+  box-shadow: 0 8px 32px rgba(0,0,0,.08);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 .home-card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.1);
+  transform: translateY(-4px);
+  box-shadow: 0 16px 48px rgba(0,0,0,.12);
+}
+.home-card:hover .home-cardImg {
+  transform: scale(1.03);
+}
+.home-card:active .home-cardImg {
+  transform: scale(1);
 }
 
 .home-cardImg {
   width: 100%;
-  height: auto;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
   display: block;
-  transition: transform 0.35s ease;
+  border-radius: 16px;
+  transition: transform 0.4s ease;
 }
 
-.home-overlayFlush {
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  background: rgba(255, 255, 255, 0.94);
-  border-top-right-radius: 12px;
-  padding: 16px 20px;
-  z-index: 2;
+.home-cardContent {
+  padding: 14px 0 0;
+  text-align: center;
 }
 
-.home-titleLarge {
+.home-cardTitle {
   margin: 0;
-  color: #0c0c0c;
-  font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: 0.02em;
-  font-size: 24px;
+  font-size: 17px;
+  font-weight: 500;
+  color: #1a1a1a;
+  letter-spacing: -0.01em;
+  line-height: 1.3;
 }
+
+.home-categoryCarousel {
+  position: relative;
+  padding: 0 0 40px;
+  margin-top: 0;
+}
+
+.home-categoryCarousel .swiper-slide {
+  height: auto;
+}
+
+.home-categoryCarousel .swiper-wrapper {
+  transition-timing-function: ease-out;
+}
+
+.home-loading {
+  text-align: center;
+  padding: 40px 20px;
+  color: #666;
+  font-size: 16px;
+}
+
+/* Legacy overlay styles - removed for cleaner design */
 
 /* ===============================
    GIFT SECTION
 ================================ */
 .home-giftSection {
-  padding: 96px 0;
+  padding: 80px 0;
+  background: #fff;
 }
 .home-giftGrid {
-  max-width: 1240px;
+  max-width: 1440px;
   margin: 0 auto;
   padding: 0 24px;
   display: grid;
@@ -166,8 +218,8 @@
   width: 95%;
   aspect-ratio: 1 / 1;
   overflow: hidden;
-  border-radius: 12px;
-  box-shadow: 0 22px 48px rgba(0, 0, 0, 0.12);
+  border-radius: 16px;
+  box-shadow: 0 24px 56px rgba(0, 0, 0, 0.12);
 }
 .home-giftImg {
   width: 100%;
@@ -240,6 +292,40 @@
     padding: 48px 0;
   }
 
+  .home-collectionsSection {
+    padding: 60px 0;
+  }
+
+  .home-sectionHeader {
+    margin-bottom: 40px;
+    padding: 0 16px;
+  }
+
+  .home-sectionTitle {
+    font-size: 32px;
+    margin-bottom: 12px;
+  }
+
+  .home-sectionSubtitle {
+    font-size: 15px;
+  }
+
+  .home-categoryCarousel {
+    padding: 0 0 30px;
+  }
+
+  .home-cardTitle {
+    font-size: 15px;
+  }
+
+  .home-cardContent {
+    padding: 12px 0 0;
+  }
+
+  .home-cardImg {
+    border-radius: 10px;
+  }
+
   .home-hero {
     height: auto;
     min-height: 420px;
@@ -265,11 +351,31 @@
   }
 
   .home-card {
-    border-radius: 10px;
+    border-radius: 8px;
   }
 
-  .home-titleLarge {
-    font-size: 18px;
+  .home-cardImg {
+    border-radius: 8px;
+  }
+
+  .home-cardTitle {
+    font-size: 14px;
+  }
+
+  .home-cardContent {
+    padding: 10px 0 0;
+  }
+
+  .home-collectionsSection {
+    padding: 48px 0;
+  }
+
+  .home-sectionTitle {
+    font-size: 28px;
+  }
+
+  .home-sectionSubtitle {
+    font-size: 14px;
   }
 
   .home-giftH2 {

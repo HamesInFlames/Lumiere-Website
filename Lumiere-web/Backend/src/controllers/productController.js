@@ -17,8 +17,8 @@ const toClient = (p) => ({
   allergens: p.allergens ?? "",
   serving_size: p.serving_size ?? "",
 
-  // 🔥 Fix image arrays
-  images: Array.isArray(p.images)
+  // 🔥 Fix image arrays - check for non-empty array first
+  images: Array.isArray(p.images) && p.images.length > 0
     ? p.images
     : p.imageUrl
     ? [p.imageUrl]

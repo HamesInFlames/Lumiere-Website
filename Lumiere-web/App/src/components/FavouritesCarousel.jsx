@@ -8,31 +8,36 @@ import "swiper/css/scrollbar";
 import { fetchProducts } from "../lib/api";
 
 const styles = {
-  section: { padding: "48px 0" },
-  container: { maxWidth: 1240, margin: "0 auto", padding: "0 16px" },
+  section: { padding: "80px 0", background: "#fafafa" },
+  container: { maxWidth: 1440, margin: "0 auto", padding: "0 24px" },
 
   headingRow: {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "space-between",
-    marginBottom: 20,
+    textAlign: "center",
+    marginBottom: 48,
   },
   h2: {
-    fontSize: "clamp(22px, 5vw, 28px)",
-    fontWeight: 700,
-    letterSpacing: ".02em",
-    margin: 0,
-    color: "#1c1c1c",
+    fontSize: "clamp(1.8rem, 4vw, 2.5rem)",
+    fontWeight: 400,
+    letterSpacing: "0.01em",
+    margin: "0 0 16px",
+    color: "#3a3a3a",
   },
   h2Link: { color: "inherit", textDecoration: "none" },
+  accent: {
+    width: 44,
+    height: 3,
+    borderRadius: 2,
+    margin: "0 auto",
+    background: "linear-gradient(90deg, #f6a6d5, #c7b3ff, #9ad3ff)",
+  },
 
   imgBox: {
     position: "relative",
     width: "100%",
     paddingTop: "100%",
-    borderRadius: 12,
+    borderRadius: 16,
     overflow: "hidden",
-    boxShadow: "0 12px 32px rgba(0,0,0,.10)",
+    boxShadow: "0 16px 40px rgba(0,0,0,.10)",
     background: "#f6f6f6",
   },
   img: {
@@ -126,6 +131,7 @@ export default function FavouritesCarousel() {
               Today&apos;s Favourites
             </Link>
           </h2>
+          <div style={styles.accent} />
         </div>
 
         <Swiper

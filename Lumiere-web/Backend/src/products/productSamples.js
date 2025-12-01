@@ -79,7 +79,6 @@ const raw = [
     category: "cakes",
     description: "Light No-Bake Cheesecake, Buttery Crumble, Graham Cracker Crust.",
   },
-
   // PERSONAL DESSERTS (from /Lumiere/Personal Desserts)
   {
     name: "Sweet Pleasure",
@@ -293,7 +292,6 @@ const raw = [
     category: "pastries",
     description: "Buttery croissant with chocolate chips and light sugar glaze.",
   },
-
   // 🍞 BREADS (from /Lumiere/Breads)
   {
     name: "Wholewheat & Seeds Sourdough",
@@ -329,36 +327,6 @@ const raw = [
     imageUrl: "/Lumiere/Breads/Sun-dried tomatoes & Garlic Sourdough.png",
     category: "bread",
     description: "Savory sourdough loaf packed with sun-dried tomatoes and roasted garlic.",
-  },
-
-  // 🍪 BAKERY SHELF (from /baker_shelf)
-  {
-    name: "Chocolate Crinkles",
-    price: 3.5,
-    imageUrl: "/baker_shelf/Chocolate Crinkles.png",
-    category: "bakery-shelf",
-    description: "Fudgy chocolate cookies coated in powdered sugar with a crackled top.",
-  },
-  {
-    name: "Chocolate Nemesis",
-    price: 8.0,
-    imageUrl: "/baker_shelf/Chocolate Nemesis.png",
-    category: "bakery-shelf",
-    description: "Rich, dense flourless chocolate cake with an intense chocolate flavor.",
-  },
-  {
-    name: "Hazelnut Cookies",
-    price: 4.0,
-    imageUrl: "/baker_shelf/Hazelnut Cookies.png",
-    category: "bakery-shelf",
-    description: "Buttery cookies studded with toasted hazelnuts and a hint of vanilla.",
-  },
-  {
-    name: "Pear Breton",
-    price: 6.5,
-    imageUrl: "/baker_shelf/Pear Breton.png",
-    category: "bakery-shelf",
-    description: "Traditional French butter cake with caramelized pear and almond cream.",
   },
 ];
 

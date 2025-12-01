@@ -5,15 +5,16 @@ export default function ShowcaseImage({
   imgSrc = "/Lumiere.png",          // put your image in /public
   alt = "Lumière interior",
   objectPosition = "center right",  // matches the Shopify block
-  aspect = "56.25%",                 // controls height (62.5% ≈ 16:10)
+  aspect = "40%",                     // controls height (40% = more panoramic)
 }) {
-  const wrap = { maxWidth: 1240, margin: "0 auto", padding: "0 24px" };
+  const wrap = { maxWidth: 1440, margin: "0 auto", padding: "0 24px" };
 
   const card = {
     position: "relative",
     overflow: "hidden",
-    boxShadow: "0 18px 44px rgba(0,0,0,.12)",
+    boxShadow: "0 24px 56px rgba(0,0,0,.12)",
     background: "#f7f7f7",
+    borderRadius: 16,
   };
 
   const ratio = {
@@ -35,7 +36,7 @@ export default function ShowcaseImage({
   };
 
   return (
-    <section style={{ padding: "72px 0" }}>
+    <section style={{ padding: "80px 0", background: "#fff" }}>
       <div style={wrap}>
         <div style={card}>
           <div style={ratio}>

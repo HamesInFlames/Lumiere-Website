@@ -19,13 +19,25 @@
   margin-bottom: 8px;
 }
 
-.menu-subtitle {
-  font-size: 18px;
-  color: #666;
-  margin-bottom: 32px;
-  max-width: 600px;
-  margin-left: auto;
-  margin-right: auto;
+.menu-subtitle-header {
+  font-size: 22px;
+  font-weight: 500;
+  color: #333;
+  margin: 0 auto 8px;
+  max-width: 700px;
+  line-height: 1.5;
+  letter-spacing: 0.2px;
+}
+
+.menu-subtitle-footer {
+  font-size: 16px;
+  font-weight: 400;
+  color: #777;
+  margin: 0 auto 32px;
+  max-width: 700px;
+  line-height: 1.5;
+  letter-spacing: 0.3px;
+  font-style: italic;
 }
 
 /* -----------------------------------------
@@ -34,7 +46,7 @@
 
 .menu-tabs {
   position: sticky;
-  top: 118px; /* below header with top bar */
+  top: 132px; /* below header with top bar - increased for proper spacing */
   z-index: 50;
   background: #fff;
   padding: 12px 0;
@@ -236,14 +248,19 @@
     font-size: 28px;
   }
 
-  .menu-subtitle {
-    font-size: 15px;
+  .menu-subtitle-header {
+    font-size: 18px;
+    margin-bottom: 6px;
+  }
+
+  .menu-subtitle-footer {
+    font-size: 14px;
     margin-bottom: 20px;
   }
 
   /* Scrollable tabs on mobile */
   .menu-tabs {
-    top: 68px; /* shorter header on mobile (no top bar) */
+    top: 78px; /* shorter header on mobile (no top bar) - increased for proper spacing */
     padding: 10px 0;
   }
 
