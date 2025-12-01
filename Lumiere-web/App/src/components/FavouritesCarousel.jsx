@@ -145,6 +145,7 @@ export default function FavouritesCarousel() {
             640: { slidesPerView: 2, spaceBetween: 16 },
             1024: { slidesPerView: 3, spaceBetween: 20 },
           }}
+          style={{ paddingBottom: 32 }}
         >
           {favourites.map((p) => (
             <SwiperSlide key={p.id}>
