@@ -10,8 +10,14 @@ export async function connectDB() {
     return;
   }
   try {
-    await mongoose.connect(uri, { autoIndex: true });
-    console.log("✅ MongoDB connected");
+    await mongoose.connect(uri, {
+      autoIndex: true,
+      // Security & Performance options
+      maxPoolSize: 10,           // Limit connection pool size
+      serverSelectionTimeoutMS: 5000, // Timeout if can't connect
+      socketTimeoutMS: 45000,    // Close sockets after 45s of inactivity
+    });
+    console.log("✅ MongoDB connected securely");
   } catch (err) {
     console.error("❌ MongoDB connection error:", err.message);
     mongoose.set("bufferCommands", false);

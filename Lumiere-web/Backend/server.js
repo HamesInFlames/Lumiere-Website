@@ -5,6 +5,8 @@ import dotenv from 'dotenv';
 import cors from 'cors';
 import morgan from 'morgan';
 import mongoose from 'mongoose';
+import helmet from 'helmet';
+import rateLimit from 'express-rate-limit';
 import { connectDB, disconnectDB } from './src/config/db.js';
 import productRoutes from './src/routes/productRoutes.js';
 import { notFound, errorHandler } from './src/middleware/errorMiddleware.js';
@@ -13,8 +15,33 @@ import contactRoutes from "./src/routes/contactRoutes.js";
 dotenv.config();
 
 const app = express();
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+
+// ============ SECURITY MIDDLEWARE ============
+
+// Helmet: Sets various HTTP headers for security
+// Protects against: XSS, clickjacking, MIME sniffing, etc.
+app.use(helmet());
+
+// Rate Limiting: Prevent brute force & DDoS attacks
+const generalLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 100, // Limit each IP to 100 requests per windowMs
+  message: { ok: false, message: 'Too many requests, please try again later.' },
+  standardHeaders: true,
+  legacyHeaders: false,
+});
+app.use(generalLimiter);
+
+// Stricter rate limit for contact form (prevent spam)
+const contactLimiter = rateLimit({
+  windowMs: 60 * 60 * 1000, // 1 hour
+  max: 5, // Limit each IP to 5 contact submissions per hour
+  message: { ok: false, message: 'Too many contact submissions, please try again later.' },
+});
+
+// ============ BODY PARSING ============
+app.use(express.json({ limit: '10kb' })); // Limit body size to prevent large payload attacks
+app.use(express.urlencoded({ extended: true, limit: '10kb' }));
 
 
 // CORS allow-list via CORS_ORIGIN="http://localhost:5173,https://yourdomain.com"
@@ -37,7 +64,7 @@ app.get('/healthz', (_req, res) => res.json({
 }));
 
 app.use('/api/products', productRoutes);
-app.use("/api/contact", contactRoutes);
+app.use("/api/contact", contactLimiter, contactRoutes); // Apply stricter rate limit to contact
 
 // 404 + error handlers
 app.use(notFound);

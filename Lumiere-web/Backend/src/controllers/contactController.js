@@ -1,31 +1,14 @@
 // src/controllers/contactController.js
 import nodemailer from "nodemailer";
 
-function validate({ name, email, phone, message }) {
-  const errors = [];
-
-  if (!name || name.trim().length < 2) errors.push("name");
-  if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) errors.push("email");
-
-  // phone optional — only validate if provided
-  if (phone && phone.trim().length > 0 && phone.trim().length < 7) {
-    errors.push("phone");
-  }
-
-  if (!message || message.trim().length < 5) errors.push("message");
-
-  return errors;
-}
-
+// Note: Input validation is now handled by express-validator in routes
+// This controller receives already validated & sanitized data
 
 export async function submitContact(req, res, next) {
   try {
     const { name, email, phone, message } = req.body || {};
-    const bad = validate({ name, email, phone, message });
-    if (bad.length) {
-      return res.status(400).json({ ok: false, message: "Invalid fields", fields: bad });
-    }
 
+    // Create transporter with secure defaults
     const transporter = nodemailer.createTransport({
       host: process.env.SMTP_HOST,
       port: Number(process.env.SMTP_PORT || 587),
