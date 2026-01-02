@@ -20,7 +20,7 @@ function Hero() {
         <div className="home-heroContent">
           <h1 className="home-heroH1">Artfully Crafted, Made for Sharing</h1>
           {/* Go to the new products index */}
-          <Link to="/e-boutique" className="home-cta">BROWSE MENU</Link>
+          <Link to="/menu" className="home-cta">BROWSE MENU</Link>
         </div>
       </div>
     </section>
@@ -80,7 +80,7 @@ function GiftBoxes() {
             Immerse yourself in the artistry of taste and embark on a journey of unparalleled pleasure
           </p>
           {/* Link to a relevant category in the new products index */}
-          <Link to="/e-boutique" className="home-giftBtn">
+          <Link to="/menu" className="home-giftBtn">
             SEE OUR MENU
           </Link>
         </div>

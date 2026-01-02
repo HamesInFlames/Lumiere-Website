@@ -3,7 +3,7 @@ import { BrowserRouter, Routes, Route, useLocation, Navigate } from "react-route
 import Header from "./components/Header.jsx";
 import Footer from "./components/Footer.jsx";
 import Home from "./pages/Home.jsx";
-import EBoutique from "./pages/EBoutique.jsx";
+import Menu from "./pages/Menu.jsx";
 import Contact from "./pages/Contact.jsx";
 import ScrollToTop from "./components/ScrollToTop.jsx";
 import ProductsIndex from "./pages/Products";
@@ -18,7 +18,7 @@ function MainContent() {
       <ScrollToTop />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/e-boutique" element={<EBoutique />} />
+        <Route path="/menu" element={<Menu />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/pages/contact" element={<Navigate to="/contact" replace />} />
         <Route path="/products" element={<ProductsIndex />} />

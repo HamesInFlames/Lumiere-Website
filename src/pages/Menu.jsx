@@ -120,12 +120,13 @@ export default function EBoutique() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [items]);
 
-  // 4) Click tab → smooth scroll to section
+  // 4) Click tab → smooth scroll to section (positions section header just below tabs)
   const handleTabClick = (id) => {
     const el = sectionRefs.current[id];
     if (!el) return;
 
-    const headerOffset = 120; // adjust if your header height changes
+    // Header + sticky tabs height + small gap
+    const headerOffset = 180; // accounts for fixed header (~85px) + sticky tabs (~75px) + padding
     const rect = el.getBoundingClientRect();
     const offsetTop = rect.top + window.scrollY - headerOffset;
 

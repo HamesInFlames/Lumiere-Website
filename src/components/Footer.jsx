@@ -45,7 +45,7 @@ export default function Footer() {
           <div>
             <h6 className="footer-title">Lumiere Patisserie</h6>
             <ul className="footer-list">
-              <li><Link to="/e-boutique" className="footer-link">Menu</Link></li>
+              <li><Link to="/menu" className="footer-link">Menu</Link></li>
               <li><Link to="/contact" className="footer-link">Contact Us</Link></li>
             </ul>
           </div>

@@ -12,7 +12,7 @@ export default function Header({ onHeight }) {
   const location = useLocation();
 
   const isHomeActive = location.pathname === "/";
-  const isEBActive = location.pathname.startsWith("/e-boutique");
+  const isMenuActive = location.pathname.startsWith("/menu");
   const isContactActive = location.pathname.startsWith("/contact");
 
   // Header shadow + height reporting
@@ -102,8 +102,8 @@ export default function Header({ onHeight }) {
 
                 {/* MENU (NO DROPDOWN) */}
                 <li className="nav-item">
-                  <Link to="/e-boutique" className="nav-link" onClick={closeMenu}>Menu</Link>
-                  <span className={`nav-underline ${isEBActive ? "visible" : ""}`} />
+                  <Link to="/menu" className="nav-link" onClick={closeMenu}>Menu</Link>
+                  <span className={`nav-underline ${isMenuActive ? "visible" : ""}`} />
                 </li>
 
                 {/* CONTACT */}
