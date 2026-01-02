@@ -125,10 +125,18 @@ export default function EBoutique() {
     const el = sectionRefs.current[id];
     if (!el) return;
 
-    // Header + sticky tabs height + small gap
-    const headerOffset = 180; // accounts for fixed header (~85px) + sticky tabs (~75px) + padding
+    // Get actual heights of fixed/sticky elements
+    const header = document.querySelector('.site-header');
+    const tabs = document.querySelector('.menu-tabs');
+    
+    const headerHeight = header ? header.offsetHeight : 85;
+    const tabsHeight = tabs ? tabs.offsetHeight : 60;
+    
+    // Total offset = header + tabs + small gap (16px)
+    const totalOffset = headerHeight + tabsHeight + 16;
+    
     const rect = el.getBoundingClientRect();
-    const offsetTop = rect.top + window.scrollY - headerOffset;
+    const offsetTop = rect.top + window.scrollY - totalOffset;
 
     window.scrollTo({ top: offsetTop, behavior: "smooth" });
     setActive(id);
