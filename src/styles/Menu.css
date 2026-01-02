@@ -30,8 +30,11 @@
   top: 85px;
   z-index: 999;
   background: #fff;
-  padding: 16px 0;
+  /* 8px top/bottom padding for rainbow border (4px) + breathing room (4px) */
+  padding: 20px 0 22px;
   border-bottom: 1px solid #eee;
+  /* Prevent any clipping */
+  overflow: visible;
 }
 
 .menu-tabs-spacer {
@@ -41,11 +44,15 @@
 .menu-tab-row {
   display: flex;
   justify-content: center;
-  gap: 10px;
-  padding: 0 24px;
+  gap: 12px;
+  /* 28px left/right for scroll + 4px for rainbow border */
+  padding: 4px 28px;
   overflow-x: auto;
+  overflow-y: visible;
   scrollbar-width: none;
   -ms-overflow-style: none;
+  /* Ensure rainbow border is not clipped */
+  margin: 0 -4px;
 }
 
 .menu-tab-row::-webkit-scrollbar {
@@ -55,7 +62,9 @@
 /* Tab Design - High Contrast */
 .menu-tab {
   position: relative;
+  /* 12px vertical + 22px horizontal + 4px margin for rainbow */
   padding: 12px 22px;
+  margin: 4px;
   font-size: 15px;
   font-weight: 600;
   letter-spacing: 0.01em;
@@ -67,6 +76,8 @@
   transition: all 0.25s ease;
   white-space: nowrap;
   flex-shrink: 0;
+  /* Ensure stacking context for ::before */
+  isolation: isolate;
 }
 
 .menu-tab:hover {
@@ -88,7 +99,8 @@
 .menu-tab--active::before {
   content: "";
   position: absolute;
-  inset: -3px;
+  /* 4px outward for visible rainbow border */
+  inset: -4px;
   border-radius: 100px;
   background: linear-gradient(90deg, #f6a, #f9e36b, #7ae1c9, #8ab6ff, #f6a);
   background-size: 200% 100%;
@@ -107,49 +119,49 @@
 @media (max-width: 768px) {
   .menu-tabs {
     top: 72px;
-    padding: 14px 0;
+    /* 18px padding to accommodate rainbow border (4px) + gap */
+    padding: 18px 0 20px;
   }
 
   .menu-tab-row {
     justify-content: flex-start;
-    padding: 0 16px 4px;
-    gap: 8px;
-    /* Add padding at end so last tab isn't clipped */
-    padding-right: 40px;
-  }
-
-  /* Spacer element at end to prevent clipping */
-  .menu-tab-row::after {
-    content: "";
-    flex-shrink: 0;
-    width: 24px;
+    /* 4px vertical for rainbow, 20px left, 48px right for last tab */
+    padding: 4px 48px 4px 20px;
+    gap: 10px;
+    margin: 0;
   }
 
   .menu-tab {
     padding: 10px 18px;
+    margin: 4px;
     font-size: 14px;
     border-width: 1.5px;
   }
 
   .menu-tab--active::before {
-    inset: -2px;
+    inset: -4px;
   }
 }
 
 @media (max-width: 480px) {
   .menu-tabs {
     top: 68px;
+    padding: 16px 0 18px;
   }
 
   .menu-tab-row {
-    padding: 0 12px 4px;
-    gap: 6px;
-    padding-right: 32px;
+    padding: 4px 44px 4px 16px;
+    gap: 8px;
   }
 
   .menu-tab {
     padding: 9px 16px;
+    margin: 3px;
     font-size: 13px;
+  }
+
+  .menu-tab--active::before {
+    inset: -3px;
   }
 }
 
