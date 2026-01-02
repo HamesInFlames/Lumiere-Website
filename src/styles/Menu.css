@@ -127,9 +127,11 @@
   transform: translateY(-1px);
 }
 
+/* No hover change for active tab - keep it stable */
 .menu-tab--active:hover {
-  background: #000;
-  border-color: #000;
+  background: #1a1a1a;
+  border-color: #1a1a1a;
+  transform: translateY(-1px);
 }
 
 .menu-tab--active:active {
