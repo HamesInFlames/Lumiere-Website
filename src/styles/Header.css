@@ -136,52 +136,47 @@
 }
 
 /* Right side (reserve width so center nav never moves) */
-.right {
+.right-actions {
   justify-self: end;
-  position: relative;
-  height: 36px;
-  width: var(--side-col); /* ✅ matches left column */
   display: flex;
   align-items: center;
+  gap: 12px;
 }
 
-/* Search */
-.search {
-  position: absolute;
-  right: 0;
-  top: 0;
-  display: flex;
+/* Uber Eats Button - Desktop */
+.uber-eats-btn {
+  display: inline-flex;
   align-items: center;
-  height: 36px;
-  border-radius: 999px;
-  border: 1px solid #e6e6e6;
-  padding-left: 10px;
-  padding-right: 8px;
-  width: 36px;
-  overflow: hidden;
-  background: #fff;
-  transition: box-shadow .15s ease, width .15s ease;
-}
-.search.is-open {
-  width: 260px;
-  box-shadow: 0 4px 12px rgba(0,0,0,.06);
-}
-.search-btn {
-  background: transparent;
+  justify-content: center;
+  padding: 10px 20px;
+  background: #06C167;
   border: none;
-  padding: 0;
-  cursor: pointer;
-  line-height: 0;
+  border-radius: 24px;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 8px rgba(6, 193, 103, 0.3);
 }
-.search-input {
-  border: none;
-  outline: none;
-  width: 100%;
-  height: 100%;
-  font-size: 14px;
-  color: #222;
-  background: transparent;
-  padding-left: 6px;
+
+.uber-eats-btn:hover {
+  background: #05a85a;
+  box-shadow: 0 4px 14px rgba(6, 193, 103, 0.4);
+  transform: translateY(-1px);
+}
+
+.uber-eats-btn:active {
+  transform: translateY(0);
+  background: #049950;
+}
+
+.uber-eats-btn .uber-logo-img {
+  height: 28px;
+  width: auto;
+  display: block;
+}
+
+/* Hide mobile Uber Eats link on desktop */
+.uber-eats-link {
+  display: none;
 }
 
 /* Responsive tweak */
@@ -202,17 +197,54 @@
   }
 
   .header-grid {
-    display: flex;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
     align-items: center;
     padding: 0 16px;
+    gap: 12px;
   }
 
+  /* Mobile: Uber Eats on LEFT */
+  .uber-eats-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    background: #06C167;
+    border: none;
+    border-radius: 12px;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 6px rgba(6, 193, 103, 0.3);
+    z-index: 1002;
+    -webkit-tap-highlight-color: transparent;
+    padding: 8px;
+  }
+
+  .uber-eats-link:active {
+    transform: scale(0.95);
+    background: #05a85a;
+    box-shadow: 0 1px 4px rgba(6, 193, 103, 0.4);
+  }
+
+  .uber-eats-link .uber-logo-img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  /* Logo in CENTER */
   .logo-box {
     z-index: 1002;
+    justify-self: center;
   }
 
   .logo-img { height: 50px; }
+
+  /* Hide desktop Uber Eats button on mobile */
+  .right-actions {
+    display: none;
+  }
 
   /* Hide desktop nav by default on mobile */
   .nav-wrap { 
@@ -337,17 +369,18 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 48px;
-    height: 48px;
+    width: 44px;
+    height: 44px;
     background: #f8f8f8;
     border: none;
     border-radius: 12px;
     cursor: pointer;
-    padding: 12px;
+    padding: 0;
     z-index: 1002;
     position: relative;
     -webkit-tap-highlight-color: transparent;
     transition: background 0.2s ease, transform 0.2s ease;
+    justify-self: end;
   }
 
   .hamburger:active {
@@ -361,10 +394,23 @@
     height: 2px;
     background: #333;
     border-radius: 2px;
-    margin: 2.5px 0;
+    position: absolute;
+    left: 50%;
     transition: transform 0.3s cubic-bezier(0.68, -0.6, 0.32, 1.6), 
                 opacity 0.2s ease,
                 background 0.2s ease;
+  }
+
+  .hamburger span:nth-child(1) {
+    transform: translate(-50%, -6px);
+  }
+
+  .hamburger span:nth-child(2) {
+    transform: translate(-50%, 0);
+  }
+
+  .hamburger span:nth-child(3) {
+    transform: translate(-50%, 6px);
   }
 
   .hamburger.open {
@@ -376,18 +422,17 @@
   }
 
   .hamburger.open span:nth-child(1) {
-    transform: rotate(45deg) translate(4px, 5px);
-  }
-  .hamburger.open span:nth-child(2) {
-    opacity: 0;
-    transform: scaleX(0);
-  }
-  .hamburger.open span:nth-child(3) {
-    transform: rotate(-45deg) translate(4px, -5px);
+    transform: translate(-50%, 0) rotate(45deg);
   }
 
-  /* Hide right side on mobile */
-  .right { display: none; }
+  .hamburger.open span:nth-child(2) {
+    opacity: 0;
+    transform: translate(-50%, 0) scaleX(0);
+  }
+
+  .hamburger.open span:nth-child(3) {
+    transform: translate(-50%, 0) rotate(-45deg);
+  }
 }
 
 /* Hide hamburger and overlay on desktop */

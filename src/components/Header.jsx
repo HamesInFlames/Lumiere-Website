@@ -68,6 +68,17 @@ export default function Header({ onHeight }) {
         <div className="header-bar">
           <div className="header-grid">
 
+            {/* UBER EATS LINK (Mobile: left side) */}
+            <a 
+              href="https://www.ubereats.com/ca/store/lumiere-patisserie/rhZJeBGrXv-V50R2q2ufkw?diningMode=DELIVERY&pl=JTdCJTIyYWRkcmVzcyUyMiUzQSUyMjY3JTIwQWJpdGliaSUyMEF2ZSUyMiUyQyUyMnJlZmVyZW5jZSUyMiUzQSUyMjZjODM5NWRmLWNiNTAtZDNjNS1lMDNjLTVhZWFkMzRhYmUzZSUyMiUyQyUyMnJlZmVyZW5jZVR5cGUlMjIlM0ElMjJ1YmVyX3BsYWNlcyUyMiUyQyUyMmxhdGl0dWRlJTIyJTNBNDMuNzk3MTU4MSUyQyUyMmxvbmdpdHVkZSUyMiUzQS03OS40MTQ2Nzg4JTdE"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="uber-eats-link"
+              aria-label="Order on Uber Eats"
+            >
+              <img src="/Uber-Eats-logo.png" alt="Uber Eats" className="uber-logo-img" />
+            </a>
+
             {/* LOGO */}
             <div className="logo-box">
               <Link to="/" className="logo-link" onClick={closeMenu}>
@@ -107,6 +118,19 @@ export default function Header({ onHeight }) {
 
               </ul>
             </nav>
+
+            {/* UBER EATS (Desktop: right side) */}
+            <div className="right-actions">
+              <a 
+                href="https://www.ubereats.com/ca/store/lumiere-patisserie/rhZJeBGrXv-V50R2q2ufkw?diningMode=DELIVERY&pl=JTdCJTIyYWRkcmVzcyUyMiUzQSUyMjY3JTIwQWJpdGliaSUyMEF2ZSUyMiUyQyUyMnJlZmVyZW5jZSUyMiUzQSUyMjZjODM5NWRmLWNiNTAtZDNjNS1lMDNjLTVhZWFkMzRhYmUzZSUyMiUyQyUyMnJlZmVyZW5jZVR5cGUlMjIlM0ElMjJ1YmVyX3BsYWNlcyUyMiUyQyUyMmxhdGl0dWRlJTIyJTNBNDMuNzk3MTU4MSUyQyUyMmxvbmdpdHVkZSUyMiUzQS03OS40MTQ2Nzg4JTdE"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="uber-eats-btn"
+                aria-label="Order on Uber Eats"
+              >
+                <img src="/Uber-Eats-logo.png" alt="Uber Eats" className="uber-logo-img" />
+              </a>
+            </div>
 
             {/* HAMBURGER MENU BUTTON */}
             <button
