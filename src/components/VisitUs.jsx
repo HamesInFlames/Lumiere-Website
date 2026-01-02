@@ -22,7 +22,7 @@ export default function VisitUs() {
           {/* External new tab */}
           <a
             className="visit-btn visit-btn-outline"
-            href="https://www.google.com/maps/place/1102+Centre+St+%231,+Thornhill,+ON+L4J+3M8"
+            href="https://www.google.com/maps/place/Lumi%C3%A8re+P%C3%A2tisserie/@43.8089994,-79.4643976,17z/data=!3m2!4b1!5s0x882b2c2571548749:0xb2d5338425c0ba65!4m6!3m5!1s0x882b2d3656ef54a1:0xfc1b28b01a017991!8m2!3d43.8089956!4d-79.4618227!16s%2Fg%2F11r_dmkggr"
             target="_blank"
             rel="noopener noreferrer"
           >

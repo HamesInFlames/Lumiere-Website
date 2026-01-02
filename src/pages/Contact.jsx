@@ -88,15 +88,23 @@ export default function Contact() {
           {/* Right: Map card */}
           <div className="card card-map">
             <iframe
-              title="Lumiere Patisserie Map"
+              title="Lumière Pâtisserie Map"
               width="100%"
               height="100%"
               style={{ border: 0, borderRadius: 14 }}
               loading="lazy"
               allowFullScreen
               referrerPolicy="no-referrer-when-downgrade"
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2889.799211522993!2d-79.441839!3d43.810286!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x882b2b7f2d9e9e45%3A0x0!2s1102%20Centre%20St%20%231%2C%20Thornhill%2C%20ON%20L4J%203M8!5e0!3m2!1sen!2sca!4v0000000000"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2884.8!2d-79.4643976!3d43.8089994!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x882b2d3656ef54a1%3A0xfc1b28b01a017991!2sLumi%C3%A8re%20P%C3%A2tisserie!5e0!3m2!1sen!2sca!4v1704000000000!5m2!1sen!2sca"
             />
+            <a 
+              href="https://www.google.com/maps/place/Lumi%C3%A8re+P%C3%A2tisserie/@43.8089994,-79.4643976,17z/data=!3m2!4b1!5s0x882b2c2571548749:0xb2d5338425c0ba65!4m6!3m5!1s0x882b2d3656ef54a1:0xfc1b28b01a017991!8m2!3d43.8089956!4d-79.4618227!16s%2Fg%2F11r_dmkggr"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="map-link"
+            >
+              Open in Google Maps →
+            </a>
           </div>
         </div>
       </section>
