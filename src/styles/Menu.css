@@ -117,20 +117,14 @@
 }
 
 /* Active/Selected Tab */
-.menu-tab--active {
+.menu-tab--active,
+.menu-tab--active:hover,
+.menu-tab--active:focus {
   color: #fff;
   font-weight: 700;
   background: #1a1a1a;
   border-color: #1a1a1a;
   box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
-  /* Slight lift effect */
-  transform: translateY(-1px);
-}
-
-/* No hover change for active tab - keep it stable */
-.menu-tab--active:hover {
-  background: #1a1a1a;
-  border-color: #1a1a1a;
   transform: translateY(-1px);
 }
 
