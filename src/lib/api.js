@@ -1,9 +1,105 @@
 // App/src/lib/api.js
-// Embedded product data - works without backend in production
+// Product data can be managed via:
+// 1. CSV file at public/products.csv (edit in Excel/Google Sheets)
+// 2. Google Sheets (set SHEET_URL in fetchFromSheets.js)
+// 3. Fallback to hardcoded data below
 
 import { getOptimizedImage } from './imageMap.js';
 
-const PRODUCTS = [
+// ============================================
+// CONFIGURATION: Choose your data source
+// ============================================
+// Set to true to load from CSV file (public/products.csv)
+// Set to false to use hardcoded PRODUCTS array below
+const USE_CSV_FILE = true;
+
+// ============================================
+// CSV PARSING UTILITIES
+// ============================================
+
+/**
+ * Parse a single CSV line, handling quoted values with commas
+ */
+function parseCSVLine(line) {
+  const values = [];
+  let current = '';
+  let inQuotes = false;
+  
+  for (let i = 0; i < line.length; i++) {
+    const char = line[i];
+    
+    if (char === '"') {
+      inQuotes = !inQuotes;
+    } else if (char === ',' && !inQuotes) {
+      values.push(current.trim());
+      current = '';
+    } else {
+      current += char;
+    }
+  }
+  values.push(current.trim());
+  
+  return values;
+}
+
+/**
+ * Parse CSV text into array of objects
+ */
+function parseCSV(csvText) {
+  const lines = csvText.trim().split('\n');
+  const headers = parseCSVLine(lines[0]);
+  
+  const products = [];
+  
+  for (let i = 1; i < lines.length; i++) {
+    const values = parseCSVLine(lines[i]);
+    if (values.length < headers.length) continue;
+    
+    const product = {};
+    headers.forEach((header, index) => {
+      let value = values[index] || '';
+      // Convert price to number
+      if (header === 'price') {
+        value = parseFloat(value) || 0;
+      }
+      product[header] = value;
+    });
+    
+    products.push(product);
+  }
+  
+  return products;
+}
+
+// ============================================
+// CSV FILE LOADING
+// ============================================
+
+let cachedCSVProducts = null;
+
+async function loadProductsFromCSV() {
+  if (cachedCSVProducts) return cachedCSVProducts;
+  
+  try {
+    const response = await fetch('/products.csv');
+    if (!response.ok) throw new Error('CSV not found');
+    
+    const csvText = await response.text();
+    cachedCSVProducts = parseCSV(csvText);
+    console.log(`✅ Loaded ${cachedCSVProducts.length} products from CSV`);
+    return cachedCSVProducts;
+  } catch (error) {
+    console.warn('Could not load CSV, using fallback data:', error.message);
+    return null;
+  }
+}
+
+// ============================================
+// FALLBACK HARDCODED DATA
+// (Used if CSV fails to load)
+// ============================================
+
+const FALLBACK_PRODUCTS = [
   // One Biters
   { id: "1", slug: "one-biter-assortment-box-4-pcs", name: "One Biter Assortment Box (4 pcs)", price: 16, imageUrl: "/Lumiere/4 One Biters.png", category: "onebite", description: "" },
   { id: "2", slug: "one-biter-assortment-box-12-pcs", name: "One Biter Assortment Box (12 pcs)", price: 48, imageUrl: "/Lumiere/12 One Biters.png", category: "onebite", description: "" },
@@ -67,6 +163,10 @@ const PRODUCTS = [
   { id: "50", slug: "pear-breton", name: "Pear Breton", price: 6.5, imageUrl: "/baker_shelf/Pear Breton.png", category: "bakery-shelf", description: "Traditional French butter cake with caramelized pear and almond cream." },
 ];
 
+// ============================================
+// PRODUCT NORMALIZATION
+// ============================================
+
 /**
  * Normalizes product objects so the frontend always receives consistent field names.
  * Uses optimized WebP images for faster loading.
@@ -77,7 +177,7 @@ function normalizeProduct(p) {
     id: p.id,
     slug: p.slug,
     title: p.name,
-    price: p.price,
+    price: typeof p.price === 'number' ? p.price : parseFloat(p.price) || 0,
     image: optimizedImage,
     images: [optimizedImage],
     category: p.category,
@@ -88,16 +188,26 @@ function normalizeProduct(p) {
   };
 }
 
+// ============================================
+// PUBLIC API
+// ============================================
+
 /**
  * Fetch list of products with optional filtering:
  * - category
  * - q (search)
  */
 export async function fetchProducts({ category, q } = {}) {
-  // Simulate async for consistency
-  await Promise.resolve();
+  let products;
   
-  let filtered = [...PRODUCTS];
+  if (USE_CSV_FILE) {
+    const csvProducts = await loadProductsFromCSV();
+    products = csvProducts || FALLBACK_PRODUCTS;
+  } else {
+    products = FALLBACK_PRODUCTS;
+  }
+  
+  let filtered = [...products];
   
   if (category) {
     filtered = filtered.filter(p => p.category === category);
@@ -107,7 +217,7 @@ export async function fetchProducts({ category, q } = {}) {
     const query = q.toLowerCase();
     filtered = filtered.filter(p => 
       p.name.toLowerCase().includes(query) || 
-      p.description.toLowerCase().includes(query)
+      (p.description && p.description.toLowerCase().includes(query))
     );
   }
   
@@ -118,9 +228,16 @@ export async function fetchProducts({ category, q } = {}) {
  * Fetch a single product using its slug.
  */
 export async function fetchProduct(slug) {
-  await Promise.resolve();
+  let products;
   
-  const product = PRODUCTS.find(p => p.slug === slug);
+  if (USE_CSV_FILE) {
+    const csvProducts = await loadProductsFromCSV();
+    products = csvProducts || FALLBACK_PRODUCTS;
+  } else {
+    products = FALLBACK_PRODUCTS;
+  }
+  
+  const product = products.find(p => p.slug === slug);
   
   if (!product) {
     throw new Error("Product not found");

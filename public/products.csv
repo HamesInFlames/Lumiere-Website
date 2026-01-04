@@ -1,0 +1,52 @@
+id,name,slug,price,imageUrl,category,description
+1,One Biter Assortment Box (4 pcs),one-biter-assortment-box-4-pcs,16,/Lumiere/4 One Biters.png,onebite,
+2,One Biter Assortment Box (12 pcs),one-biter-assortment-box-12-pcs,48,/Lumiere/12 One Biters.png,onebite,
+3,Blackcurrant Queen Cake,blackcurrant-queen-cake,50,/Lumiere/Cake/Blackcurrant Queen Cake.png,cakes,"Blackcurrant Diplomat, Blackcurrant Mousse, Hazelnut Crunch. Gluten Free, Dairy Free."
+4,ChocoHazelnut Cake,chocohazelnut-cake,49,/Lumiere/Cake/ChocoHazelnut Cake.png,cakes,"Milk Chocolate Ganache, Milk Chocolate Mousse, Hazelnut Crunch."
+5,Cleopatre Cake,cleopatre-cake,48,/Lumiere/Cake/Cleopatre Cake.png,cakes,"Blackcurrant Compote, Blackcurrant Mousse, Hazelnut Crunch."
+6,Coconut Dream Cake,coconut-dream-cake,44,/Lumiere/Cake/Coconut Dream Cake.png,cakes,"Coconut Diplomat, Coconut Mousse, Toasted Coconut."
+7,Lemon Pistachio Meringue Cake,lemon-pistachio-meringue-cake,50,/Lumiere/Cake/Lemon Pistachio Meringue Cake.png,cakes,"Pistachio Almond Cream, Raspberry Mousse, Almond Short Dough. Gluten Free."
+8,Raspberry Pistachio Cake,raspberry-pistachio-cake,49,/Lumiere/Cake/Raspberry Pistachio Cake.png,cakes,"Pistachio Almond Cream, Raspberry Mousse, Almond Short Dough. Gluten Free."
+9,Strawberry Cheesecake,strawberry-cheesecake,46,/Lumiere/Cake/Strawberry Cheesecake.png,cakes,"Light Cheesecake, Strawberry Mousse, Buttery Crumb. Gluten Free."
+10,Tiramisu Cake,tiramisu-cake,50,/Lumiere/Cake/Tiramisu Cake.png,cakes,"Tiramisu Mousse, Soft Chocolate Sponge, Coffee Syrup, Cappuccino Chantilly."
+11,Cream & Crumb Cake,cream-crumb-cake,44,/Lumiere/Cake/Cream & Crumb Cake.png,cakes,"Light No-Bake Cheesecake, Buttery Crumble, Graham Cracker Crust."
+12,Sweet Pleasure,sweet-pleasure,11.5,/Lumiere/Personal Desserts/Sweet Pleasure.png,personal-desserts,"Dark Chocolate Mousse, Chocolate Ganache, Chocolate Insert."
+13,Tiramichoux,tiramichoux,10.5,/Lumiere/Personal Desserts/Tiramichoux.png,personal-desserts,"Cocoa Craquelin Choux Pastry, Sabayon Mascarpone Cream, Espresso Biscotti Savoiardi, Cappuccino Chantilly."
+14,Raspberry Pistachio Tart,raspberry-pistachio-tart,10,/Lumiere/Personal Desserts/Raspberry Pistachio Tart.png,personal-desserts,"Pistachio Almond Cream, Raspberry Mousse, Almond Short Dough. Gluten Free."
+15,Black Forest,black-forest,10.5,/Lumiere/Personal Desserts/Black Forest.png,personal-desserts,"Chocolate Sponge, Cherry Compote, Kirsch Cream, Chocolate Chantilly."
+16,Dubai Chocolate,dubai-chocolate,11.5,/Lumiere/Personal Desserts/Dubai Chocolate.png,personal-desserts,"Cocoa Tart Shell, Hazelnut Praliné, Dark Chocolate Ganache, Milk Chocolate Mousse."
+17,Rings of Paris,rings-of-paris,11,/Lumiere/Personal Desserts/Rings of Paris.png,personal-desserts,"Pistachio Almond Cream, Raspberry Compote, Ruby Chocolate Ganache, Cocoa Tart."
+18,Lemon Pistachio Meringue,lemon-pistachio-meringue,11.5,/Lumiere/Personal Desserts/Lemon Pistachio Meringue.png,personal-desserts,"Pistachio Diplomat, Dairy-Free Lemon Cream, Meringue. Gluten Free."
+19,Peaches & Cream,peaches-cream,11,/Lumiere/Personal Desserts/Peaches & Cream.png,personal-desserts,"Passion Fruit Mousse, Coconut Bavaroise, Peach Mousse, Cocoa Tart."
+20,Cream & Crumb,cream-crumb,9.5,/Lumiere/Personal Desserts/Cream & Crumb.png,personal-desserts,"Light No-Bake Cheesecake, Buttery Crumbles, Graham Cracker Crust"
+21,Blackcurrant Queen,blackcurrant-queen,11,/Lumiere/Personal Desserts/Blackcurrant Queen.png,personal-desserts,"Blackcurrant Compote, Blackcurrant Mousse, Hazelnut Crunch. Gluten Free."
+22,Coconut Dream,coconut-dream,10.5,/Lumiere/Personal Desserts/Coconut Dream.png,personal-desserts,"Coconut Diplomat, Coconut Mousse, Toasted Coconut."
+23,Personal Heart,personal-heart,10.5,/Lumiere/Personal Desserts/Personal Heart.png,personal-desserts,"Raspberry Rose Mousse, Lychee Insert"
+24,Strawberry Cheesecake Tart,strawberry-cheesecake-tart,10,/Lumiere/Personal Desserts/Strawberry Cheesecake Tart.png,personal-desserts,"Light Cheesecake, Strawberry Mousse, Buttery Crumble, Almond Short Dough"
+25,Cleopatra,cleopatra,11.5,/Lumiere/Personal Desserts/Cleopatra.png,personal-desserts,"Milk Chocolate Ganache, Milk Chocolate Cream, Hazelnut Wafer"
+26,Creme Berry Tart,creme-berry-tart,9,/Lumiere/Personal Desserts/Creme Berry Tart.png,personal-desserts,"Almond Short Crust, Vanilla Crème Pâtissier, Fresh Ontario Berries"
+27,Daisy,daisy,11.5,/Lumiere/Personal Desserts/Daisy.png,personal-desserts,"Light Vanilla Mousse, Fresh Berries, Almond Crumble."
+28,Almond Croissant,almond-croissant,6.85,/Lumiere/Pastry/Almond Criossant.png,pastries,Flaky croissant filled with almond cream and topped with toasted almonds.
+29,Double Milk Chocolate Croissant,double-milk-chocolate-croissant,6.85,/Lumiere/Pastry/Double Chocolate Criossant.png,pastries,Rich buttery croissant layered with double milk chocolate filling.
+30,Butter Croissant,butter-croissant,4.5,/Lumiere/Pastry/Butter Croissant.png,pastries,Classic French croissant with a flaky crust and soft buttery interior.
+31,Salted Caramel Croissant,salted-caramel-croissant,6.85,/Lumiere/Pastry/Salted Caramel Criossant.png,pastries,Golden croissant filled with salted caramel and topped with glaze.
+32,Raspberry Cheesecake Croissant,raspberry-cheesecake-croissant,6.85,/Lumiere/Pastry/Raspberry Cheesecake Criossant.png,pastries,Filled with raspberry compote and cheesecake cream.
+33,Pistachio Croissant,pistachio-croissant,6.85,/Lumiere/Pastry/Pistachio Croissant.png,pastries,Rich pistachio cream inside buttery croissant layers.
+34,Creme Diplomat Croissant,creme-diplomat-croissant,6.85,/Lumiere/Pastry/DIplomat Criossant.png,pastries,Croissant filled with smooth crème diplomat and dusted with icing sugar.
+35,Chocolatine,chocolatine,5.5,/Lumiere/Pastry/Chocolatin.png,pastries,Classic chocolate-filled pastry with crisp golden layers.
+36,Sweet Cheese Danish,sweet-cheese-danish,5.1,/Lumiere/Pastry/Cheese Danish.png,pastries,Soft Danish pastry filled with smooth sweet cheese.
+37,Cherry Danish,cherry-danish,5.75,/Lumiere/Pastry/Fruit Danish.png,pastries,Danish topped with cherry compote and light glaze.
+38,Cinnamon Roll,cinnamon-roll,5.25,/Lumiere/Pastry/Cinnamon Lemon Roll.png,pastries,Soft roll with buttery cinnamon sugar filling and icing drizzle.
+39,Pecan Salted Caramel Danish,pecan-salted-caramel-danish,6.25,/Lumiere/Pastry/Pecan Salted Caramel Danish.png,pastries,Sweet Danish pastry topped with pecans and caramel glaze.
+40,Coconut Passion Fruit Croissant,coconut-passion-fruit-croissant,6.85,/Lumiere/Pastry/Coconut Passion Fruit Croissant.png,pastries,Tropical combination of coconut cream and passion fruit filling.
+41,Chocolate Chip Croissant,chocolate-chip-croissant,6.85,/Lumiere/Pastry/Chocolate Chip Croissant.png,pastries,Buttery croissant with chocolate chips and light sugar glaze.
+42,Wholewheat & Seeds Sourdough,wholewheat-seeds-sourdough,7.5,/Lumiere/Breads/Multigrain Sourdough.png,bread,Hearty sourdough made with a blend of grains and seeds for extra flavor.
+43,Olive Sourdough,olive-sourdough,7.5,/Lumiere/Breads/Olive Sourdough.png,bread,Rustic sourdough loaf enriched with Kalamata olives.
+44,Plain Sourdough,plain-sourdough,7,/Lumiere/Breads/Plain Sourdough.png,bread,Classic country-style sourdough with a crispy crust and chewy crumb.
+45,Rye & Walnut Sourdough,rye-walnut-sourdough,7,/Lumiere/Breads/Rye Sourdough.png,bread,"Dense rye loaf with earthy flavor, perfect for sandwiches."
+46,Sun-dried Tomatoes & Garlic Sourdough,sun-dried-tomatoes-garlic-sourdough,8.5,/Lumiere/Breads/Sun-dried tomatoes & Garlic Sourdough.png,bread,Savory sourdough loaf packed with sun-dried tomatoes and roasted garlic.
+47,Chocolate Crinkles,chocolate-crinkles,3.5,/baker_shelf/Chocolate Crinkles.png,bakery-shelf,Fudgy chocolate cookies coated in powdered sugar with a crackled top.
+48,Chocolate Nemesis,chocolate-nemesis,8,/baker_shelf/Chocolate Nemesis.png,bakery-shelf,"Rich, dense flourless chocolate cake with an intense chocolate flavor."
+49,Hazelnut Cookies,hazelnut-cookies,4,/baker_shelf/Hazelnut Cookies.png,bakery-shelf,Buttery cookies studded with toasted hazelnuts and a hint of vanilla.
+50,Pear Breton,pear-breton,6.5,/baker_shelf/Pear Breton.png,bakery-shelf,Traditional French butter cake with caramelized pear and almond cream.
+
