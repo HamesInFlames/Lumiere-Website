@@ -1,6 +1,8 @@
 // App/src/lib/api.js
 // Embedded product data - works without backend in production
 
+import { getOptimizedImage } from './imageMap.js';
+
 const PRODUCTS = [
   // One Biters
   { id: "1", slug: "one-biter-assortment-box-4-pcs", name: "One Biter Assortment Box (4 pcs)", price: 16, imageUrl: "/Lumiere/4 One Biters.png", category: "onebite", description: "" },
@@ -67,15 +69,17 @@ const PRODUCTS = [
 
 /**
  * Normalizes product objects so the frontend always receives consistent field names.
+ * Uses optimized WebP images for faster loading.
  */
 function normalizeProduct(p) {
+  const optimizedImage = getOptimizedImage(p.imageUrl);
   return {
     id: p.id,
     slug: p.slug,
     title: p.name,
     price: p.price,
-    image: p.imageUrl,
-    images: [p.imageUrl],
+    image: optimizedImage,
+    images: [optimizedImage],
     category: p.category,
     description: p.description || "",
     ingredients: p.ingredients || "",

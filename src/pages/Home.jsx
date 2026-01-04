@@ -6,10 +6,10 @@ import ShowcaseImage from "../components/ShowcaseImage";
 import VisitUs from "../components/VisitUs";
 import "../styles/Home.css";
 
-/* public/ images */
-const cakesImg = "/Noisette%20Noir.png";
-const personalDessertsImg = "/Sweet.png";
-const oneBiteImg = "/Bitters.png";
+/* Use optimized WebP images */
+const cakesImg = "/optimized/Noisette Noir.webp";
+const personalDessertsImg = "/optimized/Sweet.webp";
+const oneBiteImg = "/optimized/Bitters.webp";
 
 function Hero() {
   return (
@@ -54,7 +54,7 @@ function PastriesSection() {
               }}
               aria-label={c.title}
             >
-              <img src={c.img} alt={c.title} className="home-cardImg" />
+              <img src={c.img} alt={c.title} className="home-cardImg" loading="lazy" />
               <div className="home-overlayFlush">
                 <h2 className="home-titleLarge">{c.title}</h2>
               </div>
@@ -71,7 +71,7 @@ function GiftBoxes() {
     <section className="home-giftSection">
       <div className="home-giftGrid">
         <div className="home-giftImgWrap">
-          <img src={oneBiteImg} alt="Gift box selection" className="home-giftImg" />
+          <img src={oneBiteImg} alt="Gift box selection" className="home-giftImg" loading="lazy" />
         </div>
         <div className="home-giftTextCol">
           <h2 className="home-giftH2">Illuminate a moment</h2>
@@ -106,7 +106,7 @@ export default function Home() {
       <PastriesSection />
       <GiftBoxes />
       <FavouritesCarousel />
-      <ShowcaseImage imgSrc="/Lumière.png" objectPosition="center right" />
+      <ShowcaseImage imgSrc="/optimized/Lumière.webp" objectPosition="center right" />
       <VisitUs />
     </div>
   );

@@ -79,9 +79,9 @@ function ProductCard({ p }) {
   return (
     <div onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)}>
       <div style={styles.imgBox}>
-        <img src={p.image} alt={p.title} style={{ ...styles.img, opacity: hover ? 0 : 1 }} />
+        <img src={p.image} alt={p.title} style={{ ...styles.img, opacity: hover ? 0 : 1 }} loading="lazy" />
         {second && (
-          <img src={second} alt={p.title} style={{ ...styles.img, opacity: hover ? 1 : 0 }} />
+          <img src={second} alt={p.title} style={{ ...styles.img, opacity: hover ? 1 : 0 }} loading="lazy" />
         )}
       </div>
 
