@@ -142,7 +142,7 @@
 
 /* --- Form --- */
 .form-card {
-  max-width: 7700px;
+  max-width: 770px;
   margin: 28px auto 0;
   background: #fff;
   border: 1px solid #eee;
@@ -173,7 +173,7 @@
 
 .field input,
 .field textarea {
-  width: 95%;
+  width: 100%;
   border: 1px solid #e6e6e6;
   border-radius: 10px;
   padding: 12px 12px;

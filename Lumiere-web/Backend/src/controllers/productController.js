@@ -6,18 +6,21 @@ import samples from "../products/productSamples.js";
 const toClient = (p) => ({
   id: p._id ? p._id.toString() : p.id,
   name: p.name,
+  title: p.name, // alias for frontend compatibility
   price: p.price,
   imageUrl: p.imageUrl,
+  image: p.imageUrl, // alias for frontend compatibility
   slug: p.slug,
   category: p.category,
 
-  // 🔥 FIX: send all extra fields to frontend
+  // Product details
   description: p.description ?? "",
   ingredients: p.ingredients ?? "",
   allergens: p.allergens ?? "",
+  allergenFree: p.allergenFree ?? "",
   serving_size: p.serving_size ?? "",
 
-  // 🔥 Fix image arrays
+  // Image arrays
   images: Array.isArray(p.images)
     ? p.images
     : p.imageUrl

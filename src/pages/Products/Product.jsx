@@ -3,6 +3,29 @@ import { useParams } from "react-router-dom";
 import { fetchProduct } from "../../lib/api";
 import "../../styles/Product.css";
 
+// Accordion item component with +/- toggle
+function AccordionItem({ title, children, defaultOpen = false }) {
+  const [isOpen, setIsOpen] = useState(defaultOpen);
+
+  return (
+    <div className={`acc-item ${isOpen ? 'acc-item--open' : ''}`}>
+      <button 
+        className="acc-item__header" 
+        onClick={() => setIsOpen(!isOpen)}
+        type="button"
+      >
+        <span className="acc-item__title">{title}</span>
+        <span className="acc-item__icon">{isOpen ? '−' : '+'}</span>
+      </button>
+      {isOpen && (
+        <div className="acc-item__content">
+          {children}
+        </div>
+      )}
+    </div>
+  );
+}
+
 export default function ProductPage() {
   const { slug } = useParams();
   const [p, setP] = useState(null);
@@ -40,31 +63,36 @@ export default function ProductPage() {
             <div className="product__price">${p.price.toFixed(2)}</div>
           )}
 
-          {/* Description & details */}
+          {/* Description & details with +/- accordion */}
           <div className="acc">
             {p.description && (
-              <details open>
-                <summary>Description</summary>
-                <div>{p.description}</div>
-              </details>
+              <AccordionItem title="Description" defaultOpen={true}>
+                <p>{p.description}</p>
+              </AccordionItem>
+            )}
+            {(p.allergens || p.allergenFree) && (
+              <AccordionItem title="Allergen Information">
+                {p.allergenFree && (
+                  <p className="allergen-free">
+                    <strong>Allergen Free:</strong> {p.allergenFree}
+                  </p>
+                )}
+                {p.allergens && (
+                  <p className="allergen-warning">
+                    <strong>Contains:</strong> {p.allergens}
+                  </p>
+                )}
+              </AccordionItem>
             )}
             {p.ingredients && (
-              <details>
-                <summary>Ingredients</summary>
-                <div>{p.ingredients}</div>
-              </details>
-            )}
-            {p.allergens && (
-              <details>
-                <summary>Allergens</summary>
-                <div>{p.allergens}</div>
-              </details>
+              <AccordionItem title="Ingredients">
+                <p>{p.ingredients}</p>
+              </AccordionItem>
             )}
             {p.serving_size && (
-              <details>
-                <summary>Serving size</summary>
-                <div>{p.serving_size}</div>
-              </details>
+              <AccordionItem title="Serving Size">
+                <p>{p.serving_size}</p>
+              </AccordionItem>
             )}
           </div>
         </div>
