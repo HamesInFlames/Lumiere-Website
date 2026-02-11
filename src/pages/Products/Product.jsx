@@ -71,26 +71,30 @@ export default function ProductPage() {
               </AccordionItem>
             )}
             {(p.allergens || p.allergenFree) && (
-              <AccordionItem title="Allergen Information">
-                {p.allergenFree && (
-                  <p className="allergen-free">
-                    <strong>Allergen Free:</strong> {p.allergenFree}
-                  </p>
-                )}
-                {p.allergens && (
-                  <p className="allergen-warning">
-                    <strong>Contains:</strong> {p.allergens}
-                  </p>
-                )}
+              <AccordionItem title="Allergen Information" defaultOpen={true}>
+                <div className="allergen-info">
+                  {p.allergenFree && (
+                    <div className="allergen-free">
+                      <strong>Free From:</strong>
+                      <span>{p.allergenFree.replace(/ Free/gi, '')}</span>
+                    </div>
+                  )}
+                  {p.allergens && (
+                    <div className="allergen-warning">
+                      <strong>Contains:</strong>
+                      <span>{p.allergens.replace(/has /gi, '')}</span>
+                    </div>
+                  )}
+                </div>
               </AccordionItem>
             )}
             {p.ingredients && (
-              <AccordionItem title="Ingredients">
+              <AccordionItem title="Ingredients" defaultOpen={true}>
                 <p>{p.ingredients}</p>
               </AccordionItem>
             )}
             {p.serving_size && (
-              <AccordionItem title="Serving Size">
+              <AccordionItem title="Serving Size" defaultOpen={true}>
                 <p>{p.serving_size}</p>
               </AccordionItem>
             )}
