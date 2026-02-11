@@ -183,6 +183,7 @@ function normalizeProduct(p) {
     category: p.category,
     description: p.description || "",
     ingredients: p.ingredients || "",
+    allergenFree: p.allergenFree || "",
     allergens: p.allergens || "",
     serving_size: p.serving_size || "",
   };
