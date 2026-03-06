@@ -145,7 +145,6 @@ const FALLBACK_PRODUCTS = [
   { id: "36", slug: "sweet-cheese-danish", name: "Sweet Cheese Danish", price: 5.1, imageUrl: "/Lumiere/Pastry/Cheese Danish.png", category: "pastries", description: "Soft Danish pastry filled with smooth sweet cheese." },
   { id: "37", slug: "cherry-danish", name: "Cherry Danish", price: 5.75, imageUrl: "/Lumiere/Pastry/Fruit Danish.png", category: "pastries", description: "Danish topped with cherry compote and light glaze." },
   { id: "38", slug: "cinnamon-roll", name: "Cinnamon Roll", price: 5.25, imageUrl: "/Lumiere/Pastry/Cinnamon Lemon Roll.png", category: "pastries", description: "Soft roll with buttery cinnamon sugar filling and icing drizzle." },
-  { id: "39", slug: "pecan-salted-caramel-danish", name: "Pecan Salted Caramel Danish", price: 6.25, imageUrl: "/Lumiere/Pastry/Pecan Salted Caramel Danish.png", category: "pastries", description: "Sweet Danish pastry topped with pecans and caramel glaze." },
   { id: "40", slug: "coconut-passion-fruit-croissant", name: "Coconut Passion Fruit Croissant", price: 6.85, imageUrl: "/Lumiere/Pastry/Coconut Passion Fruit Croissant.png", category: "pastries", description: "Tropical combination of coconut cream and passion fruit filling." },
   { id: "41", slug: "chocolate-chip-croissant", name: "Chocolate Chip Croissant", price: 6.85, imageUrl: "/Lumiere/Pastry/Chocolate Chip Croissant.png", category: "pastries", description: "Buttery croissant with chocolate chips and light sugar glaze." },
 
@@ -160,7 +159,6 @@ const FALLBACK_PRODUCTS = [
   { id: "47", slug: "chocolate-crinkles", name: "Chocolate Crinkles", price: 3.5, imageUrl: "/baker_shelf/Chocolate Crinkles.png", category: "bakery-shelf", description: "Fudgy chocolate cookies coated in powdered sugar with a crackled top." },
   { id: "48", slug: "chocolate-nemesis", name: "Chocolate Nemesis", price: 8, imageUrl: "/baker_shelf/Chocolate Nemesis.png", category: "bakery-shelf", description: "Rich, dense flourless chocolate cake with an intense chocolate flavor." },
   { id: "49", slug: "hazelnut-cookies", name: "Hazelnut Cookies", price: 4, imageUrl: "/baker_shelf/Hazelnut Cookies.png", category: "bakery-shelf", description: "Buttery cookies studded with toasted hazelnuts and a hint of vanilla." },
-  { id: "50", slug: "pear-breton", name: "Pear Breton", price: 6.5, imageUrl: "/baker_shelf/Pear Breton.png", category: "bakery-shelf", description: "Traditional French butter cake with caramelized pear and almond cream." },
 ];
 
 // ============================================
