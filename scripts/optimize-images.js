@@ -38,7 +38,7 @@ const CONFIG = {
 const IMAGE_EXTENSIONS = ['.png', '.jpg', '.jpeg', '.PNG', '.JPG', '.JPEG'];
 
 // Folders to skip
-const SKIP_FOLDERS = ['optimized', 'node_modules'];
+const SKIP_FOLDERS = ['optimized', 'node_modules', '_staging', 'Lumiere', 'bread', 'cake', 'pastry', 'personal_dessert', 'baker_shelf', 'one_bite'];
 
 // Track stats
 let stats = {

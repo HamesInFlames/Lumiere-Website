@@ -26,6 +26,43 @@ function AccordionItem({ title, children, defaultOpen = false }) {
   );
 }
 
+// Image gallery with main image and thumbnails
+function ProductGallery({ images, title }) {
+  const [selectedIndex, setSelectedIndex] = useState(0);
+  
+  if (!images || images.length === 0) {
+    return (
+      <div className="product__gallery">
+        <div className="gallery__main">
+          <div className="ph" />
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="product__gallery">
+      <div className="gallery__main">
+        <img src={images[selectedIndex]} alt={`${title}`} />
+      </div>
+      {images.length > 1 && (
+        <div className="gallery__thumbs">
+          {images.map((src, i) => (
+            <button
+              key={i}
+              className={`gallery__thumb ${i === selectedIndex ? 'gallery__thumb--active' : ''}`}
+              onClick={() => setSelectedIndex(i)}
+              aria-label={`View image ${i + 1}`}
+            >
+              <img src={src} alt={`${title} thumbnail ${i + 1}`} />
+            </button>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
 export default function ProductPage() {
   const { slug } = useParams();
   const [p, setP] = useState(null);
@@ -47,13 +84,9 @@ export default function ProductPage() {
   return (
     <section className="product wrap">
       <div className="product__grid">
-        {/* Left side: product images */}
+        {/* Left side: product images with thumbnails */}
         <div className="product__media">
-          {(gallery.length ? gallery : [null]).map((src, i) => (
-            <div key={i} className="media__item">
-              {src ? <img src={src} alt={`${p.title} ${i + 1}`} /> : <div className="ph" />}
-            </div>
-          ))}
+          <ProductGallery images={gallery} title={p.title} />
         </div>
 
         {/* Right side: info */}

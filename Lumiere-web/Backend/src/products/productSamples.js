@@ -107,9 +107,9 @@ const raw = [
     allergenFree: "Nut Free",
   },
   {
-    name: "Quite Daisy",
+    name: "Daisy Cake",
     price: 56.00,
-    imageUrl: "/Lumiere/Cake/Quite Daisy.png",
+    imageUrl: "/Lumiere/Cake/Daisy Cake.png",
     category: "cakes",
     description: "Passion Fruit Mousse, Passion Fruit Compote, Hazelnut Milk Chocolate Ganache, Cocoa Tart.",
     allergens: "has Nuts, has Dairy, has Eggs, has Gluten",
@@ -259,15 +259,6 @@ const raw = [
     description: "Almond Short Crust, Vanilla Crème Pâtissier, Fresh Ontario Berries.",
     allergens: "has Nuts, has Dairy, has Gluten, has Eggs",
   },
-  {
-    name: "Matcha Latte",
-    price: 11.50,
-    imageUrl: "/Lumiere/Personal Desserts/Matcha Latte.png",
-    category: "personal-desserts",
-    description: "White Chocolate Vanilla Mousse, Matcha Sponge Cake, Matcha Ganache, Matcha Chantilly, Matcha Nama.",
-    allergenFree: "Nut Free",
-    allergens: "has Gluten, has Dairy, has Eggs",
-  },
 
   // ═══════════════════════════════════════════════════════════════════════════
   // PASTRIES (Puff Pastry) - Removed Pecan Salted Caramel Danish
@@ -348,13 +339,6 @@ const raw = [
     imageUrl: "/Lumiere/Pastry/Cinnamon Lemon Roll.png",
     category: "pastries",
     description: "Soft roll with buttery cinnamon sugar filling and icing drizzle.",
-  },
-  {
-    name: "Coconut Passion Fruit Croissant",
-    price: 6.85,
-    imageUrl: "/Lumiere/Pastry/Coconut Passion Fruit Croissant.png",
-    category: "pastries",
-    description: "Tropical combination of coconut cream and passion fruit filling.",
   },
   {
     name: "Chocolate Chip Croissant",
@@ -449,11 +433,11 @@ const raw = [
     allergens: "has Gluten, has Eggs, has Dairy",
   },
   {
-    name: "Pecan Tart",
+    name: "Baklava Tart",
     price: 25.00,
-    imageUrl: "/baker_shelf/Pecan Tart.png",
+    imageUrl: "/images/bakery-shelf/Baklava Tart.png",
     category: "bakery-shelf",
-    description: "Classic pecan tart with a buttery crust and caramelized pecans.",
+    description: "Traditional baklava-inspired tart with layers of phyllo, nuts, and honey.",
   },
   {
     name: "Chocolate Nemesis",

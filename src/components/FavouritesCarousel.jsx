@@ -101,15 +101,22 @@ export default function FavouritesCarousel() {
     const cached = getCache(cacheKey);
 
     if (cached) {
-      setFavourites(cached);
-      return;
+      // Validate cached items still have images
+      const validCached = cached.filter((p) => p.image && p.image.trim() !== "");
+      if (validCached.length === cached.length) {
+        setFavourites(validCached);
+        return;
+      }
+      // Cache has invalid items, clear it and refetch
+      localStorage.removeItem(cacheKey);
     }
 
-    // Fetch products then randomize
+    // Fetch products then randomize (only products with images)
     fetchProducts()
       .then((products) => {
         if (!Array.isArray(products)) return;
-        const randomItems = getRandomItems(products, 5);
+        const productsWithImages = products.filter((p) => p.image && p.image.trim() !== "");
+        const randomItems = getRandomItems(productsWithImages, 5);
         setFavourites(randomItems);
         setCache(cacheKey, randomItems, 5 * 60 * 1000); // 5 minutes cache
       })

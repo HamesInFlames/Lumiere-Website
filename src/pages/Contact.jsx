@@ -1,6 +1,7 @@
 // App/src/pages/Contact.jsx
 import React, { useState } from "react";
 import "../styles/Contact.css";
+import { apiUrl } from "../lib/config";
 
 export default function Contact() {
   const [form, setForm] = useState({ name: "", email: "", phone: "", msg: "" });
@@ -22,7 +23,7 @@ export default function Contact() {
         message: form.msg?.trim(),
       };
 
-      const res = await fetch("/api/contact", {
+      const res = await fetch(apiUrl("/api/contact"), {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),

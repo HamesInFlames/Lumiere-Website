@@ -11,7 +11,7 @@ id,name,slug,price,imageUrl,category,description,allergenFree,allergens
 10,Cream & Crumb Cake,cream-crumb-cake,44,/Lumiere/Cake/Cream & Crumb Cake.png,cakes,"Light No-Bake Cheesecake, Buttery Crumbles, Graham Cracker Crust",Nut Free,"has Dairy, has Honey, has Gluten"
 11,Chocolate Cream & Crumb Cake,chocolate-cream-crumb-cake,44,,cakes,"Light No-Bake Chocolate Cheesecake, Cocoa Buttery Crumbles, Graham Cracker Crust",Nut Free,
 12,Tiramisu Cake,tiramisu-cake,50,/Lumiere/Cake/Tiramisu Cake.png,cakes,"Tiramisu Mousse, Soft Chocolate Short Dough, Espresso Syrup, Cappuccino Chantilly",Nut Free,
-13,Quite Daisy,quite-daisy,56,,cakes,"Passion Fruit Mousse, Passion Fruit Compote, Hazelnut Milk Chocolate Ganache, Cocoa Tart",,"has Nuts, has Dairy, has Eggs, has Gluten"
+13,Daisy Cake,daisy-cake,56,,cakes,"Passion Fruit Mousse, Passion Fruit Compote, Hazelnut Milk Chocolate Ganache, Cocoa Tart",,"has Nuts, has Dairy, has Eggs, has Gluten"
 14,Tiramichoux,tiramichoux,9,/Lumiere/Personal Desserts/Tiramichoux.png,personal-desserts,"Cocoa Craquelin Choux Pastry, Sabayon Mascarpone Cream, Espresso Biscotti Savoiardi, Cappuccino Chantilly",Nut Free,"has Dairy, has Gluten, has Eggs, has Alchohol"
 15,Sweet Pleasure,sweet-pleasure,10.5,/Lumiere/Personal Desserts/Sweet Pleasure.png,personal-desserts,"Hazelnut Dacquoise, Hazelnut Crunch, Milk Chocolate Ganache, Milk Chocolate Chantilly",Gluten Free,"has Nuts, has Dairy, has Eggs"
 16,Lemon Pistachio Meringue,lemon-pistachio-meringue,11.5,/Lumiere/Personal Desserts/Lemon Pistachio Meringue.png,personal-desserts,"Pistachio Dacquoise, Dairy Free Lemon Cream, Meringue","Gluten Free, Dairy Free","has Nuts, has Eggs"
@@ -29,7 +29,6 @@ id,name,slug,price,imageUrl,category,description,allergenFree,allergens
 28,Black Forest,black-forest,10.5,/Lumiere/Personal Desserts/Black Forest.png,personal-desserts,"Dark Chocolate Mousse, Cherry Compote, White Chocolate Insert",,"has Dairy, has Nuts, has Gluten, has Eggs"
 29,Personal Heart,personal-heart,10.5,/Lumiere/Personal Desserts/Personal Heart.png,personal-desserts,"Raspberry Rose Mousse, Lychee Insert",,"has Nuts, has Dairy, has Gluten, has Eggs"
 30,Creme Berry Tart,creme-berry-tart,9,/Lumiere/Personal Desserts/Creme Berry Tart.png,personal-desserts,"Almond Short Crust, Vanilla Crème Pâtissier, Fresh Ontario Berries",,"has Nuts, has Dairy, has Gluten, has Eggs"
-31,Matcha Latte,matcha-latte,,,personal-desserts,"White Chocolate Vanilla Mousse, Matcha Sponge Cake, Matcha Ganache, Matcha Chantilly, Matcha Nama",Nut Free,"has Gluten, Dairy, has Eggs"
 32,Almond Croissant,almond-croissant,6.85,/Lumiere/Pastry/Almond Criossant.png,pastries,,,
 33,Double Milk Chocolate Croissant,double-milk-chocolate-croissant,6.85,/Lumiere/Pastry/Double Chocolate Criossant.png,pastries,,,
 34,Butter Croissant,butter-croissant,4.5,/Lumiere/Pastry/Butter Croissant.png,pastries,,,
@@ -41,13 +40,12 @@ id,name,slug,price,imageUrl,category,description,allergenFree,allergens
 40,Sweet Cheese Danish,sweet-cheese-danish,5.1,/Lumiere/Pastry/Cheese Danish.png,pastries,,,
 41,Cherry Danish,cherry-danish,5.75,/Lumiere/Pastry/Fruit Danish.png,pastries,,,
 42,Cinnamon Roll,cinnamon-roll,5.25,/Lumiere/Pastry/Cinnamon Lemon Roll.png,pastries,,,
-43,Coconut Passion Fruit Croissant,coconut-passion-fruit-croissant,6.85,/Lumiere/Pastry/Coconut Passion Fruit Croissant.png,pastries,,,
 44,Chocolate Chip Croissant,chocolate-chip-croissant,6.85,/Lumiere/Pastry/Chocolate Chip Croissant.png,pastries,,,
 45,Choco Chip & Hazelnut Cookies,choco-chip-hazelnut-cookies,9.75,,bakery-shelf,,,"has Nuts, has Gluten, has Eggs, has Dairy"
 46,Oatmeal Cookies,oatmeal-cookies,9.75,,bakery-shelf,,Nut Free,"has Gluten, has Eggs, has Dairy"
 47,Black Sesame Choco Chip,black-sesame-choco-chip,9.75,,bakery-shelf,,Nut Free,"has Gluten, has Eggs, has Dairy"
 48,Halva Cookies,halva-cookies,9.75,,bakery-shelf,,Nut Free,"has Gluten, has Eggs, has Dairy"
-49,Pecan Tart,pecan-tart,25,,bakery-shelf,,,
+49,Baklava Tart,baklava-tart,25,/images/bakery-shelf/Baklava Tart.png,bakery-shelf,,,
 50,Chocolate Nemesis,chocolate-nemesis,25,/baker_shelf/Chocolate Nemesis.png,bakery-shelf,,,
 51,Meringues,meringues,6.75,,bakery-shelf,,,
 52,Lumiere Marshmallows,lumiere-marshmallows,10.5,,bakery-shelf,,"Nut Free, Gluten Free",

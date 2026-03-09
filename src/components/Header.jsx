@@ -76,13 +76,13 @@ export default function Header({ onHeight }) {
               className="uber-eats-link"
               aria-label="Order on Uber Eats"
             >
-              <img src="/Uber-Eats-logo.png" alt="Uber Eats" className="uber-logo-img" />
+              <img src="/optimized/images/web-design/Uber-Eats-logo.webp" alt="Uber Eats" className="uber-logo-img" />
             </a>
 
             {/* LOGO */}
             <div className="logo-box">
               <Link to="/" className="logo-link" onClick={closeMenu}>
-                <img src="/lumiere.png" alt="Lumière Pastries" className="logo-img" />
+                <img src="/optimized/images/web-design/lumiere Logo.webp" alt="Lumière Pastries" className="logo-img" />
               </Link>
             </div>
 
@@ -128,7 +128,7 @@ export default function Header({ onHeight }) {
                 className="uber-eats-btn"
                 aria-label="Order on Uber Eats"
               >
-                <img src="/Uber-Eats-logo.png" alt="Uber Eats" className="uber-logo-img" />
+                <img src="/optimized/images/web-design/Uber-Eats-logo.webp" alt="Uber Eats" className="uber-logo-img" />
               </a>
             </div>
 

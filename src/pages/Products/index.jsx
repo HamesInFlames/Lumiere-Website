@@ -5,12 +5,12 @@ import { fetchProducts } from "../../lib/api";
 import "../../styles/Collection.css";
 
 const HERO_BY_CATEGORY = {
-  "cakes": { image: "/Fraisier.png", heading: "Cakes" },
-  "personal-desserts": { image: "/personal_dessert/Tiramichoux.png", heading: "Personal Desserts" },
-  "onebite": { image: "/Bites.jpg", heading: "One-Bite Creations" },
-  "pastries": { image: "/pastry/croisants.jpg", heading: "Pastries" },
-  "bread": { image: "/bread/Classic Challah.jpg", heading: "Bread" },
-  "bakery-shelf": { image: "/baker_shelf/Hazelnut Cookies.png", heading: "Bakery Shelf" },
+  "cakes": { image: "/optimized/images/cakes/Tiramisu Cake.webp", heading: "Cakes" },
+  "personal-desserts": { image: "/optimized/images/personal-desserts/Tiramichoux.webp", heading: "Personal Desserts" },
+  "onebite": { image: "/optimized/Bites.webp", heading: "One-Bite Creations" },
+  "pastries": { image: "/optimized/images/pastries/Almond Criossant.webp", heading: "Pastries" },
+  "bread": { image: "/optimized/images/breads/Classic Challah.webp", heading: "Bread" },
+  "bakery-shelf": { image: "/optimized/images/bakery-shelf/Hazelnut Cookies.webp", heading: "Bakery Shelf" },
 };
 
 export default function ProductsIndex() {

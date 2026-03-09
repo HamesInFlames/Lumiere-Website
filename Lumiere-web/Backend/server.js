@@ -18,11 +18,15 @@ app.use(express.urlencoded({ extended: true }));
 
 
 // CORS allow-list via CORS_ORIGIN="http://localhost:5173,https://yourdomain.com"
+// In production, set CORS_ORIGIN to your frontend Railway URL or use '*' for public API
 const allow = (process.env.CORS_ORIGIN || '').split(',').map(s => s.trim()).filter(Boolean);
 app.use(cors({
   origin: (origin, cb) => {
     if (!origin) return cb(null, true); // tools like curl/postman
+    // In production with no CORS_ORIGIN set, allow all origins
     if (allow.length === 0 || allow.includes('*') || allow.includes(origin)) return cb(null, true);
+    // Also allow any .railway.app subdomain
+    if (origin && origin.endsWith('.railway.app')) return cb(null, true);
     return cb(new Error('Not allowed by CORS'));
   },
   credentials: true

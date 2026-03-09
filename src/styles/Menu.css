@@ -332,6 +332,22 @@
   object-fit: cover;
 }
 
+.menu-img--placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #f5f5f5 0%, #e8e8e8 100%);
+  color: #999;
+  font-size: 14px;
+  font-weight: 500;
+  text-align: center;
+  padding: 20px;
+}
+
+.menu-img--placeholder::after {
+  content: "Photo Coming Soon";
+}
+
 /* Name & Price */
 .menu-name {
   font-size: 19px;

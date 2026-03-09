@@ -14,7 +14,7 @@ const oneBiteImg = "/optimized/Bitters.webp";
 function Hero() {
   return (
     <section className="home-hero">
-      <img className="home-heroImg" alt="Hero dessert" src="/desserts.webp" />
+      <img className="home-heroImg" alt="Hero dessert" src="/optimized/images/web-design/Hero desserts.webp" />
       <div className="home-heroOverlay" />
       <div className="home-container home-heroInner">
         <div className="home-heroContent">
