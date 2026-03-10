@@ -42,8 +42,48 @@ export default function Menu() {
   const [loading, setLoading] = useState(true);
   const [err, setErr] = useState("");
   const [active, setActive] = useState("cakes");
+  const [scrollState, setScrollState] = useState({ atStart: true, atEnd: false });
 
   const sectionRefs = useRef({});
+  const tabRowRef = useRef(null);
+  const tabWrapperRef = useRef(null);
+  const isScrollingRef = useRef(false);
+
+  // Track horizontal scroll position of tab row
+  useEffect(() => {
+    const tabRow = tabRowRef.current;
+    if (!tabRow) return;
+
+    const updateScrollState = () => {
+      const { scrollLeft, scrollWidth, clientWidth } = tabRow;
+      const atStart = scrollLeft <= 5;
+      const atEnd = scrollLeft + clientWidth >= scrollWidth - 5;
+      setScrollState({ atStart, atEnd });
+    };
+
+    tabRow.addEventListener('scroll', updateScrollState, { passive: true });
+    
+    // Initial check after a small delay to ensure layout is complete
+    const timer = setTimeout(updateScrollState, 100);
+    updateScrollState();
+
+    // Also update on resize
+    window.addEventListener('resize', updateScrollState);
+
+    return () => {
+      tabRow.removeEventListener('scroll', updateScrollState);
+      window.removeEventListener('resize', updateScrollState);
+      clearTimeout(timer);
+    };
+  }, [loading]);
+
+  // Scroll tab row left/right
+  const scrollTabs = (direction) => {
+    const tabRow = tabRowRef.current;
+    if (!tabRow) return;
+    const scrollAmount = direction === 'left' ? -150 : 150;
+    tabRow.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+  };
 
   // 1) Load ALL products (no category filter)
   useEffect(() => {
@@ -83,47 +123,71 @@ export default function Menu() {
     return map;
   }, [items]);
 
-  // 3) Observe sections to highlight active tab on scroll
+  // 3) Highlight active tab based on scroll position
   useEffect(() => {
     if (!items.length) return;
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        let best = null;
+    const handleScroll = () => {
+      // Skip updates during programmatic scrolling
+      if (isScrollingRef.current) return;
 
-        for (const entry of entries) {
-          if (!entry.isIntersecting) continue;
-          const id = entry.target.getAttribute("data-section-id");
-          if (!id) continue;
+      // Get the offset where we consider a section "active"
+      // This is below the sticky header + tabs
+      const header = document.querySelector('.site-header');
+      const tabs = document.querySelector('.menu-tabs');
+      const headerHeight = header ? header.offsetHeight : 85;
+      const tabsHeight = tabs ? tabs.offsetHeight : 60;
+      const triggerPoint = headerHeight + tabsHeight + 50;
 
-          if (!best || entry.intersectionRatio > best.ratio) {
-            best = { id, ratio: entry.intersectionRatio };
-          }
+      // Find the section whose top is closest to (but above) the trigger point
+      let currentSection = MENU_SECTIONS[0].id;
+
+      for (const sec of MENU_SECTIONS) {
+        const el = sectionRefs.current[sec.id];
+        if (!el) continue;
+
+        const rect = el.getBoundingClientRect();
+        
+        // If section top is above the trigger point, it's the current section
+        // Keep updating until we find one that's below
+        if (rect.top <= triggerPoint) {
+          currentSection = sec.id;
         }
-
-        if (best && best.id !== active) {
-          setActive(best.id);
-        }
-      },
-      {
-        root: null,
-        threshold: [0.3, 0.6],
       }
-    );
 
-    MENU_SECTIONS.forEach((sec) => {
-      const el = sectionRefs.current[sec.id];
-      if (el) observer.observe(el);
-    });
+      if (currentSection !== active) {
+        setActive(currentSection);
+      }
+    };
 
-    return () => observer.disconnect();
+    // Throttle scroll handler for performance
+    let ticking = false;
+    const throttledScroll = () => {
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          handleScroll();
+          ticking = false;
+        });
+        ticking = true;
+      }
+    };
+
+    window.addEventListener('scroll', throttledScroll, { passive: true });
+    
+    // Initial check
+    handleScroll();
+
+    return () => window.removeEventListener('scroll', throttledScroll);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [items]);
+  }, [items, active]);
 
   // 4) Click tab → smooth scroll to section (positions section header just below tabs)
   const handleTabClick = (id) => {
     const el = sectionRefs.current[id];
     if (!el) return;
+
+    // Prevent observer from fighting with click navigation
+    isScrollingRef.current = true;
 
     // Get actual heights of fixed/sticky elements
     const header = document.querySelector('.site-header');
@@ -138,8 +202,15 @@ export default function Menu() {
     const rect = el.getBoundingClientRect();
     const offsetTop = rect.top + window.scrollY - totalOffset;
 
-    window.scrollTo({ top: offsetTop, behavior: "smooth" });
+    // Set active immediately for instant feedback
     setActive(id);
+
+    window.scrollTo({ top: offsetTop, behavior: "smooth" });
+    
+    // Re-enable observer after scroll completes
+    setTimeout(() => {
+      isScrollingRef.current = false;
+    }, 800);
   };
 
   if (err) {
@@ -163,19 +234,48 @@ export default function Menu() {
 
       {/* Sticky horizontal category tabs (Paris Baguette style) */}
       <nav className="menu-tabs" aria-label="Product categories">
-        <div className="menu-tab-row">
-          {MENU_SECTIONS.map((sec) => (
-            <button
-              key={sec.id}
-              type="button"
-              className={`menu-tab ${
-                active === sec.id ? "menu-tab--active" : ""
-              }`}
-              onClick={() => handleTabClick(sec.id)}
-            >
-              {sec.label}
-            </button>
-          ))}
+        <div 
+          className={`menu-tabs-wrapper ${scrollState.atStart ? 'at-start' : ''} ${scrollState.atEnd ? 'at-end' : ''}`}
+          ref={tabWrapperRef}
+        >
+          {/* Left scroll indicator */}
+          <button
+            type="button"
+            className={`menu-scroll-indicator menu-scroll-indicator--left ${scrollState.atStart ? 'menu-scroll-indicator--hidden' : ''}`}
+            onClick={() => scrollTabs('left')}
+            aria-label="Scroll categories left"
+          >
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+              <polyline points="15 18 9 12 15 6" />
+            </svg>
+          </button>
+
+          <div className="menu-tab-row" ref={tabRowRef}>
+            {MENU_SECTIONS.map((sec) => (
+              <button
+                key={sec.id}
+                type="button"
+                className={`menu-tab ${
+                  active === sec.id ? "menu-tab--active" : ""
+                }`}
+                onClick={() => handleTabClick(sec.id)}
+              >
+                {sec.label}
+              </button>
+            ))}
+          </div>
+
+          {/* Right scroll indicator */}
+          <button
+            type="button"
+            className={`menu-scroll-indicator menu-scroll-indicator--right ${scrollState.atEnd ? 'menu-scroll-indicator--hidden' : ''}`}
+            onClick={() => scrollTabs('right')}
+            aria-label="Scroll categories right"
+          >
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+              <polyline points="9 18 15 12 9 6" />
+            </svg>
+          </button>
         </div>
       </nav>
       <div className="menu-tabs-spacer"></div>
