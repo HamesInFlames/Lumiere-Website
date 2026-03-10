@@ -27,13 +27,26 @@ const styles = {
   },
   h2Link: { color: "inherit", textDecoration: "none" },
 
+  cardLink: {
+    display: "block",
+    textDecoration: "none",
+    color: "#222",
+    borderRadius: 14,
+    overflow: "hidden",
+    background: "#fff",
+    boxShadow: "0 2px 12px rgba(0,0,0,.08)",
+    transition: "transform .25s ease, box-shadow .25s ease",
+  },
+  cardLinkHover: {
+    transform: "translateY(-4px)",
+    boxShadow: "0 12px 32px rgba(0,0,0,.15)",
+  },
+
   imgBox: {
     position: "relative",
     width: "100%",
     paddingTop: "100%",
-    borderRadius: 12,
     overflow: "hidden",
-    boxShadow: "0 18px 44px rgba(0,0,0,.12)",
     background: "#f6f6f6",
   },
   img: {
@@ -45,9 +58,11 @@ const styles = {
     transition: "opacity .35s ease",
   },
 
-  captionLink: { display: "block", marginTop: 12, textDecoration: "none", color: "#222" },
+  caption: { padding: "16px" },
   title: { display: "block", fontWeight: 700, fontSize: 18, marginBottom: 6 },
   price: { fontWeight: 600, color: "#333" },
+
+  swiperWrapper: { paddingBottom: 40 },
 };
 
 /* Utility: pick random unique items */
@@ -77,7 +92,13 @@ function ProductCard({ p }) {
   const second = p.images?.[1] || p.image;
 
   return (
-    <div onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)}>
+    <Link 
+      to={`/product/${p.slug}`} 
+      style={{ ...styles.cardLink, ...(hover ? styles.cardLinkHover : {}) }}
+      onMouseEnter={() => setHover(true)} 
+      onMouseLeave={() => setHover(false)}
+      aria-label={p.title}
+    >
       <div style={styles.imgBox}>
         <img src={p.image} alt={p.title} style={{ ...styles.img, opacity: hover ? 0 : 1 }} loading="lazy" />
         {second && (
@@ -85,11 +106,11 @@ function ProductCard({ p }) {
         )}
       </div>
 
-      <Link to={`/product/${p.slug}`} style={styles.captionLink}>
+      <div style={styles.caption}>
         <span style={styles.title}>{p.title}</span>
         <div style={styles.price}>${(p.price ?? 0).toFixed(2)}</div>
-      </Link>
-    </div>
+      </div>
+    </Link>
   );
 }
 
@@ -142,6 +163,7 @@ export default function FavouritesCarousel() {
           spaceBetween={20}
           navigation
           scrollbar={{ draggable: true }}
+          style={styles.swiperWrapper}
           breakpoints={{
             0: { slidesPerView: 1.2, spaceBetween: 14 },
             640: { slidesPerView: 2, spaceBetween: 16 },
