@@ -1,5 +1,41 @@
 # Changelog
 
+All notable changes to the Lumière Patisserie website will be documented in this file.
+
+---
+
+## [2026-03-10] - Menu Navigation & Infrastructure Updates
+
+### ✨ New Features
+
+#### Menu Page Enhancements
+- **Rainbow gradient active tab** — Active category tab now features a beautiful rainbow gradient matching the site's header theme
+- **Improved scrollspy** — Smoother, more accurate section highlighting as you scroll through the menu
+- **Mobile scroll indicators** — Arrow buttons and fade gradients on mobile to indicate horizontally scrollable tabs
+- **Spring-like animations** — Enhanced tab transitions with natural, bouncy easing
+
+#### Favourites Carousel
+- Carousel cards are now fully clickable for better UX
+- Added proper scrollbar spacing
+
+### 🔧 Technical Improvements
+
+#### Contact Form
+- Migrated from backend API to Google Apps Script for form submissions
+- Simplified deployment by removing backend dependency
+
+#### Codebase Cleanup
+- Fixed broken image references
+- Removed unused files and components
+- Reorganized configuration files
+- Added `.nvmrc` for Node 20 version specification
+
+#### Deployment
+- Added Railway deployment configuration
+- Reorganized image assets for better structure
+
+---
+
 ## [2026-02-09] - Product Data & UI Updates
 
 ### Products Updated
