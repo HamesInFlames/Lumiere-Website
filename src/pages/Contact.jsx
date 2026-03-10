@@ -1,7 +1,8 @@
 // App/src/pages/Contact.jsx
 import React, { useState } from "react";
 import "../styles/Contact.css";
-import { apiUrl } from "../lib/config";
+
+const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwFhTaRRSt_gmyFW4nVwChsdRDqKA1x9QAUiW-7WgoA81VI2fWwknsP0CpDFH0NxKZv/exec";
 
 export default function Contact() {
   const [form, setForm] = useState({ name: "", email: "", phone: "", msg: "" });
@@ -23,21 +24,19 @@ export default function Contact() {
         message: form.msg?.trim(),
       };
 
-      const res = await fetch(apiUrl("/api/contact"), {
+      // Send to Google Apps Script
+      await fetch(GOOGLE_SCRIPT_URL, {
         method: "POST",
+        mode: "no-cors",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
       });
 
-      if (!res.ok) {
-        const err = await res.json().catch(() => ({}));
-        throw new Error(err?.message || "Failed to send");
-      }
-
-      setStatus("Message sent! We’ll get back to you shortly.");
+      // With no-cors we can't read response, but if no error thrown, assume success
+      setStatus("Message sent! We'll get back to you shortly.");
       setForm({ name: "", email: "", phone: "", msg: "" });
     } catch (err) {
-      setStatus(err.message || "Something went wrong.");
+      setStatus("Something went wrong. Please try again.");
     } finally {
       setSubmitting(false);
     }
@@ -51,7 +50,7 @@ export default function Contact() {
           <h1 className="contact-title">Contact Us</h1>
           <div className="contact-accent" />
           <p className="contact-lede">
-            Questions about custom orders, pickup &amp; delivery, or anything else? We’d love to help.
+            Questions about custom orders, pickup &amp; delivery, or anything else? We'd love to help.
           </p>
         </div>
       </section>
@@ -76,12 +75,12 @@ export default function Contact() {
               <h4>Hours</h4>
               <ul>
                 <li><span>Monday</span><em className="badge badge-muted">Closed</em></li>
-                <li><span>Tuesday</span><em>9am – 7pm</em></li>
-                <li><span>Wednesday</span><em>9am – 7pm</em></li>
-                <li><span>Thursday</span><em>9am – 7pm</em></li>
-                <li><span>Friday</span><em>9am – 7pm</em></li>
-                <li><span>Saturday</span><em>9am – 7pm</em></li>
-                <li><span>Sunday</span><em>9am – 7pm</em></li>
+                <li><span>Tuesday</span><em>9am - 7pm</em></li>
+                <li><span>Wednesday</span><em>9am - 7pm</em></li>
+                <li><span>Thursday</span><em>9am - 7pm</em></li>
+                <li><span>Friday</span><em>9am - 7pm</em></li>
+                <li><span>Saturday</span><em>9am - 7pm</em></li>
+                <li><span>Sunday</span><em>9am - 7pm</em></li>
               </ul>
             </div>
           </div>
@@ -89,7 +88,7 @@ export default function Contact() {
           {/* Right: Map card */}
           <div className="card card-map">
             <iframe
-              title="Lumière Pâtisserie Map"
+              title="Lumiere Patisserie Map"
               width="100%"
               height="100%"
               style={{ border: 0, borderRadius: 14 }}
@@ -153,7 +152,7 @@ export default function Contact() {
 
           <div className="form-actions">
             <button type="submit" className="btn-grad" disabled={submitting}>
-              {submitting ? "Sending…" : "Send message"}
+              {submitting ? "Sending..." : "Send message"}
             </button>
             {!!status && <span className="form-status" style={{ marginLeft: 12 }}>{status}</span>}
           </div>
