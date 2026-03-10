@@ -151,7 +151,7 @@ export default function FavouritesCarousel() {
       <div style={styles.container}>
         <div style={styles.headingRow}>
           <h2 style={styles.h2}>
-            <Link to="/collections/populaire" style={styles.h2Link}>
+            <Link to="/menu" style={styles.h2Link}>
               Today&apos;s Favourites
             </Link>
           </h2>

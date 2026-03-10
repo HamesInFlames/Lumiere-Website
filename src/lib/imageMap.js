@@ -1,17 +1,7 @@
-// Auto-generated image map
+// Image map for optimized WebP versions
 // Maps original images to optimized WebP versions
-// Generated: 2026-03-09T23:04:25.795Z
 
 export const imageMap = {
-  "/bakershelf.png": "/optimized/bakershelf.webp",
-  "/Bites.jpg": "/optimized/Bites.webp",
-  "/Bitters.png": "/optimized/Bitters.webp",
-  "/Black Forest.png": "/optimized/Black Forest.webp",
-  "/cherry.png": "/optimized/cherry.webp",
-  "/Delicatessen.png": "/optimized/Delicatessen.webp",
-  "/desserts1.jpg": "/optimized/desserts1.webp",
-  "/Fraisier.png": "/optimized/Fraisier.webp",
-  "/Fraisier1.png": "/optimized/Fraisier1.webp",
   "/images/bakery-shelf/600_0472.jpg": "/optimized/images/bakery-shelf/600_0472.webp",
   "/images/bakery-shelf/Baklava Tart.png": "/optimized/images/bakery-shelf/Baklava Tart.webp",
   "/images/bakery-shelf/Chocolate Crincle Cookie.jpg": "/optimized/images/bakery-shelf/Chocolate Crincle Cookie.webp",
@@ -84,18 +74,8 @@ export const imageMap = {
   "/images/web-design/lumiere Logo.png": "/optimized/images/web-design/lumiere Logo.webp",
   "/images/web-design/Lumière inside Photo.png": "/optimized/images/web-design/Lumière inside Photo.webp",
   "/images/web-design/Uber-Eats-logo.png": "/optimized/images/web-design/Uber-Eats-logo.webp",
-  "/Lumiere Cheesecake.png": "/optimized/Lumiere Cheesecake.webp",
-  "/Lumiere Cheesecake2.png": "/optimized/Lumiere Cheesecake2.webp",
-  "/lumiere.png": "/optimized/lumiere.webp",
+  "/Black Forest.png": "/optimized/Black Forest.webp",
   "/Lumière.png": "/optimized/Lumière.webp",
-  "/Noisette Noir.png": "/optimized/Noisette Noir.webp",
-  "/Petit Fours (Box of 4)2.png": "/optimized/Petit Fours (Box of 4)2.webp",
-  "/plain.png": "/optimized/plain.webp",
-  "/Sweet.png": "/optimized/Sweet.webp",
-  "/sweet1.png": "/optimized/sweet1.webp",
-  "/Tiramichoux2.png": "/optimized/Tiramichoux2.webp",
-  "/tiramisuhome.png": "/optimized/tiramisuhome.webp",
-  "/Uber-Eats-logo.png": "/optimized/Uber-Eats-logo.webp"
 };
 
 /**

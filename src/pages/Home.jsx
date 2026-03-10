@@ -6,10 +6,10 @@ import ShowcaseImage from "../components/ShowcaseImage";
 import VisitUs from "../components/VisitUs";
 import "../styles/Home.css";
 
-/* Use optimized WebP images */
-const cakesImg = "/optimized/Noisette Noir.webp";
-const personalDessertsImg = "/optimized/Sweet.webp";
-const oneBiteImg = "/optimized/Bitters.webp";
+/* Use optimized WebP images from existing assets */
+const cakesImg = "/optimized/images/cakes/Tiramisu Cake.webp";
+const personalDessertsImg = "/optimized/images/personal-desserts/Sweet Pleasure.webp";
+const oneBiteImg = "/optimized/images/one-biters/One Biters 12pc.webp";
 
 function Hero() {
   return (

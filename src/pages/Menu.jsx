@@ -1,4 +1,4 @@
-// src/pages/EBoutique.jsx
+// src/pages/Menu.jsx
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { fetchProducts } from "../lib/api";
@@ -37,7 +37,7 @@ const MENU_SECTIONS = [
   },
 ];
 
-export default function EBoutique() {
+export default function Menu() {
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);
   const [err, setErr] = useState("");

@@ -7,7 +7,7 @@ import "../../styles/Collection.css";
 const HERO_BY_CATEGORY = {
   "cakes": { image: "/optimized/images/cakes/Tiramisu Cake.webp", heading: "Cakes" },
   "personal-desserts": { image: "/optimized/images/personal-desserts/Tiramichoux.webp", heading: "Personal Desserts" },
-  "onebite": { image: "/optimized/Bites.webp", heading: "One-Bite Creations" },
+  "onebite": { image: "/optimized/images/one-biters/One Biters 12pc.webp", heading: "One-Bite Creations" },
   "pastries": { image: "/optimized/images/pastries/Almond Criossant.webp", heading: "Pastries" },
   "bread": { image: "/optimized/images/breads/Classic Challah.webp", heading: "Bread" },
   "bakery-shelf": { image: "/optimized/images/bakery-shelf/Hazelnut Cookies.webp", heading: "Bakery Shelf" },
