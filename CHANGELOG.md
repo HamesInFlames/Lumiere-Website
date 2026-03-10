@@ -101,7 +101,80 @@ Only the following breads are now shown:
 
 ---
 
-## How to Edit Products
+## [2026-01-04] - Performance & Data Management
+
+### 🚀 Performance
+- **Image optimization** — Reduced image assets from 282MB to 4MB (98.6% reduction)
+- Faster page loads and improved mobile experience
+
+### 📊 Data Management
+- **CSV-based product management** — Products can now be edited via spreadsheet
+- No code changes required to update prices, descriptions, or add new products
+
+---
+
+## [2026-01-02] - Menu UI Polish & Navigation
+
+### ✨ UI/UX Improvements
+- **Polished tab design** — Touch-friendly 44px height, smooth interactions
+- **Rainbow shimmer accent** — Beautiful gradient underline on active tabs
+- **High contrast tabs** — Better visibility and accessibility
+- **Smooth scroll sync** — Fixed tab scroll position when navigating sections
+- **Bold tab text** — Improved readability
+
+### 🔧 Fixes
+- Fixed rainbow border clipping with proper padding/margin calculations
+- Removed hover darkening effect on active tab
+- Renamed "E-Boutique" to "Menu" for clarity
+
+### 🗺️ Navigation
+- Added correct Google Maps link for Lumiere Patisserie location
+
+---
+
+## [2026-01-01] - Mobile Experience & Deployment
+
+### 📱 Mobile Improvements
+- **Hamburger menu** — Beautiful slide-out navigation for mobile devices
+- **Uber Eats button** — Green branded button for easy ordering
+- **Fixed mobile layout** — Resolved various mobile responsiveness issues
+
+### 🔧 Technical
+- Embedded products data in frontend for serverless deployment
+- Fixed Railway deployment without backend dependency
+
+---
+
+## [2025-11-28] - MVP Launch
+
+### 🎉 Initial Release
+- **Mobile responsive design** — Full support for phones and tablets
+- **Header** — Phone number, social media links, Uber Eats integration
+- **Footer** — Contact info, business hours, location
+- **Bug fixes** — Various stability improvements
+
+---
+
+## [2025-11-15] - Project Foundation
+
+### 🏗️ Initial Setup
+- Full project structure with React frontend
+- Backend API for product management
+- Product catalog with categories
+- Image gallery and product details pages
+
+---
+
+## [2025-10-25] - Repository Created
+
+### 📁 Initial Commit
+- Created GitHub repository
+- Added `.gitignore` for clean version control
+- Project scaffolding and configuration
+
+---
+
+## 📖 How to Edit Products
 
 1. Open `public/products.csv` in Excel or Google Sheets
 2. Edit prices, descriptions, or allergen info
@@ -111,12 +184,12 @@ Only the following breads are now shown:
 ### CSV Columns
 | Column | Description |
 |--------|-------------|
-| id | Unique product ID |
-| name | Product display name |
-| slug | URL-friendly name (auto-generated from name) |
-| price | Retail price |
-| imageUrl | Path to product image |
-| category | One of: onebite, cakes, personal-desserts, pastries, bread, bakery-shelf |
-| description | Product description |
-| allergenFree | e.g., "Gluten Free, Dairy Free, Nut Free" |
-| allergens | e.g., "has Dairy, has Nuts, has Gluten, has Eggs" |
+| `id` | Unique product ID |
+| `name` | Product display name |
+| `slug` | URL-friendly name (auto-generated from name) |
+| `price` | Retail price |
+| `imageUrl` | Path to product image |
+| `category` | One of: `onebite`, `cakes`, `personal-desserts`, `pastries`, `bread`, `bakery-shelf` |
+| `description` | Product description |
+| `allergenFree` | e.g., "Gluten Free, Dairy Free, Nut Free" |
+| `allergens` | e.g., "has Dairy, has Nuts, has Gluten, has Eggs" |
