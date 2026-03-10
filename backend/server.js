@@ -1,6 +1,5 @@
 import express from "express";
 import cors from "cors";
-import nodemailer from "nodemailer";
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -15,7 +14,6 @@ const allowedOrigins = [
 
 app.use(cors({
   origin: (origin, callback) => {
-    // Allow requests with no origin (mobile apps, Postman, etc.)
     if (!origin) return callback(null, true);
     if (allowedOrigins.some(allowed => origin.startsWith(allowed.replace(/\/$/, '')))) {
       return callback(null, true);
@@ -46,6 +44,25 @@ function validateContact({ name, email, phone, message }) {
   return errors;
 }
 
+// Send email using Resend API (HTTP-based, works on Railway)
+async function sendEmailWithResend({ to, from, replyTo, subject, text, html }) {
+  const response = await fetch("https://api.resend.com/emails", {
+    method: "POST",
+    headers: {
+      "Authorization": `Bearer ${process.env.RESEND_API_KEY}`,
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({ to, from, reply_to: replyTo, subject, text, html })
+  });
+  
+  if (!response.ok) {
+    const errorData = await response.json().catch(() => ({}));
+    throw new Error(errorData.message || `Resend API error: ${response.status}`);
+  }
+  
+  return response.json();
+}
+
 // Contact form endpoint
 app.post("/api/contact", async (req, res) => {
   try {
@@ -60,24 +77,14 @@ app.post("/api/contact", async (req, res) => {
       });
     }
 
-    // Check if SMTP is configured
-    if (!process.env.SMTP_HOST || !process.env.SMTP_USER) {
-      console.error("SMTP not configured. Set SMTP_HOST, SMTP_USER, SMTP_PASS environment variables.");
+    // Check if Resend is configured
+    if (!process.env.RESEND_API_KEY) {
+      console.error("RESEND_API_KEY not configured.");
       return res.status(500).json({ 
         ok: false, 
         message: "Email service not configured" 
       });
     }
-
-    const transporter = nodemailer.createTransport({
-      host: process.env.SMTP_HOST,
-      port: Number(process.env.SMTP_PORT || 587),
-      secure: process.env.SMTP_SECURE === "true",
-      auth: {
-        user: process.env.SMTP_USER,
-        pass: process.env.SMTP_PASS
-      }
-    });
 
     const subject = `New website inquiry from ${name}`;
     const text = [
@@ -112,9 +119,9 @@ app.post("/api/contact", async (req, res) => {
       <p style="background: #f5f5f5; padding: 15px; border-radius: 5px;">${message.replace(/\n/g, "<br>")}</p>
     `;
 
-    await transporter.sendMail({
-      from: process.env.MAIL_FROM || process.env.SMTP_USER,
-      to: process.env.MAIL_TO || process.env.SMTP_USER,
+    await sendEmailWithResend({
+      to: process.env.MAIL_TO || "xoxoksh05@gmail.com",
+      from: process.env.MAIL_FROM || "onboarding@resend.dev",
       replyTo: email,
       subject,
       text,
