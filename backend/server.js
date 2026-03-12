@@ -120,7 +120,7 @@ app.post("/api/contact", async (req, res) => {
     `;
 
     await sendEmailWithResend({
-      to: process.env.MAIL_TO || "xoxoksh05@gmail.com",
+      to: process.env.MAIL_TO || "contact@lumierepatisserie.ca",
       from: process.env.MAIL_FROM || "onboarding@resend.dev",
       replyTo: email,
       subject,
