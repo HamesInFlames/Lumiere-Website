@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import "../styles/Contact.css";
 
-const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwFhTaRRSt_gmyFW4nVwChsdRDqKA1x9QAUiW-7WgoA81VI2fWwknsP0CpDFH0NxKZv/exec";
+const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwsimLWT9hLhP4n2Vk-9IE5DnC3FfPMqve2N3ZPLPnEnfp-n9e6QPfWf8H__BDeMGaMuw/exec";
 
 export default function Contact() {
   const [form, setForm] = useState({ name: "", email: "", phone: "", msg: "" });
