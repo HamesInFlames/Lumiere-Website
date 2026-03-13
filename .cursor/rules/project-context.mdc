@@ -1,0 +1,52 @@
+---
+description: Lumière Pâtisserie website project context - provides essential background for all conversations
+alwaysApply: true
+---
+
+# Lumière Pâtisserie Website
+
+## Project Overview
+This is the production website for **Lumière Pâtisserie**, a French patisserie in Canada. The site is deployed via **Railway** and connected to the `main` branch (changes to main go live immediately).
+
+## Tech Stack
+- **Frontend:** React + Vite, React Router, CSS Modules, react-spring animations
+- **Backend:** Node.js, Express.js, MongoDB, Mongoose (mostly unused - frontend is serverless)
+- **Deployment:** Railway (connected to `main` branch)
+- **Contact Form:** Google Apps Script (no backend dependency)
+
+## Project Structure
+```
+Lumiere-web/
+├── App/          # React frontend (Vite)
+│   └── src/
+│       ├── components/
+│       ├── pages/
+│       └── styles/
+└── Backend/      # Express API (mostly unused)
+public/
+├── products.csv  # Product data (editable spreadsheet)
+└── images/       # Optimized product images
+```
+
+## Key Features
+- Menu page with categorized products (cakes, pastries, bread, bakery shelf)
+- Rainbow gradient UI accents, spring animations
+- Mobile-responsive with hamburger menu
+- CSV-based product management (no code changes needed for product updates)
+
+## Important Files
+- `public/products.csv` - Edit prices, descriptions, allergens here
+- `CHANGELOG.md` - Document all changes with dates
+- `Lumiere-web/App/src/` - Main frontend code
+
+## Branch Strategy
+- `main` - Production (auto-deploys to Railway → live website)
+- `development` - Safe development branch (work here first)
+- Merge to `main` only when ready to go live
+
+## Product Categories
+`onebite`, `cakes`, `personal-desserts`, `pastries`, `bread`, `bakery-shelf`
+
+## Contact
+- Email: eliran@lumierepatisserie.ca
+- Location: Canada (has Google Maps integration)
