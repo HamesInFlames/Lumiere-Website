@@ -111,13 +111,13 @@ Pre-order:
 └── assignedTo: "kitchen" | "bar" (who prepares it)
 
 Wholesale:
-├── customer: "TOVA" | "C-C" | etc. (recurring account)
+├── customer: "C-C" | etc. (recurring account)
 ├── deliveryDate: Date
-├── destinations: [
+├── kitchen that is preparing the order: [
 │     { name: "LUMIERE", items: [...] },
 │     { name: "TOVA", items: [...] }
 │   ]
-├── status: "pending" | "preparing" | "delivered"
+├── status: "pending" | "preparing" | "prepared" | "delivered / picked up"
 └── createdBy: User
 ```
 

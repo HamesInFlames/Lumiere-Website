@@ -1,8 +1,7 @@
 ---
 description: Lumière Pâtisserie website project context - provides essential background for all conversations
-alwaysApply: true
+alwaysApply: false
 ---
-
 # Lumière Pâtisserie Website
 
 ## Project Overview
