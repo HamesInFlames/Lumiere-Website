@@ -29,9 +29,9 @@ function Hero() {
 
 function PastriesSection() {
   const cards = [
-    { title: "Cakes",               img: cakesImg,            to: "/products?category=cakes" },
-    { title: "Personal Desserts",   img: personalDessertsImg, to: "/products?category=personal-desserts" },
-    { title: "One-Bite Assortments",img: oneBiteImg,          to: "/products?category=onebite" },
+    { title: "Cakes",                img: cakesImg,            to: "/menu#cakes" },
+    { title: "Personal Desserts",    img: personalDessertsImg, to: "/menu#personal-desserts" },
+    { title: "One-Bite Assortments", img: oneBiteImg,          to: "/menu#onebite" },
   ];
 
   return (

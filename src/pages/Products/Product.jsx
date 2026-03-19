@@ -1,7 +1,32 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { fetchProduct } from "../../lib/api";
 import "../../styles/Product.css";
+
+function ProductCloseButton() {
+  const navigate = useNavigate();
+
+  return (
+    <button
+      type="button"
+      className="product__close"
+      onClick={() => navigate(-1)}
+      aria-label="Go back to previous page"
+    >
+      <svg
+        className="product__close-icon"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2.25"
+        strokeLinecap="round"
+        aria-hidden="true"
+      >
+        <path d="M18 6 6 18M6 6l12 12" />
+      </svg>
+    </button>
+  );
+}
 
 // Accordion item component with +/- toggle
 function AccordionItem({ title, children, defaultOpen = false }) {
@@ -76,13 +101,32 @@ export default function ProductPage() {
     return () => (ok = false);
   }, [slug]);
 
-  if (err) return <div className="wrap"><p>Error: {err}</p></div>;
-  if (!p) return <div className="wrap"><p>Loading…</p></div>;
+  if (err) {
+    return (
+      <>
+        <ProductCloseButton />
+        <div className="wrap">
+          <p>Error: {err}</p>
+        </div>
+      </>
+    );
+  }
+  if (!p) {
+    return (
+      <>
+        <ProductCloseButton />
+        <div className="wrap">
+          <p>Loading…</p>
+        </div>
+      </>
+    );
+  }
 
   const gallery = p.images?.length ? p.images : (p.image ? [p.image] : []);
 
   return (
     <section className="product wrap">
+      <ProductCloseButton />
       <div className="product__grid">
         {/* Left side: product images with thumbnails */}
         <div className="product__media">
