@@ -4,7 +4,7 @@
 
 **A modern, elegant website for an artisan French pâtisserie in Canada**
 
-[Live Website](https://lumierepatisserie.ca) | [Contact](mailto:eliran@lumierepatisserie.ca)
+[Live Website](https://www.lumierepatisserie.ca) | [Contact](mailto:eliran@lumierepatisserie.ca)
 
 </div>
 
