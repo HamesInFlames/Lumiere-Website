@@ -2,11 +2,30 @@
    MENU PAGE — Cleaner, Bigger, 4 Columns
 ------------------------------------------ */
 
+/* Grid: centre column matches old max-width + side gutters; .menu-tabs spans full row (no 100vw — avoids horizontal scroll) */
 .menu-page {
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 40px 24px 80px;
+  display: grid;
+  grid-template-columns:
+    1fr
+    min(1400px, calc(100% - 48px))
+    1fr;
+  max-width: none;
+  width: 100%;
+  margin: 0;
+  padding: 40px 0 80px;
+  box-sizing: border-box;
   text-align: center;
+}
+
+.menu-page > *:not(.menu-tabs) {
+  grid-column: 2;
+  min-width: 0;
+}
+
+.menu-page > .menu-tabs {
+  grid-column: 1 / -1;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .menu-title {

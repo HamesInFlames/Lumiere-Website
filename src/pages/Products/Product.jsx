@@ -1,7 +1,79 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { fetchProduct } from "../../lib/api";
 import "../../styles/Product.css";
+
+/** Display labels aligned with Menu.jsx section ids */
+const CATEGORY_LABELS = {
+  cakes: "Cakes",
+  "personal-desserts": "Personal Desserts",
+  onebite: "One-Bite Creations",
+  pastries: "Pastries",
+  bread: "Breads",
+  "bakery-shelf": "Bakery Shelf",
+};
+
+function categoryLabel(categoryId) {
+  if (!categoryId) return null;
+  return (
+    CATEGORY_LABELS[categoryId] ||
+    categoryId.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase())
+  );
+}
+
+function ProductBreadcrumbs({ product, loading, error }) {
+  const cat = product?.category;
+  const catText = categoryLabel(cat);
+  const showCategory = Boolean(product && cat && catText);
+
+  return (
+    <nav className="product-bc" aria-label="Breadcrumb">
+      <ol className="product-bc__list">
+        <li className="product-bc__item">
+          <Link to="/" className="product-bc__link">
+            Home
+          </Link>
+        </li>
+        <li className="product-bc__item">
+          <span className="product-bc__sep" aria-hidden="true">
+            /
+          </span>
+          <Link to="/menu" className="product-bc__link">
+            Menu
+          </Link>
+        </li>
+        {showCategory && (
+          <li className="product-bc__item">
+            <span className="product-bc__sep" aria-hidden="true">
+              /
+            </span>
+            <Link to={`/menu#${cat}`} className="product-bc__link">
+              {catText}
+            </Link>
+          </li>
+        )}
+        <li className="product-bc__item">
+          <span className="product-bc__sep" aria-hidden="true">
+            /
+          </span>
+          {error ? (
+            <span className="product-bc__current product-bc__current--muted">
+              Unable to load
+            </span>
+          ) : loading ? (
+            <span className="product-bc__current product-bc__current--muted">
+              Loading…
+            </span>
+          ) : (
+            <span className="product-bc__current" aria-current="page">
+              {product.title}
+            </span>
+          )}
+        </li>
+      </ol>
+    </nav>
+  );
+}
 
 // Accordion item component with +/- toggle
 function AccordionItem({ title, children, defaultOpen = false }) {
@@ -76,13 +148,28 @@ export default function ProductPage() {
     return () => (ok = false);
   }, [slug]);
 
-  if (err) return <div className="wrap"><p>Error: {err}</p></div>;
-  if (!p) return <div className="wrap"><p>Loading…</p></div>;
+  if (err) {
+    return (
+      <div className="wrap">
+        <ProductBreadcrumbs error={err} />
+        <p className="product-bc__errorDetail">Error: {err}</p>
+      </div>
+    );
+  }
+  if (!p) {
+    return (
+      <div className="wrap">
+        <ProductBreadcrumbs loading />
+        <p>Loading…</p>
+      </div>
+    );
+  }
 
   const gallery = p.images?.length ? p.images : (p.image ? [p.image] : []);
 
   return (
     <section className="product wrap">
+      <ProductBreadcrumbs product={p} />
       <div className="product__grid">
         {/* Left side: product images with thumbnails */}
         <div className="product__media">

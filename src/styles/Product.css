@@ -1,5 +1,109 @@
 /* === Product page (detail) === */
 
+/* Breadcrumb — 16px type, wraps from phone (e.g. SE) to wide desktop */
+.product-bc {
+  margin: 0 0 20px;
+  padding: 0;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.product-bc__list {
+  list-style: none;
+  margin: 0;
+  padding: 10px 0 14px;
+  border-bottom: 1px solid #eaeaea;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  align-content: flex-start;
+  gap: 8px 6px;
+  font-size: 16px;
+  line-height: 1.45;
+  width: 100%;
+  max-width: 100%;
+}
+
+.product-bc__item {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 6px;
+  min-width: 0;
+  max-width: 100%;
+}
+
+.product-bc__sep {
+  color: #c4c4c4;
+  font-weight: 400;
+  user-select: none;
+  flex-shrink: 0;
+}
+
+.product-bc__link {
+  color: #555;
+  text-decoration: none;
+  font-weight: 500;
+  border-radius: 4px;
+  padding: 2px 4px;
+  margin: -2px -4px;
+  transition: color 0.2s ease, background-color 0.2s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.product-bc__link:hover {
+  color: #111;
+  background: rgba(0, 0, 0, 0.04);
+}
+
+.product-bc__link:focus-visible {
+  outline: 2px solid rgba(122, 225, 201, 0.9);
+  outline-offset: 2px;
+}
+
+.product-bc__current {
+  color: #1a1a1a;
+  font-weight: 600;
+  min-width: 0;
+  max-width: 100%;
+  padding: 2px 0;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+.product-bc__current--muted {
+  color: #888;
+  font-weight: 500;
+  font-style: italic;
+}
+
+.product-bc__errorDetail {
+  margin-top: 8px;
+}
+
+/* Narrow phones: put current page on its own row so long titles wrap cleanly */
+@media (max-width: 480px) {
+  .product-bc__list {
+    gap: 6px 6px;
+    padding-bottom: 16px;
+  }
+
+  .product-bc__item:last-child {
+    flex: 1 1 100%;
+    max-width: 100%;
+  }
+}
+
+/* Comfortable tap targets on touch devices */
+@media (hover: none) and (pointer: coarse) {
+  .product-bc__link {
+    padding: 6px 6px;
+    margin: -6px;
+  }
+}
+
 .wrap { 
   max-width: 1240px; 
   margin: 0 auto; 

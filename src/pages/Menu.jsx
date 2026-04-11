@@ -1,6 +1,6 @@
 // src/pages/Menu.jsx
-import React, { useEffect, useMemo, useRef, useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { Link, useLocation } from "react-router-dom";
 import { fetchProducts } from "../lib/api";
 import "../styles/Menu.css";
 
@@ -38,6 +38,7 @@ const MENU_SECTIONS = [
 ];
 
 export default function Menu() {
+  const location = useLocation();
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);
   const [err, setErr] = useState("");
@@ -48,6 +49,30 @@ export default function Menu() {
   const tabRowRef = useRef(null);
   const tabWrapperRef = useRef(null);
   const isScrollingRef = useRef(false);
+
+  const scrollToSectionById = useCallback((id) => {
+    const el = sectionRefs.current[id];
+    if (!el) return false;
+
+    isScrollingRef.current = true;
+
+    const header = document.querySelector(".site-header");
+    const tabs = document.querySelector(".menu-tabs");
+    const headerHeight = header ? header.offsetHeight : 85;
+    const tabsHeight = tabs ? tabs.offsetHeight : 60;
+    const totalOffset = headerHeight + tabsHeight + 16;
+
+    const rect = el.getBoundingClientRect();
+    const offsetTop = rect.top + window.scrollY - totalOffset;
+
+    setActive(id);
+    window.scrollTo({ top: offsetTop, behavior: "smooth" });
+
+    setTimeout(() => {
+      isScrollingRef.current = false;
+    }, 800);
+    return true;
+  }, []);
 
   // Track horizontal scroll position of tab row
   useEffect(() => {
@@ -123,6 +148,24 @@ export default function Menu() {
     return map;
   }, [items]);
 
+  // Scroll to category from URL hash (e.g. /menu#cakes) after sections mount
+  useEffect(() => {
+    if (loading) return;
+    const id = location.hash.replace(/^#/, "");
+    if (!id || !MENU_SECTIONS.some((s) => s.id === id)) return;
+
+    let cancelled = false;
+    const tid = window.setTimeout(() => {
+      if (cancelled) return;
+      scrollToSectionById(id);
+    }, 0);
+
+    return () => {
+      cancelled = true;
+      clearTimeout(tid);
+    };
+  }, [loading, location.hash, scrollToSectionById]);
+
   // 3) Highlight active tab based on scroll position
   useEffect(() => {
     if (!items.length) return;
@@ -178,39 +221,11 @@ export default function Menu() {
     handleScroll();
 
     return () => window.removeEventListener('scroll', throttledScroll);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [items, active]);
 
   // 4) Click tab → smooth scroll to section (positions section header just below tabs)
   const handleTabClick = (id) => {
-    const el = sectionRefs.current[id];
-    if (!el) return;
-
-    // Prevent observer from fighting with click navigation
-    isScrollingRef.current = true;
-
-    // Get actual heights of fixed/sticky elements
-    const header = document.querySelector('.site-header');
-    const tabs = document.querySelector('.menu-tabs');
-    
-    const headerHeight = header ? header.offsetHeight : 85;
-    const tabsHeight = tabs ? tabs.offsetHeight : 60;
-    
-    // Total offset = header + tabs + small gap (16px)
-    const totalOffset = headerHeight + tabsHeight + 16;
-    
-    const rect = el.getBoundingClientRect();
-    const offsetTop = rect.top + window.scrollY - totalOffset;
-
-    // Set active immediately for instant feedback
-    setActive(id);
-
-    window.scrollTo({ top: offsetTop, behavior: "smooth" });
-    
-    // Re-enable observer after scroll completes
-    setTimeout(() => {
-      isScrollingRef.current = false;
-    }, 800);
+    scrollToSectionById(id);
   };
 
   if (err) {
@@ -290,6 +305,7 @@ export default function Menu() {
           return (
             <section
               key={sec.id}
+              id={sec.id}
               className="menu-section"
               data-section-id={sec.id}
               ref={(el) => {

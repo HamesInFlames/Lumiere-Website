@@ -6,6 +6,10 @@ export default function ScrollToTop() {
   const { pathname, search, hash } = useLocation();
 
   useEffect(() => {
+    // Menu page scrolls to category sections after products load (see Menu.jsx).
+    if (pathname === "/menu" && hash) {
+      return;
+    }
     // If a hash is present, try to scroll to that element; otherwise go to top.
     if (hash) {
       // let the page render first
