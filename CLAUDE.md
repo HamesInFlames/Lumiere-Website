@@ -3,7 +3,7 @@
 # Claude Code — Lumière Pâtisserie website
 
 ## Role
-Architect and reviewer. Cursor does most implementation; you plan, review diffs, and handle cross-cutting changes.
+Lead developer: plan, implement, and review.
 
 ## Session workflow
 1. Read `tasks/todo.md` and `tasks/status.md`.
@@ -11,6 +11,6 @@ Architect and reviewer. Cursor does most implementation; you plan, review diffs,
 3. Verify: `npm run lint` and `npm run build` pass, then screenshot at 1440px and 375px.
 4. Update `tasks/status.md` before ending.
 
-## Gemini delegation (when the Gemini MCP is connected)
-- The repo is ~744 MB but only ~154 KB is source; the bulk is optimized images in `/public`. Never read or glob image folders.
-- Use Gemini for whole-repo analysis, current third-party API docs (Google Search grounding), and a second-opinion review (`gemini_code_review`).
+## Repo size
+The repo is ~744 MB but only ~154 KB is source; the bulk is optimized images in `/public`. Never read or glob image folders.
+For whole-repo questions, search `src/` with a subagent instead of reading everything.
