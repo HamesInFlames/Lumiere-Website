@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>Drinks Menu · Lumière Patisserie</title>
+  <link rel="icon" type="image/png" href="/favicon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <script>
+    /* =====================================================================
+       DRINKS MENU DATA  —  THIS IS THE ONLY PART YOU NEED TO EDIT
+       =====================================================================
+       • Sections appear in the order listed. Items appear in the order listed.
+       • Item fields:
+           name   (required)  text shown on the menu
+           price  (required)  number (4.35) or text ("4.35 / 5.45") if you need two sizes
+           desc   (optional)  one short line under the name
+           badge  (optional)  small label, e.g. "New", "Seasonal", "Popular"
+           hide   (optional)  true = keep the item in the file but don't show it
+       • To add a drink: copy one line, paste it where you want it, change the values.
+       • To move a drink between HOT and COLD: cut the line, paste it in the other section.
+       • Section "note" shows as small italic text under the section title (leave "" for none).
+       ===================================================================== */
+    const MENU = {
+      currency: "$",
+      updated: "2026-09-07",            // shown in the footer, change when you publish
+      sections: [
+        {
+          id: "hot",
+          title: "Hot",
+          note: "",
+          items: [
+            { name: "Espresso",         price: 2.90 },
+            { name: "Double Espresso",  price: 3.80 },
+            { name: "Macchiato",        price: 2.95 },
+            { name: "Double Macchiato", price: 3.85 },   // was listed as "Double Espresso" on the sheet – confirm
+            { name: "Latte",            price: 4.35 },
+            { name: "Cappuccino",       price: 4.35 },
+            { name: "Chococcino",       price: 5.95 },
+            { name: "Mocaccino",        price: 5.95 },
+            { name: "Tea",              price: 4.35 },
+          ],
+        },
+        {
+          id: "cold",
+          title: "Cold",
+          note: "Any hot drink can be made iced (+1.40)",
+          items: [
+            { name: "Snow Latte",                price: 5.75 },
+            { name: "Granita di Caffè / Lemon",  price: 6.00 },
+            { name: "Iced Tea",                  price: 5.45 },
+            { name: "Fresh Juice",               price: 9.25 },
+          ],
+        },
+        {
+          id: "addons",
+          title: "Add-Ons",
+          note: "",
+          items: [
+            { name: "Oat / Almond Milk", price: 0.80 },
+            { name: "Extra Shot",        price: 0.60 },
+            { name: "Large",             price: 1.10 },
+            { name: "Iced",              price: 1.40 },
+          ],
+        },
+      ],
+    };
+    /* ===================== END OF EDITABLE DATA ===================== */
+  </script>
+
+  <style>
+    :root {
+      --ink: #1a1a1a;
+      --muted: #666;
+      --line: #eaeaea;
+      --bg: #ffffff;
+      --card: #faf8f5;
+      --accent: #b08d57;          /* warm gold – tweak to match the new board */
+      --hot: #c0392b;
+      --cold: #2e6fa7;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; background: var(--bg); color: var(--ink); }
+    body {
+      font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      line-height: 1.4;
+    }
+
+    .wrap { max-width: 560px; margin: 0 auto; padding: 0 20px 48px; }
+
+    /* ---------- header ---------- */
+    .hdr { text-align: center; padding: 32px 0 16px; }
+    .hdr img { height: 56px; width: auto; display: block; margin: 0 auto 12px; }
+    .hdr h1 { font-size: 26px; font-weight: 800; margin: 0; letter-spacing: -0.01em; }
+    .hdr p  { margin: 4px 0 0; color: var(--muted); font-size: 14px; }
+
+    /* ---------- tabs ---------- */
+    .tabs {
+      position: sticky; top: 0; z-index: 10;
+      display: flex; gap: 8px; justify-content: center;
+      background: var(--bg); padding: 12px 0;
+      border-bottom: 1px solid var(--line);
+    }
+    .tab {
+      appearance: none; border: 1.5px solid var(--line); background: #fff;
+      color: var(--ink); font: inherit; font-weight: 600; font-size: 14px;
+      padding: 10px 18px; border-radius: 999px; cursor: pointer; min-height: 44px;
+      transition: background .15s, border-color .15s, color .15s;
+    }
+    .tab.active { background: var(--ink); border-color: var(--ink); color: #fff; }
+
+    /* ---------- sections ---------- */
+    .section { padding-top: 28px; scroll-margin-top: 72px; }
+    .section-head { display: flex; align-items: baseline; gap: 10px; margin-bottom: 4px; }
+    .section-head h2 {
+      font-size: 22px; font-weight: 800; margin: 0; text-transform: uppercase; letter-spacing: .04em;
+    }
+    .dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
+    .section-hot  .dot { background: var(--hot); }
+    .section-cold .dot { background: var(--cold); }
+    .section-addons .dot { background: var(--accent); }
+    .section-note { color: var(--muted); font-size: 13px; font-style: italic; margin: 0 0 12px; }
+
+    .item {
+      display: grid; grid-template-columns: 1fr auto; column-gap: 12px; align-items: baseline;
+      padding: 12px 0; border-bottom: 1px dashed var(--line);
+    }
+    .item:last-child { border-bottom: 0; }
+    .name { font-weight: 600; font-size: 16px; }
+    .desc { color: var(--muted); font-size: 13px; margin-top: 2px; grid-column: 1; }
+    .price { font-weight: 600; font-size: 16px; font-variant-numeric: tabular-nums; white-space: nowrap; }
+    .badge {
+      display: inline-block; margin-left: 8px; padding: 2px 8px; border-radius: 999px;
+      font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .04em;
+      background: var(--accent); color: #fff; vertical-align: middle;
+    }
+    .section-addons .item { padding: 9px 0; }
+    .section-addons .name, .section-addons .price { font-size: 15px; font-weight: 500; }
+    .section-addons .price::before { content: "+ "; }
+
+    footer { text-align: center; color: var(--muted); font-size: 12px; margin-top: 40px; }
+
+    /* ---------- print (handy reference for the physical board) ---------- */
+    @media print {
+      .tabs { display: none; }
+      .wrap { max-width: none; padding: 0; }
+      .section { break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header class="hdr">
+      <img src="/lumiere.png" alt="Lumière Patisserie" onerror="this.style.display='none'" />
+      <h1>Drinks</h1>
+      <p>Made to order · Prices before tax</p>
+    </header>
+
+    <nav class="tabs" id="tabs" aria-label="Menu sections"></nav>
+    <main id="menu"></main>
+
+    <footer>Menu updated <span id="updated"></span></footer>
+  </div>
+
+  <script>
+    // ---------- render (no need to edit below) ----------
+    const fmt = (p) => (typeof p === "number" ? MENU.currency + p.toFixed(2) : String(p));
+    const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+
+    const tabs = document.getElementById("tabs");
+    const menu = document.getElementById("menu");
+
+    MENU.sections.forEach((sec) => {
+      const btn = document.createElement("button");
+      btn.className = "tab";
+      btn.textContent = sec.title;
+      btn.dataset.target = sec.id;
+      btn.addEventListener("click", () => {
+        document.getElementById(sec.id).scrollIntoView({ behavior: "smooth", block: "start" });
+      });
+      tabs.appendChild(btn);
+
+      const items = sec.items.filter((i) => !i.hide).map((i) => `
+        <div class="item">
+          <div class="name">${esc(i.name)}${i.badge ? `<span class="badge">${esc(i.badge)}</span>` : ""}</div>
+          <div class="price">${esc(fmt(i.price))}</div>
+          ${i.desc ? `<div class="desc">${esc(i.desc)}</div>` : ""}
+        </div>`).join("");
+
+      menu.insertAdjacentHTML("beforeend", `
+        <section class="section section-${sec.id}" id="${sec.id}">
+          <div class="section-head"><span class="dot"></span><h2>${esc(sec.title)}</h2></div>
+          ${sec.note ? `<p class="section-note">${esc(sec.note)}</p>` : ""}
+          ${items}
+        </section>`);
+    });
+
+    document.getElementById("updated").textContent = MENU.updated;
+
+    // highlight the tab for the section currently in view
+    const tabBtns = [...tabs.querySelectorAll(".tab")];
+    const setActive = (id) => tabBtns.forEach((b) => b.classList.toggle("active", b.dataset.target === id));
+    setActive(MENU.sections[0].id);
+    const sections = [...document.querySelectorAll(".section")];
+    const onScroll = () => {
+      const y = window.scrollY + 90;
+      let current = sections[0].id;
+      sections.forEach((s) => { if (s.offsetTop <= y) current = s.id; });
+      setActive(current);
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+  </script>
+</body>
+</html>
