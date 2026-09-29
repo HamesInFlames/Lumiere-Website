@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Drinks Menu Audit · Lumière</title>
+<style>
+  :root { --ink:#1a1a1a; --muted:#666; --line:#e3e3e3; --bg:#fff; --soft:#f6f6f6;
+          --hot:#c0392b; --cold:#2e6fa7; --addon:#b08d57; --ok:#2e8b57; --warn:#d68910; --bad:#c0392b; }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif; color:var(--ink); background:var(--bg); font-size:14px; }
+  .wrap { max-width:1280px; margin:0 auto; padding:24px 20px 80px; }
+  h1 { font-size:24px; margin:0 0 4px; }
+  .sub { color:var(--muted); margin:0 0 20px; }
+
+  /* summary */
+  .stats { display:flex; flex-wrap:wrap; gap:10px; margin-bottom:18px; }
+  .stat { background:var(--soft); border-radius:10px; padding:10px 14px; min-width:120px; }
+  .stat b { display:block; font-size:20px; }
+  .stat span { color:var(--muted); font-size:12px; }
+
+  /* toolbar */
+  .bar { display:flex; flex-wrap:wrap; gap:8px; align-items:center; margin-bottom:12px; }
+  button { font:inherit; font-weight:600; padding:8px 14px; border-radius:8px; border:1px solid var(--line); background:#fff; cursor:pointer; }
+  button:hover { background:var(--soft); }
+  button.primary { background:var(--ink); color:#fff; border-color:var(--ink); }
+  button.danger { color:var(--bad); }
+  .spacer { flex:1; }
+  .filters label { margin-right:10px; cursor:pointer; }
+
+  /* table */
+  .tablewrap { overflow-x:auto; border:1px solid var(--line); border-radius:10px; }
+  table { border-collapse:collapse; width:100%; min-width:1080px; }
+  th { text-align:left; font-size:12px; text-transform:uppercase; letter-spacing:.04em; color:var(--muted); background:var(--soft); padding:10px 8px; position:sticky; top:0; z-index:1; }
+  td { padding:6px 8px; border-top:1px solid var(--line); vertical-align:middle; }
+  tr.removed td { opacity:.45; text-decoration:line-through; }
+  tr.removed td.ctl { text-decoration:none; opacity:1; }
+  tr.new td:first-child { border-left:3px solid var(--ok); }
+  input[type=text], input[type=number], select, textarea { font:inherit; padding:6px 8px; border:1px solid var(--line); border-radius:6px; width:100%; background:#fff; }
+  input[type=number] { width:84px; text-align:right; }
+  textarea { resize:vertical; min-height:32px; }
+  .orig { color:var(--muted); font-size:12px; white-space:nowrap; }
+  .delta { font-size:12px; white-space:nowrap; }
+  .delta.up { color:var(--bad); } .delta.down { color:var(--ok); }
+  .changed { background:#fff8e1; }
+
+  /* temp pills */
+  .pills { display:flex; gap:4px; }
+  .pill { white-space:nowrap; padding:5px 10px; border-radius:999px; border:1px solid var(--line); background:#fff; font-size:12px; font-weight:600; cursor:pointer; }
+  .pill.hot.on { background:var(--hot); border-color:var(--hot); color:#fff; }
+  .pill.cold.on { background:var(--cold); border-color:var(--cold); color:#fff; }
+  .pill.addon.on { background:var(--addon); border-color:var(--addon); color:#fff; }
+
+  .flag { display:inline-block; font-size:11px; font-weight:700; padding:2px 7px; border-radius:999px; background:#fdecea; color:var(--bad); margin:2px 2px 0 0; }
+  .flag.info { background:#eaf2fb; color:var(--cold); }
+  .flag.ok { background:#e8f5ee; color:var(--ok); }
+  .drag { cursor:grab; color:#bbb; user-select:none; text-align:center; }
+  .x { color:#bbb; cursor:pointer; font-weight:700; }
+  .x:hover { color:var(--bad); }
+
+  /* preview */
+  .preview { margin-top:28px; display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:16px; }
+  .col { border:1px solid var(--line); border-radius:10px; padding:14px; }
+  .col h3 { margin:0 0 8px; text-transform:uppercase; letter-spacing:.04em; font-size:13px; }
+  .col.hot h3 { color:var(--hot);} .col.cold h3 { color:var(--cold);} .col.addon h3 { color:var(--addon);}
+  .col div { display:flex; justify-content:space-between; padding:4px 0; border-bottom:1px dashed var(--line); }
+  .col div:last-child { border-bottom:0; }
+  .col .pending { color:var(--muted); }
+
+  .out { margin-top:18px; }
+  .out textarea { font-family:ui-monospace,Consolas,monospace; font-size:12px; min-height:180px; }
+  .toast { position:fixed; bottom:20px; left:50%; transform:translateX(-50%); background:var(--ink); color:#fff; padding:10px 16px; border-radius:8px; opacity:0; transition:opacity .2s; pointer-events:none; }
+  .toast.show { opacity:1; }
+  @media print { .bar, .out, .drag, .x, th:first-child, td:first-child { display:none; } .tablewrap { border:0; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Drinks Menu Audit</h1>
+  <p class="sub">Source: current price sheet (screenshot, 2026-09-07). Assign each item to <b>Hot</b> / <b>Cold</b> / <b>Add-on</b>, set the new price, decide keep or remove, add notes. Everything autosaves in this browser.</p>
+
+  <div class="stats" id="stats"></div>
+
+  <div class="bar">
+    <button class="primary" onclick="addRow()">+ Add drink</button>
+    <button onclick="exportCSV()">Export CSV</button>
+    <button onclick="buildMenuBlock()">Generate menu block</button>
+    <button onclick="window.print()">Print</button>
+    <span class="spacer"></span>
+    <span class="filters">
+      <label><input type="checkbox" id="fHideRemoved" onchange="render()"> hide removed</label>
+      <label><input type="checkbox" id="fOnlyOpen" onchange="render()"> only "to review"</label>
+    </span>
+    <button class="danger" onclick="resetAll()">Reset to sheet</button>
+  </div>
+
+  <div class="tablewrap">
+    <table>
+      <thead><tr>
+        <th style="width:28px"></th>
+        <th style="width:220px">Name</th>
+        <th style="width:120px">Sheet</th>
+        <th style="width:160px">Temp</th>
+        <th style="width:100px">Price</th>
+        <th style="width:70px">Δ</th>
+        <th style="width:130px">Decision</th>
+        <th>Notes</th>
+        <th style="width:150px">Flags</th>
+        <th style="width:28px"></th>
+      </tr></thead>
+      <tbody id="rows"></tbody>
+    </table>
+  </div>
+
+  <h2 style="font-size:16px;margin:28px 0 0">Resulting menu (approved items only; "to review" shown greyed)</h2>
+  <div class="preview" id="preview"></div>
+
+  <div class="out" id="out" hidden>
+    <p class="sub">Paste this over the <code>sections: [...]</code> array inside <code>public/drinks-menu.html</code>.</p>
+    <textarea id="outText"></textarea>
+  </div>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+/* ---------- source data, transcribed from the sheet ---------- */
+const SHEET = [
+  // sheetName, sheetPrice, sheetSection, suggested name, suggested temp, auto flags
+  ["Espresso",                  2.90, "Drinks",  "Espresso",                 "hot",   []],
+  ["Double Espresso",           3.80, "Drinks",  "Double Espresso",          "hot",   []],
+  ["Macciato",                  2.95, "Drinks",  "Macchiato",                "hot",   ["spelling"]],
+  ["Double Espresso",           3.85, "Drinks",  "Double Macchiato",         "hot",   ["duplicate name", "assumed Double Macchiato"]],
+  ["Latte",                     4.35, "Drinks",  "Latte",                    "hot",   []],
+  ["Capuccino",                 4.35, "Drinks",  "Cappuccino",               "hot",   ["spelling"]],
+  ["Chococinno",                5.95, "Drinks",  "Chococcino",               "hot",   ["spelling"]],
+  ["Mocaccino",                 5.95, "Drinks",  "Mocaccino",                "hot",   []],
+  ["Snow Latte",                5.75, "Drinks",  "Snow Latte",               "cold",  ["confirm temp"]],
+  ["Fresh Juice",               9.25, "Drinks",  "Fresh Juice",              "cold",  []],
+  ["Granita De Caffe / Lemon",  6.00, "Drinks",  "Granita di Caffè / Lemon", "cold",  ["spelling"]],
+  ["Iced Tea",                  5.45, "Drinks",  "Iced Tea",                 "cold",  []],
+  ["Tea",                       4.35, "Drinks",  "Tea",                      "hot",   []],
+  ["Oat / Almond",              0.80, "Add Ons", "Oat / Almond Milk",        "addon", []],
+  ["Extra Shot",                0.60, "Add Ons", "Extra Shot",               "addon", []],
+  ["Large",                     1.10, "Add Ons", "Large",                    "addon", []],
+  ["Iced",                      1.40, "Add Ons", "Iced",                     "addon", []],
+];
+const KEY = "lumiere-drinks-audit-v1";
+const TEMPS = { hot:"Hot", cold:"Cold", addon:"Add-on" };
+const DECISIONS = { review:"To review", keep:"Approved", remove:"Remove" };
+
+function fromSheet() {
+  return SHEET.map((r, i) => ({
+    id: "s" + i, origName: r[0], origPrice: r[1], origSection: r[2],
+    name: r[3], temp: r[4], price: r[1], decision: "review", note: "", flags: r[5], isNew: false,
+  }));
+}
+let rows = load();
+function load() { try { const s = localStorage.getItem(KEY); if (s) return JSON.parse(s); } catch {} return fromSheet(); }
+function save() { try { localStorage.setItem(KEY, JSON.stringify(rows)); } catch {} }
+
+/* ---------- actions ---------- */
+function addRow() {
+  rows.push({ id:"n"+Date.now(), origName:"", origPrice:null, origSection:"", name:"", temp:"hot", price:null, decision:"review", note:"", flags:[], isNew:true });
+  update(); setTimeout(() => document.querySelector(`[data-id="${rows[rows.length-1].id}"] input[type=text]`)?.focus(), 0);
+}
+function setField(id, k, v) { const r = rows.find(r => r.id === id); if (!r) return; r[k] = v; update(); }
+function delRow(id) {
+  const r = rows.find(r => r.id === id);
+  if (r.isNew) { rows = rows.filter(x => x.id !== id); update(); return; }
+  r.decision = r.decision === "remove" ? "review" : "remove"; update();
+}
+function resetAll() { if (confirm("Throw away all your edits and reload the sheet data?")) { rows = fromSheet(); update(); } }
+function update() { save(); render(); }
+
+/* ---------- render ---------- */
+const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const money = n => (n == null || n === "" || isNaN(n)) ? "—" : "$" + Number(n).toFixed(2);
+
+function render() {
+  const hideRemoved = document.getElementById("fHideRemoved").checked;
+  const onlyOpen = document.getElementById("fOnlyOpen").checked;
+  const tb = document.getElementById("rows"); tb.innerHTML = "";
+
+  rows.forEach(r => {
+    if (hideRemoved && r.decision === "remove") return;
+    if (onlyOpen && r.decision !== "review") return;
+    const nameChanged = !r.isNew && r.name !== r.origName;
+    const priceChanged = !r.isNew && r.origPrice != null && Number(r.price) !== Number(r.origPrice);
+    const d = (r.origPrice != null && r.price != null && r.price !== "") ? Number(r.price) - r.origPrice : 0;
+    const tr = document.createElement("tr");
+    tr.dataset.id = r.id;
+    tr.className = (r.decision === "remove" ? "removed " : "") + (r.isNew ? "new" : "");
+    tr.draggable = true;
+    tr.innerHTML = `
+      <td class="drag">⋮⋮</td>
+      <td class="${nameChanged ? "changed" : ""}"><input type="text" value="${esc(r.name)}" placeholder="Drink name" onchange="setField('${r.id}','name',this.value)"></td>
+      <td class="orig">${r.isNew ? '<span class="flag ok">NEW</span>' : esc(r.origName) + "<br>" + money(r.origPrice) + " · " + esc(r.origSection)}</td>
+      <td><div class="pills">${Object.entries(TEMPS).map(([k,v]) => `<span class="pill ${k} ${r.temp===k?"on":""}" onclick="setField('${r.id}','temp','${k}')">${v}</span>`).join("")}</div></td>
+      <td class="${priceChanged ? "changed" : ""}"><input type="number" step="0.05" min="0" value="${r.price == null || r.price === "" ? "" : Number(r.price).toFixed(2)}" onchange="setField('${r.id}','price',this.value===''?null:Number(this.value))"></td>
+      <td class="delta ${d>0?"up":d<0?"down":""}">${d ? (d>0?"+":"") + d.toFixed(2) : ""}</td>
+      <td class="ctl"><select onchange="setField('${r.id}','decision',this.value)">${Object.entries(DECISIONS).map(([k,v]) => `<option value="${k}" ${r.decision===k?"selected":""}>${v}</option>`).join("")}</select></td>
+      <td><textarea rows="1" placeholder="e.g. new recipe, check cost, board only…" onchange="setField('${r.id}','note',this.value)">${esc(r.note)}</textarea></td>
+      <td>${(r.flags||[]).map(f => `<span class="flag ${/assumed|confirm/.test(f)?"info":""}">${esc(f)}</span>`).join("")}${nameChanged?'<span class="flag info">renamed</span>':""}${priceChanged?'<span class="flag info">repriced</span>':""}</td>
+      <td class="ctl"><span class="x" title="${r.isNew?"Delete row":"Toggle remove"}" onclick="delRow('${r.id}')">✕</span></td>`;
+    tb.appendChild(tr);
+  });
+  wireDrag(tb);
+  renderStats(); renderPreview();
+}
+
+function renderStats() {
+  const live = rows.filter(r => r.decision !== "remove");
+  const c = k => live.filter(r => r.temp === k).length;
+  const s = [
+    [rows.length, "items total"], [c("hot"), "hot"], [c("cold"), "cold"], [c("addon"), "add-ons"],
+    [rows.filter(r => r.decision === "review").length, "still to review"],
+    [rows.filter(r => r.decision === "keep").length, "approved"],
+    [rows.filter(r => r.decision === "remove").length, "removed"],
+    [rows.filter(r => r.isNew).length, "new"],
+  ];
+  document.getElementById("stats").innerHTML = s.map(([n,l]) => `<div class="stat"><b>${n}</b><span>${l}</span></div>`).join("");
+}
+
+function renderPreview() {
+  const p = document.getElementById("preview"); p.innerHTML = "";
+  for (const [k, label] of Object.entries(TEMPS)) {
+    const items = rows.filter(r => r.temp === k && r.decision !== "remove" && r.name);
+    p.insertAdjacentHTML("beforeend", `<div class="col ${k}"><h3>${label}</h3>${
+      items.length ? items.map(r => `<div class="${r.decision==="review"?"pending":""}"><span>${esc(r.name)}</span><span>${k==="addon"?"+ ":""}${money(r.price)}</span></div>`).join("") : '<div class="pending">nothing yet</div>'
+    }</div>`);
+  }
+}
+
+/* ---------- drag to reorder ---------- */
+let dragId = null;
+function wireDrag(tb) {
+  tb.querySelectorAll("tr").forEach(tr => {
+    tr.addEventListener("dragstart", () => { dragId = tr.dataset.id; });
+    tr.addEventListener("dragover", e => e.preventDefault());
+    tr.addEventListener("drop", e => {
+      e.preventDefault(); if (!dragId || dragId === tr.dataset.id) return;
+      const from = rows.findIndex(r => r.id === dragId), to = rows.findIndex(r => r.id === tr.dataset.id);
+      const [m] = rows.splice(from, 1); rows.splice(to, 0, m); dragId = null; update();
+    });
+  });
+}
+
+/* ---------- exports ---------- */
+function toast(m) { const t = document.getElementById("toast"); t.textContent = m; t.classList.add("show"); setTimeout(() => t.classList.remove("show"), 1600); }
+function download(name, text, type) {
+  const a = document.createElement("a"); a.href = URL.createObjectURL(new Blob([text], { type })); a.download = name; a.click();
+}
+function exportCSV() {
+  const q = v => `"${String(v ?? "").replace(/"/g, '""')}"`;
+  const head = ["Sheet name","Sheet price","Sheet section","New name","Temp","New price","Delta","Decision","Notes","Flags"];
+  const body = rows.map(r => [r.origName, r.origPrice ?? "", r.origSection, r.name, TEMPS[r.temp], r.price ?? "",
+    (r.origPrice != null && r.price != null) ? (Number(r.price) - r.origPrice).toFixed(2) : "", DECISIONS[r.decision], r.note, (r.flags||[]).join("; ")].map(q).join(","));
+  download("drinks-menu-audit.csv", [head.map(q).join(","), ...body].join("\n"), "text/csv");
+}
+function buildMenuBlock() {
+  const sec = (temp, title, note) => {
+    const id = temp === "addon" ? "addons" : temp;   // must match section ids in public/drinks-menu.html
+    const items = rows.filter(r => r.temp === temp && r.decision === "keep" && r.name)
+      .map(r => `            { name: ${JSON.stringify(r.name)}, price: ${Number(r.price ?? 0).toFixed(2)} },`).join("\n");
+    return `        {\n          id: "${id}",\n          title: "${title}",\n          note: ${JSON.stringify(note)},\n          items: [\n${items}\n          ],\n        },`;
+  };
+  const txt = `      sections: [\n${sec("hot","Hot","")}\n${sec("cold","Cold","Any hot drink can be made iced (+1.40)")}\n${sec("addon","Add-Ons","")}\n      ],`;
+  const out = document.getElementById("out"); out.hidden = false;
+  document.getElementById("outText").value = txt;
+  navigator.clipboard?.writeText(txt).then(() => toast("Copied to clipboard (approved items only)"));
+  out.scrollIntoView({ behavior: "smooth" });
+}
+
+render();
+</script>
+</body>
+</html>
