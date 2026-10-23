@@ -2,6 +2,8 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { fetchProducts } from "../lib/api";
+import { usePageMeta } from "../lib/usePageMeta";
+import { pageMeta } from "../lib/seo";
 import "../styles/Menu.css";
 
 const MENU_SECTIONS = [
@@ -38,6 +40,7 @@ const MENU_SECTIONS = [
 ];
 
 export default function Menu() {
+  usePageMeta(pageMeta("menu"), null);
   const location = useLocation();
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);

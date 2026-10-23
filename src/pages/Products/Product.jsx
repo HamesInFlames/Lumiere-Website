@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { fetchProduct } from "../../lib/api";
+import { usePageMeta } from "../../lib/usePageMeta";
+import { pageMeta, productJsonLd } from "../../lib/seo";
 import "../../styles/Product.css";
 
 /** Display labels aligned with Menu.jsx section ids */
@@ -147,6 +149,11 @@ export default function ProductPage() {
       .catch((e) => ok && setErr(e.message));
     return () => (ok = false);
   }, [slug]);
+
+  usePageMeta(
+    p ? pageMeta("product", p) : null,
+    p ? productJsonLd(p) : null
+  );
 
   if (err) {
     return (

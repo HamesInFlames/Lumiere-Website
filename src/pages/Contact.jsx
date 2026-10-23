@@ -1,10 +1,13 @@
 // App/src/pages/Contact.jsx
 import React, { useState } from "react";
 import "../styles/Contact.css";
+import { usePageMeta } from "../lib/usePageMeta";
+import { pageMeta, businessJsonLd } from "../lib/seo";
 
 const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwsimLWT9hLhP4n2Vk-9IE5DnC3FfPMqve2N3ZPLPnEnfp-n9e6QPfWf8H__BDeMGaMuw/exec";
 
 export default function Contact() {
+  usePageMeta(pageMeta("contact"), businessJsonLd());
   const [form, setForm] = useState({ name: "", email: "", phone: "", msg: "" });
   const [submitting, setSubmitting] = useState(false);
   const [status, setStatus] = useState("");

@@ -45,7 +45,7 @@ function parseCSVLine(line) {
 /**
  * Parse CSV text into array of objects
  */
-function parseCSV(csvText) {
+export function parseCSV(csvText) {
   const lines = csvText.trim().split('\n');
   const headers = parseCSVLine(lines[0]);
   
@@ -186,7 +186,7 @@ const SLICED_IMAGES = {
  * Uses optimized WebP images for faster loading.
  * Includes sliced images for personal desserts when available.
  */
-function normalizeProduct(p) {
+export function normalizeProduct(p) {
   const optimizedImage = getOptimizedImage(p.imageUrl);
   
   // Build images array - main image first, then sliced if available

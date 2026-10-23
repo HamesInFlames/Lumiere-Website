@@ -4,6 +4,8 @@ import { Link } from "react-router-dom";
 import FavouritesCarousel from "../components/FavouritesCarousel";
 import ShowcaseImage from "../components/ShowcaseImage";
 import VisitUs from "../components/VisitUs";
+import { usePageMeta } from "../lib/usePageMeta";
+import { pageMeta, businessJsonLd } from "../lib/seo";
 import "../styles/Home.css";
 
 /* Use optimized WebP images from existing assets */
@@ -90,6 +92,8 @@ function GiftBoxes() {
 }
 
 export default function Home() {
+  usePageMeta(pageMeta("home"), businessJsonLd());
+
   useEffect(() => {
     const setSBW = () => {
       const sbw = window.innerWidth - document.documentElement.clientWidth;

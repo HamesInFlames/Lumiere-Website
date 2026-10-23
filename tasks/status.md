@@ -12,3 +12,14 @@
 - **What was done:** Synced the menu (`public/products.csv`) to Clover export 7: 39 prices changed, 7 shelf items now shown, 6 hidden (Salted Caramel Croissant, Raspberry Cheesecake Croissant, Chocolate Chip Croissant, Baklava Tart, Japanese Milk Bread, French Baguette), and 20 Clover items added with no photo yet. The menu shows 72 items. `FavouritesCarousel` now skips `hidden` items. `npm run build` passes. `npm run lint` shows the same 35 errors as before. Checked /menu, the home carousel (15 reloads, no hidden items) and a new product page at 1440px and 375px.
 - **What's next:** Photos for the 20 new items. `/drinks-menu.html` isn't live (the URL falls through to the main site) and still has old drink prices. Pistachio Croissant has never had a photo.
 - **Blockers:** None.
+
+## Session — 2026-10-23 (SEO foundation)
+- **Tool used:** Claude Code
+- **Branch:** `seo/technical-foundation` (committed, not pushed).
+- **What was done:** Per-page titles and descriptions, prerendered HTML per route, `public/robots.txt`, `dist/sitemap.xml` (75 URLs), Bakery and Product JSON-LD, 301 redirects from the old Shopify URLs (`/collections/gateaux-cakes` → `/menu#cakes`, `/collections/boulangerie` → `/menu#bread`, `/products/<slug>` → `/product/<slug>`, `/pages/about` → `/`, and others), `/drinks-menu` → `/drinks-menu.html`. See `tasks/decisions.md` (2026-10-23).
+- **Verified:** `npm run build` passes (75 pages, 160 redirects). `npm run lint` 35 errors, same as before. Served with `serve dist -s` (today's start command): same as the live site plus redirects, robots.txt and sitemap; no page claims canonical `/`. Served with `serve dist` (no `-s`): every route has its own title and canonical; unknown URLs return 404. Browser check of home, menu, contact and a product at 1440px and 375px: pages look unchanged; one title, description and canonical after JS; no console errors. Reviewer: PASS (second pass, after a fix).
+- **Railway start command:** changed to `npx serve dist -l $PORT` (dropped `-s`), approved by James. Committed on the branch; not pushed or merged yet.
+- **What's next:** Push the branch and merge to main (Railway deploys main); then check the live site: `/menu` serves its own title, `/abc` returns 404, redirects work. Then: copy work (homepage H1, category pages, descriptions for the 40 shown products that have none), and confirm hours and price range (`llms.txt` says weekend hours vary and `$$$`; the site and schema say Tue–Sun 9–7 and `$$`). Old `/products?category=x` links now land on `/menu`, without the category.
+- **Outside the code:** `lumierepatisserie.ca` without www doesn't resolve (no A record), so it needs a fix at the domain registrar. Also make the hours match on Google, Yelp, TripAdvisor and Uber Eats.
+- **Blockers:** None.
+
