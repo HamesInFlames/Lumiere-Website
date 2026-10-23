@@ -108,13 +108,13 @@
   cursor: pointer;
   white-space: nowrap;
   flex-shrink: 0;
-  /* Smoother transitions with spring-like easing */
+  /* Non-overshooting ease-out so the pill never wobbles */
   transition: 
-    transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1),
-    background-color 0.35s cubic-bezier(0.4, 0, 0.2, 1),
-    border-color 0.35s cubic-bezier(0.4, 0, 0.2, 1),
-    color 0.25s cubic-bezier(0.4, 0, 0.2, 1),
-    box-shadow 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    transform 0.15s ease-out,
+    background-color 0.15s cubic-bezier(0.4, 0, 0.2, 1),
+    border-color 0.15s cubic-bezier(0.4, 0, 0.2, 1),
+    color 0.15s cubic-bezier(0.4, 0, 0.2, 1),
+    box-shadow 0.15s cubic-bezier(0.4, 0, 0.2, 1);
   /* Prevent text selection on rapid clicks */
   user-select: none;
   -webkit-user-select: none;
@@ -122,11 +122,13 @@
   -webkit-tap-highlight-color: transparent;
 }
 
-/* Hover state */
-.menu-tab:hover {
-  border-color: #bbb;
-  color: #222;
-  background: #f8f8f8;
+/* Hover state (real hover devices only, so a tap doesn't leave a sticky hover) */
+@media (hover: hover) {
+  .menu-tab:hover {
+    border-color: #bbb;
+    color: #222;
+    background: #f8f8f8;
+  }
 }
 
 /* Focus state for accessibility */

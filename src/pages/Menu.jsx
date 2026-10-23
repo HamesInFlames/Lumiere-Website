@@ -51,31 +51,150 @@ export default function Menu() {
   const sectionRefs = useRef({});
   const tabRowRef = useRef(null);
   const tabWrapperRef = useRef(null);
+  const tabBtnRefs = useRef({});
   const isScrollingRef = useRef(false);
+  const activeRef = useRef("cakes");
+  // Releases the programmatic-scroll lock + its listeners/timers (null when idle)
+  const releaseLockRef = useRef(null);
 
-  const scrollToSectionById = useCallback((id) => {
-    const el = sectionRefs.current[id];
-    if (!el) return false;
-
-    isScrollingRef.current = true;
-
-    const header = document.querySelector(".site-header");
-    const tabs = document.querySelector(".menu-tabs");
-    const headerHeight = header ? header.offsetHeight : 85;
-    const tabsHeight = tabs ? tabs.offsetHeight : 60;
-    const totalOffset = headerHeight + tabsHeight + 16;
-
-    const rect = el.getBoundingClientRect();
-    const offsetTop = rect.top + window.scrollY - totalOffset;
-
+  // Keep state and ref in sync so the scroll-spy listener never needs `active` as a dep
+  const updateActive = useCallback((id) => {
+    activeRef.current = id;
     setActive(id);
-    window.scrollTo({ top: offsetTop, behavior: "smooth" });
-
-    setTimeout(() => {
-      isScrollingRef.current = false;
-    }, 800);
-    return true;
   }, []);
+
+  const scrollToSectionById = useCallback(
+    (id) => {
+      const el = sectionRefs.current[id];
+      if (!el) return false;
+
+      // A second tap mid-scroll must not leave a stale lock/timer behind
+      if (releaseLockRef.current) releaseLockRef.current();
+
+      const header = document.querySelector(".site-header");
+      const tabs = document.querySelector(".menu-tabs");
+      const headerHeight = header ? header.offsetHeight : 85;
+      const tabsHeight = tabs ? tabs.offsetHeight : 60;
+      const totalOffset = headerHeight + tabsHeight + 16;
+
+      const rect = el.getBoundingClientRect();
+      const maxScroll = Math.max(
+        0,
+        document.documentElement.scrollHeight - window.innerHeight
+      );
+      const targetTop = Math.min(
+        maxScroll,
+        Math.max(0, rect.top + window.scrollY - totalOffset)
+      );
+
+      // Long distances: jump instantly instead of a multi-second whip
+      const distance = Math.abs(targetTop - window.scrollY);
+      const behavior = distance > window.innerHeight * 1.5 ? "auto" : "smooth";
+
+      isScrollingRef.current = true;
+      updateActive(id);
+      window.scrollTo({ top: targetTop, behavior });
+
+      // Release the lock when the scroll actually ends
+      const userEvents = ["wheel", "touchstart", "keydown"];
+      const supportsScrollEnd = "onscrollend" in window;
+      let done = false;
+      let rafId = 0;
+      let capTimer = 0;
+
+      const finish = () => {
+        if (done) return;
+        done = true;
+        cancelAnimationFrame(rafId);
+        clearTimeout(capTimer);
+        window.removeEventListener("scrollend", onScrollEnd);
+        userEvents.forEach((evt) => window.removeEventListener(evt, finish));
+        isScrollingRef.current = false;
+        if (releaseLockRef.current === finish) releaseLockRef.current = null;
+      };
+
+      // Ignore a scrollend that belongs to a previous, cancelled scroll
+      function onScrollEnd() {
+        if (Math.abs(window.scrollY - targetTop) <= 2) finish();
+      }
+
+      if (supportsScrollEnd) window.addEventListener("scrollend", onScrollEnd);
+      // User grabbed the page: give the scroll-spy back immediately
+      userEvents.forEach((evt) =>
+        window.addEventListener(evt, finish, { passive: true })
+      );
+
+      // Fallback: position unchanged for ~100ms (250ms if it never started)
+      let lastY = window.scrollY;
+      let lastChange = performance.now();
+      let moved = false;
+      const poll = () => {
+        if (done) return;
+        const now = performance.now();
+        const y = window.scrollY;
+        if (y !== lastY) {
+          lastY = y;
+          lastChange = now;
+          moved = true;
+        } else if (now - lastChange >= (moved ? 100 : 250)) {
+          finish();
+          return;
+        }
+        rafId = requestAnimationFrame(poll);
+      };
+      rafId = requestAnimationFrame(poll);
+
+      // Hard cap
+      capTimer = window.setTimeout(finish, 1500);
+
+      releaseLockRef.current = finish;
+      return true;
+    },
+    [updateActive]
+  );
+
+  // Release any pending lock on unmount
+  useEffect(() => {
+    return () => {
+      if (releaseLockRef.current) releaseLockRef.current();
+    };
+  }, []);
+
+  // Keep the active tab visible inside the horizontally scrolling tab row.
+  // Reveal-only: a tab that is already fully visible never moves, so the tab
+  // you tapped stays under your finger. Otherwise scroll the minimum amount.
+  useEffect(() => {
+    const row = tabRowRef.current;
+    const btn = tabBtnRefs.current[active];
+    if (!row || !btn) return;
+
+    const maxLeft = row.scrollWidth - row.clientWidth;
+    if (maxLeft <= 0) return;
+
+    // Arrow buttons / edge fades cover ~44px each side on mobile
+    const inset = window.matchMedia("(max-width: 768px)").matches ? 44 : 0;
+    const margin = 8;
+
+    const rowRect = row.getBoundingClientRect();
+    const btnRect = btn.getBoundingClientRect();
+    const tabLeft = btnRect.left - rowRect.left; // relative to visible row edge
+    const tabRight = btnRect.right - rowRect.left;
+    const usableLeft = inset;
+    const usableRight = row.clientWidth - inset;
+
+    if (tabLeft >= usableLeft && tabRight <= usableRight) return;
+
+    let delta = 0;
+    if (tabLeft < usableLeft) {
+      delta = tabLeft - (usableLeft + margin);
+    } else {
+      delta = tabRight - (usableRight - margin);
+    }
+
+    const left = Math.min(maxLeft, Math.max(0, row.scrollLeft + delta));
+    if (Math.abs(left - row.scrollLeft) < 1) return;
+    row.scrollTo({ left, behavior: "smooth" });
+  }, [active]);
 
   // Track horizontal scroll position of tab row
   useEffect(() => {
@@ -201,8 +320,8 @@ export default function Menu() {
         }
       }
 
-      if (currentSection !== active) {
-        setActive(currentSection);
+      if (currentSection !== activeRef.current) {
+        updateActive(currentSection);
       }
     };
 
@@ -224,9 +343,9 @@ export default function Menu() {
     handleScroll();
 
     return () => window.removeEventListener('scroll', throttledScroll);
-  }, [items, active]);
+  }, [items, updateActive]);
 
-  // 4) Click tab → smooth scroll to section (positions section header just below tabs)
+  // 4) Click tab → jump for long distances, smooth-scroll for short ones (positions section header just below tabs)
   const handleTabClick = (id) => {
     scrollToSectionById(id);
   };
@@ -273,6 +392,9 @@ export default function Menu() {
               <button
                 key={sec.id}
                 type="button"
+                ref={(el) => {
+                  tabBtnRefs.current[sec.id] = el;
+                }}
                 className={`menu-tab ${
                   active === sec.id ? "menu-tab--active" : ""
                 }`}

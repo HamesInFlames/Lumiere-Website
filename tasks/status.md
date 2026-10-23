@@ -23,3 +23,12 @@
 - **Outside the code:** `lumierepatisserie.ca` without www doesn't resolve (no A record), so it needs a fix at the domain registrar. Also make the hours match on Google, Yelp, TripAdvisor and Uber Eats.
 - **Blockers:** None.
 
+
+## Session — 2026-10-23 (menu tabs on mobile)
+- **Tool used:** Claude Code
+- **Branch:** `fix/menu-tabs`, stacked on `seo/technical-foundation` (committed, not pushed). Merge after the SEO branch, or together.
+- **Problem:** On phones the sticky category tabs on `/menu` felt unresponsive. The highlighted tab stayed off-screen for Pastries, Breads and Bakery Shelf. Tapping a far tab smooth-scrolled ~28,000px, and a fixed 800ms lock let the highlight flip to the neighbouring section mid-scroll. A first fix re-centred the tab row on every tap, which made the tapped pill slide sideways; that was reworked.
+- **What was done (`src/pages/Menu.jsx`, `src/styles/Menu.css`):** Long tab jumps are instant, short ones smooth. The scroll lock is released when scrolling ends (scrollend, a position-stable fallback, a 1500ms cap, or user input). The scroll-spy listener is registered once. The tab row only scrolls to reveal a tab that is cut off, never for a visible one. Tab transitions are 0.15s with no overshoot. The hover style only applies on devices that can hover.
+- **Verified:** Build passes, lint 35 (unchanged). Playwright at 375px (mouse and touch emulation) and 1440px: one highlight change per tap, a visible tapped tab doesn't move, the active tab stays visible while scrolling, `/menu#bread` and the Shopify redirects land correctly. James tried it locally: "Feels right now." Reviewer: PASS.
+- **Not verified:** A real iPhone or Android phone.
+- **What's next:** Push both branches and merge. Later idea: two cards per row on mobile (the menu page is ~35,000px tall at 375px).
