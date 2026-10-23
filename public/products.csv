@@ -61,7 +61,7 @@ id,name,slug,price,imageUrl,category,description,allergenFree,allergens
 62,Japanese Milk Bread,japanese-milk-bread,6.5,/images/breads/japanese milk bread.jpg,hidden,,,
 63,French Baguette,french-baguette,3.45,/images/breads/French Baguette.jpg,hidden,,,
 64,Personal Nemesis,personal-nemesis,5.5,,pastries,,,
-65,Savory Danish,savory-danish,7.5,,pastries,"Buttery Danish Pastry, Cheesy Crème Mornay, Local Vegetable, Local Cheese",,
+65,Savory Danish,savory-danish,7.5,,pastries,,,
 66,Salted Pecan Tart,salted-pecan-tart,24,,bakery-shelf,,,
 67,Paris Noir,paris-noir,11.5,,personal-desserts,"55% Dark Choco Chantilly, Raspberry Confit, Choux Pastry",Nut Free,
 68,Strawberry Cruffin,strawberry-cruffin,6.85,,pastries,,,
