@@ -132,11 +132,13 @@ export default function FavouritesCarousel() {
       localStorage.removeItem(cacheKey);
     }
 
-    // Fetch products then randomize (only products with images)
+    // Fetch products then randomize (only products on the menu with images)
     fetchProducts()
       .then((products) => {
         if (!Array.isArray(products)) return;
-        const productsWithImages = products.filter((p) => p.image && p.image.trim() !== "");
+        const productsWithImages = products.filter(
+          (p) => p.category !== "hidden" && p.image && p.image.trim() !== ""
+        );
         const randomItems = getRandomItems(productsWithImages, 5);
         setFavourites(randomItems);
         setCache(cacheKey, randomItems, 5 * 60 * 1000); // 5 minutes cache
