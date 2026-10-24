@@ -25,3 +25,7 @@
 - **No packages added.** No SSR framework.
 - **Reason:** the live site served the same empty HTML for every URL, had no robots.txt or sitemap, and old Shopify URLs (`/collections/...`, `/products/...`, `/pages/about`) returned the homepage with a 200.
 
+
+### 2026-10-24 — kc-workflow plugin enabled for this repo
+- **Decision:** `.claude/settings.json` registers the `kc-tools` marketplace (private repo `HamesInFlames/kc-tools`) and enables `kc-workflow@kc-tools`, so sessions in this repo load the KC workflow: global rules, the worker/builder/reviewer agents, `/kc-workflow:reflect`, and a Playwright MCP (`npx @playwright/mcp@0.0.83`, run by Claude Code, not a project dependency).
+- **Note:** fetching the marketplace needs GitHub access to the private kc-tools repo. Interactive sessions ask to install it when the folder is trusted.

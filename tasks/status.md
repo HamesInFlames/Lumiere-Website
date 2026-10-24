@@ -32,3 +32,10 @@
 - **Verified:** Build passes, lint 35 (unchanged). Playwright at 375px (mouse and touch emulation) and 1440px: one highlight change per tap, a visible tapped tab doesn't move, the active tab stays visible while scrolling, `/menu#bread` and the Shopify redirects land correctly. James tried it locally: "Feels right now." Reviewer: PASS.
 - **Not verified:** A real iPhone or Android phone.
 - **What's next:** Push both branches and merge. Later idea: two cards per row on mobile (the menu page is ~35,000px tall at 375px).
+
+## Session — 2026-10-24 (cloud)
+- **Tool used:** Claude Code (cloud session)
+- **Checked:** the SEO and menu-tabs branches are merged to main and live. `/menu` has its own title, `/abc` returns 404, `/collections/boulangerie` 301s to `/menu#bread`, `/sitemap.xml` and `/drinks-menu.html` return 200. The bare domain `lumierepatisserie.ca` still has no A record.
+- **What was done:** Added `.claude/settings.json` enabling the kc-workflow plugin (see decisions.md). Reviewer: PASS.
+- **Not verified:** that a new cloud session loads the plugin from this file.
+- **What's next:** SEO copy; confirm hours and price range; photos for the 20 new items; update drinks-menu prices.

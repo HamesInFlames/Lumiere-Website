@@ -1,0 +1,13 @@
+{
+  "extraKnownMarketplaces": {
+    "kc-tools": {
+      "source": {
+        "source": "github",
+        "repo": "HamesInFlames/kc-tools"
+      }
+    }
+  },
+  "enabledPlugins": {
+    "kc-workflow@kc-tools": true
+  }
+}
