@@ -111,7 +111,7 @@ const FALLBACK_PRODUCTS = [
   { id: "6", slug: "coconut-dream-cake", name: "Coconut Dream Cake", price: 44, imageUrl: "/images/cakes/Coconut Dream Cake.png", category: "cakes", description: "Coconut Diplomat, Coconut Mousse, Toasted Coconut." },
   { id: "7", slug: "lemon-pistachio-meringue-cake", name: "Lemon Pistachio Meringue Cake", price: 50, imageUrl: "/images/cakes/Lemon Pistachio Meringue Cake.png", category: "cakes", description: "Pistachio Almond Cream, Raspberry Mousse, Almond Short Dough. Gluten Free." },
   { id: "8", slug: "raspberry-pistachio-cake", name: "Raspberry Pistachio Cake", price: 49, imageUrl: "/images/cakes/Raspberry Pistachio Cake.png", category: "cakes", description: "Pistachio Almond Cream, Raspberry Mousse, Almond Short Dough. Gluten Free." },
-  { id: "9", slug: "strawberry-cheesecake", name: "Strawberry Cheesecake", price: 46, imageUrl: "/images/cakes/Strawberry Cheesecake.png", category: "cakes", description: "Light Cheesecake, Strawberry Mousse, Buttery Crumb. Gluten Free." },
+  { id: "9", slug: "strawberry-cheesecake", name: "Strawberry Cheesecake", price: 46, imageUrl: "/images/cakes/Strawberry Cheesecake 2026.jpg", category: "cakes", description: "Light Cheesecake, Strawberry Mousse, Buttery Crumb. Gluten Free." },
   { id: "10", slug: "tiramisu-cake", name: "Tiramisu Cake", price: 50, imageUrl: "/images/cakes/Tiramisu Cake.png", category: "cakes", description: "Tiramisu Mousse, Soft Chocolate Sponge, Coffee Syrup, Cappuccino Chantilly." },
   { id: "11", slug: "cream-crumb-cake", name: "Cream & Crumb Cake", price: 44, imageUrl: "", category: "cakes", description: "Light No-Bake Cheesecake, Buttery Crumble, Graham Cracker Crust." },
 

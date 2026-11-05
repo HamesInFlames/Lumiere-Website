@@ -32,3 +32,11 @@
 - **Verified:** Build passes, lint 35 (unchanged). Playwright at 375px (mouse and touch emulation) and 1440px: one highlight change per tap, a visible tapped tab doesn't move, the active tab stays visible while scrolling, `/menu#bread` and the Shopify redirects land correctly. James tried it locally: "Feels right now." Reviewer: PASS.
 - **Not verified:** A real iPhone or Android phone.
 - **What's next:** Push both branches and merge. Later idea: two cards per row on mobile (the menu page is ~35,000px tall at 375px).
+
+## Session — 2026-11-05 (new photo mock: Strawberry Cheesecake)
+- **Tool used:** Claude Code
+- **Branch:** `ccr-6fa48463-7ae3sj` (pushed; not merged). For the Railway sandbox environment only. `main`/live is unchanged.
+- **What was done:** New photo for the full-size Strawberry Cheesecake (whole cake + slice on marble). The site shows every product in a square frame with `object-fit: cover`, so a plain swap would cut off the cake and the slice. Made a 1600×1600 version by stretching the empty marble above and below the cake (no AI fill, nothing on the cake changed), and smoothed the blocky JPEG patch in the top-left corner of the marble. New files sit next to the old ones (old photo kept for rollback): `public/images/cakes/Strawberry Cheesecake 2026.jpg` (1600², 311 KB) and `public/optimized/images/cakes/Strawberry Cheesecake 2026.webp` (1000², 50 KB, quality 82). Pointed `products.csv`, the `api.js` fallback and `imageMap.js` at it.
+- **Verified:** `npm run build` passes (75 pages). Lint 35 errors (unchanged). Product page and /menu at 1440px and 375px: whole cake and slice visible, no console errors.
+- **What's next:** Set up the Railway sandbox environment on this branch (James, in the dashboard). Repeat the same treatment as new photos arrive. The new photo is a wider shot, so the cake looks smaller in its card than the old-style neighbours until those are re-shot too.
+- **Blockers:** None.

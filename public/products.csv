@@ -7,7 +7,7 @@ id,name,slug,price,imageUrl,category,description,allergenFree,allergens
 6,Coconut Dream Cake,coconut-dream-cake,58,/images/cakes/Coconut Dream Cake.png,cakes,"Coconut Dacquoise, Dairy Free Dark Chocolate Mousse, Toasted Coconut Diplomat","Gluten Free, Dairy Free, Nut Free",has Eggs
 7,Lemon Pistachio Meringue Cake,lemon-pistachio-meringue-cake,58,/images/cakes/Lemon Pistachio Meringue Cake.png,cakes,"Pistachio Dacquoise, Dairy Free Lemon Cream, Meringue","Gluten Free, Dairy Free","has Nuts, has Eggs"
 8,Raspberry Pistachio Cake,raspberry-pistachio-cake,52,/images/cakes/Raspberry Pistachio Cake.png,cakes,"Pistachio Almond Cream, Raspberry Mousse, Almond Short Dough, Macaron",,"has Nuts, has Dairy, has Gluten, has Eggs"
-9,Strawberry Cheesecake,strawberry-cheesecake,52,/images/cakes/Strawberry Cheesecake.png,cakes,"Light Cheesecake, Strawberry Mousse, Buttery Crumble, Almond Short Dough",,"has Dairy, has Eggs, has Nuts, has Gluten"
+9,Strawberry Cheesecake,strawberry-cheesecake,52,/images/cakes/Strawberry Cheesecake 2026.jpg,cakes,"Light Cheesecake, Strawberry Mousse, Buttery Crumble, Almond Short Dough",,"has Dairy, has Eggs, has Nuts, has Gluten"
 10,Cream & Crumb Cake,cream-crumb-cake,46,,cakes,"Light No-Bake Cheesecake, Buttery Crumbles, Graham Cracker Crust",Nut Free,"has Dairy, has Honey, has Gluten"
 11,Chocolate Cream & Crumb Cake,chocolate-cream-crumb-cake,46,,cakes,"Light No-Bake Chocolate Cheesecake, Cocoa Buttery Crumbles, Graham Cracker Crust",Nut Free,
 12,Tiramisu Cake,tiramisu-cake,52,/images/cakes/Tiramisu Cake.png,cakes,"Tiramisu Mousse, Soft Chocolate Short Dough, Espresso Syrup, Cappuccino Chantilly",Nut Free,
