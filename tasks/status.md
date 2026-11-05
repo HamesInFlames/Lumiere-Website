@@ -35,8 +35,8 @@
 
 ## Session — 2026-11-05 (new photo mock: Strawberry Cheesecake)
 - **Tool used:** Claude Code
-- **Branch:** `ccr-6fa48463-7ae3sj`, fast-forwarded into `main` on James's request (live on Railway). The Railway sandbox environment idea was dropped for now.
+- **Branch:** `ccr-6fa48463-7ae3sj`, ready to merge into `main` (James asked for it live; merging is his step). The Railway sandbox environment idea was dropped for now.
 - **What was done:** New photo for the full-size Strawberry Cheesecake (whole cake + slice on marble). The site shows every product in a square frame with `object-fit: cover`, so a plain swap would cut off the cake and the slice. Made a 1600×1600 version by stretching the empty marble above and below the cake (no AI fill, nothing on the cake changed), and smoothed the blocky JPEG patch in the top-left corner of the marble. New files sit next to the old ones (old photo kept for rollback): `public/images/cakes/Strawberry Cheesecake 2026.jpg` (1600², 311 KB) and `public/optimized/images/cakes/Strawberry Cheesecake 2026.webp` (1000², 50 KB, quality 82). Pointed `products.csv`, the `api.js` fallback and `imageMap.js` at it.
 - **Verified:** `npm run build` passes (75 pages). Lint 35 errors (unchanged). Product page and /menu at 1440px and 375px: whole cake and slice visible, no console errors.
-- **What's next:** Check the live product page once Railway finishes deploying. Repeat the same treatment as new photos arrive. The new photo is a wider shot, so the cake looks smaller in its card than the old-style neighbours until those are re-shot too.
+- **What's next:** Merge into `main`, then check the live product page once Railway finishes deploying. Repeat the same treatment as new photos arrive. The new photo is a wider shot, so the cake looks smaller in its card than the old-style neighbours until those are re-shot too.
 - **Blockers:** None.
