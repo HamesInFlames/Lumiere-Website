@@ -44,5 +44,6 @@
 - **Form URL:** `HANUKKAH_FORM_URL` in `src/lib/hanukkah.js` is empty, so every pre-order button shows a disabled "Pre-orders open soon".
 - **Images:** `public/images/hanukkah/<slug>.jpg` (800px, fetched by the Google Form script), `<slug>.webp` (800px) and `<slug>-400.webp`, 11 flavours, about 1.4 MB total.
 - **Verified:** build passes (76 pages), lint 35 errors (unchanged). Browser check at 1440px and 375px; screenshots in `tasks/hanukkah-mockups/built/`.
+- **Local only:** `tasks/hanukkah-mockups/` (mockups and screenshots) is not committed.
 - **What's next:** Paste the Google Form URL into the constant, then merge and deploy.
 - **Blockers:** Google Form URL.

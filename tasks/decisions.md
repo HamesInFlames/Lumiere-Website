@@ -25,3 +25,7 @@
 - **No packages added.** No SSR framework.
 - **Reason:** the live site served the same empty HTML for every URL, had no robots.txt or sitemap, and old Shopify URLs (`/collections/...`, `/products/...`, `/pages/about`) returned the homepage with a 200.
 
+### 2026-11-11 — Hanukkah page is JSX/JS, header gets a 601-1000px rule
+- **Decision:** The `/hanukkah` page code (`src/pages/Hanukkah.jsx`, `src/lib/hanukkah.js`) is `.jsx`/`.js`, not TypeScript, because the whole app is JSX and there is no TS toolchain (`scripts/prerender.js` also imports `hanukkah.js` under plain Node).
+- **Header:** `Header.css` has a rule for 601-1000px so the four nav items and the Uber Eats button fit on one row.
+- **No packages added.**

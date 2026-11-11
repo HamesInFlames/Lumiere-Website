@@ -26,6 +26,9 @@
   line-height: 1.1;
   margin: 0 0 6px;
 }
+.hk-nowrap {
+  white-space: nowrap;
+}
 .hk-top p {
   margin: 0;
   color: #4b4b4b;
@@ -291,6 +294,7 @@
 .hk-lightbox-img {
   display: block;
   width: min(80vh, 720px, calc(100vw - 32px));
+  width: min(calc(100dvh - 140px), 720px, calc(100vw - 32px));
   height: auto;
   aspect-ratio: 1 / 1;
   object-fit: cover;
@@ -346,6 +350,7 @@
 }
 .hk-lightbox-nav {
   top: calc(min(80vh, 720px, 100vw - 32px) / 2 - 22px);
+  top: calc(min(100dvh - 140px, 720px, 100vw - 32px) / 2 - 22px);
 }
 .hk-lightbox-nav.is-prev {
   left: 10px;
@@ -375,7 +380,10 @@
 
 @media (max-width: 600px) {
   .hk-page {
-    padding: 0 16px 84px; /* room for the sticky bar */
+    padding: 0 16px;
+  }
+  .hk-page.has-sticky {
+    padding-bottom: 84px; /* room for the sticky bar, only while it shows */
   }
   .hk-top {
     padding: 24px 0 18px;
@@ -438,8 +446,5 @@
   .hk-sticky .hk-btn {
     padding: 14px 16px;
     font-size: 15px;
-  }
-  .hk-lightbox-nav {
-    top: calc((100vw - 32px) / 2 - 22px);
   }
 }

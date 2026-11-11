@@ -188,10 +188,13 @@ export default function Hanukkah() {
   let flavourIndex = -1;
 
   return (
-    <div className="hk-page">
+    <div className={`hk-page ${hideSticky ? "" : "has-sticky"}`}>
       <div className="hk-top">
         <div>
-          <h1>{HANUKKAH_TITLE}</h1>
+          <h1>
+            {HANUKKAH_TITLE.split("pre-order")[0]}
+            <span className="hk-nowrap">pre-order</span>
+          </h1>
           <p>{HANUKKAH_INTRO}</p>
         </div>
         <PreOrderButton className="hk-top-btn" />
