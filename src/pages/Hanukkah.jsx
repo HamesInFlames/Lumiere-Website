@@ -200,6 +200,11 @@ export default function Hanukkah() {
         <PreOrderButton className="hk-top-btn" />
       </div>
 
+      <div className="hk-note" role="note">
+        <b>{HANUKKAH_NOTE.title}</b>
+        <span>{HANUKKAH_NOTE.text}</span>
+      </div>
+
       <section className="hk-steps" aria-label="How pre-order works">
         {HANUKKAH_STEPS.map((s, i) => (
           <div className="hk-step" key={s.title}>
@@ -259,12 +264,6 @@ export default function Hanukkah() {
                 </button>
               );
             })}
-            {tier.id === "classic" && (
-              <div className="hk-note">
-                <b>{HANUKKAH_NOTE.title}</b>
-                <span>{HANUKKAH_NOTE.text}</span>
-              </div>
-            )}
           </div>
         </section>
       ))}
@@ -279,7 +278,7 @@ export default function Hanukkah() {
 
       <div className={`hk-sticky ${hideSticky ? "is-hidden" : ""}`}>
         <div>
-          <b>Pickup Dec 4 – 12</b>
+          <b>Pickup Dec 4 – 11</b>
           Pay in the shop
         </div>
         <PreOrderButton />

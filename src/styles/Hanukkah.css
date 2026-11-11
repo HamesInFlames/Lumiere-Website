@@ -1,6 +1,6 @@
 /* -----------------------------------------
    HANUKKAH PRE-ORDER PAGE (/hanukkah)
-   Order-first layout: title + button, 3 steps, pickup days, flavour grid.
+   Order-first layout: title + button, order-ahead notice, 3 steps, pickup days, flavour grid.
 ------------------------------------------ */
 
 .hk-page {
@@ -220,23 +220,25 @@
 }
 
 .hk-note {
-  grid-column: span 5;
-  align-self: stretch;
+  margin: 0 0 20px;
   border: 1px solid #eaeaea;
-  border-left: 4px solid #f9e36b;
+  border-left: 8px solid #f9e36b;
   border-radius: 8px;
-  padding: 16px 20px;
+  padding: 18px 24px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   gap: 4px;
+  color: #1a1a1a;
 }
 .hk-note b {
-  font-size: 16px;
+  font-size: 24px;
+  font-weight: 800;
+  line-height: 1.25;
 }
 .hk-note span {
-  font-size: 14px;
-  color: #4b4b4b;
+  font-size: 17px;
+  font-weight: 700;
+  color: #1a1a1a;
 }
 
 /* Closing bar */
@@ -363,9 +365,6 @@
   .hk-grid {
     grid-template-columns: repeat(4, 1fr);
   }
-  .hk-note {
-    grid-column: span 4;
-  }
   .hk-steps {
     grid-template-columns: 1fr;
   }
@@ -404,7 +403,13 @@
     gap: 16px 12px;
   }
   .hk-note {
-    grid-column: span 2;
+    padding: 16px 18px;
+  }
+  .hk-note b {
+    font-size: 20px;
+  }
+  .hk-note span {
+    font-size: 16px;
   }
   .hk-name {
     font-size: 15px;

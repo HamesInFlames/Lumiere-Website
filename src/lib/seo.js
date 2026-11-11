@@ -95,7 +95,7 @@ const STATIC_META = {
   hanukkah: {
     title: "Hanukkah 2026 Sufganiyot Pre-Order | Lumière Pâtisserie, Thornhill",
     description:
-      "Pre-order Hanukkah 2026 sufganiyot (donuts) from Lumière Pâtisserie: 3 Classic flavours at $3.95 and 8 Fancy flavours at $7.25. Pickup Dec 4–12, pay in the shop.",
+      "Pre-order Hanukkah 2026 sufganiyot (donuts) from Lumière Pâtisserie: 3 Classic flavours at $3.95 and 8 Fancy flavours at $7.25. Pickup Dec 4–11, pay in the shop.",
     path: "/hanukkah",
     image: DEFAULT_IMAGE,
   },

@@ -182,6 +182,7 @@ ${items}
   }).join("\n");
   return shell(`<h1>${escapeHtml(HANUKKAH_TITLE)}</h1>
 <p>${escapeHtml(HANUKKAH_INTRO)}</p>
+<p><strong>${escapeHtml(HANUKKAH_NOTE.title)}.</strong> ${escapeHtml(HANUKKAH_NOTE.text)}</p>
 <ol>
 ${steps}
 </ol>
@@ -189,7 +190,6 @@ ${steps}
 <ul>
 ${days}
 </ul>
-<p><strong>${escapeHtml(HANUKKAH_NOTE.title)}.</strong> ${escapeHtml(HANUKKAH_NOTE.text)}</p>
 ${tiers}
 <p>${escapeHtml(HANUKKAH_CLOSING.title)} ${escapeHtml(HANUKKAH_CLOSING.text)}</p>`);
 }

@@ -53,12 +53,11 @@ export const HANUKKAH_DAYS = [
   { label: "Wed Dec 9" },
   { label: "Thu Dec 10" },
   { label: "Fri Dec 11" },
-  { label: "Sat Dec 12" },
 ];
 
 export const HANUKKAH_STEPS = [
   { title: "Choose your flavours", text: "Classic $3.95 each, Fancy $7.25 each." },
-  { title: "Pick a pickup day", text: "Dec 4–6 and Dec 8–12. Order at least 2 days ahead." },
+  { title: "Pick a pickup day", text: "Dec 4–6 and Dec 8–11. Order at least 2 days ahead." },
   { title: "Pay at pickup", text: "Pay in the shop. A confirmation email is sent after you order." },
 ];
 
@@ -69,7 +68,7 @@ export const HANUKKAH_NOTE = {
 
 export const HANUKKAH_CLOSING = {
   title: "Pre-order only. Pay at pickup in the shop.",
-  text: "Pickup Dec 4 – Dec 12, closed Monday Dec 7. Open 9 am – 7 pm.",
+  text: "Pickup Dec 4 – Dec 11, closed Monday Dec 7. Open 9 am – 7 pm.",
 };
 
 export const formatTierPrice = (n) => `$${n.toFixed(2)}`;
