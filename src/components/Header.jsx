@@ -13,6 +13,7 @@ export default function Header({ onHeight }) {
 
   const isHomeActive = location.pathname === "/";
   const isMenuActive = location.pathname.startsWith("/menu");
+  const isHanukkahActive = location.pathname.startsWith("/hanukkah");
   const isContactActive = location.pathname.startsWith("/contact");
 
   // Header shadow + height reporting
@@ -104,6 +105,12 @@ export default function Header({ onHeight }) {
                 <li className="nav-item">
                   <Link to="/menu" className="nav-link" onClick={closeMenu}>Menu</Link>
                   <span className={`nav-underline ${isMenuActive ? "visible" : ""}`} />
+                </li>
+
+                {/* HANUKKAH PRE-ORDER */}
+                <li className="nav-item">
+                  <Link to="/hanukkah" className="nav-link" onClick={closeMenu}>Hanukkah Pre-Order</Link>
+                  <span className={`nav-underline ${isHanukkahActive ? "visible" : ""}`} />
                 </li>
 
                 {/* CONTACT */}

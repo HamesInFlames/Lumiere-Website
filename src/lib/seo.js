@@ -92,6 +92,13 @@ const STATIC_META = {
     path: "/menu",
     image: DEFAULT_IMAGE,
   },
+  hanukkah: {
+    title: "Hanukkah 2026 Sufganiyot Pre-Order | Lumière Pâtisserie, Thornhill",
+    description:
+      "Pre-order Hanukkah 2026 sufganiyot (donuts) from Lumière Pâtisserie: 3 Classic flavours at $3.95 and 8 Fancy flavours at $7.25. Pickup Dec 4–12, pay in the shop.",
+    path: "/hanukkah",
+    image: DEFAULT_IMAGE,
+  },
   contact: {
     title: "Contact & Hours | Lumière Pâtisserie, Thornhill",
     description:
@@ -103,7 +110,7 @@ const STATIC_META = {
 
 /**
  * Page meta for a route.
- * @param {"home"|"menu"|"contact"|"product"} route
+ * @param {"home"|"menu"|"hanukkah"|"contact"|"product"} route
  * @param {object} [product] normalized product (title, slug, price, description, image)
  * @returns {{title:string, description:string, canonical:string, image:string}}
  */

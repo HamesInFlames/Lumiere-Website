@@ -188,6 +188,17 @@
   :root { --side-col: 180px; }
 }
 
+/* Four nav items: keep logo | nav | Uber Eats on one row between 601px and 1000px */
+@media (min-width: 601px) and (max-width: 1000px) {
+  .header-grid {
+    grid-template-columns: auto 1fr auto;
+    column-gap: 12px;
+  }
+  .nav { gap: clamp(6px, 1.4vw, 14px); }
+  .nav-link { font-size: 14px; padding: 0 4px; }
+  .uber-eats-btn { padding: 8px 14px; }
+}
+
 /* ========================================
    MOBILE MENU (< 600px) - Beautiful UI
 ======================================== */
@@ -327,6 +338,7 @@
   .nav-wrap.mobile-open .nav-item:nth-child(1) { animation-delay: 0.1s; }
   .nav-wrap.mobile-open .nav-item:nth-child(2) { animation-delay: 0.15s; }
   .nav-wrap.mobile-open .nav-item:nth-child(3) { animation-delay: 0.2s; }
+  .nav-wrap.mobile-open .nav-item:nth-child(4) { animation-delay: 0.25s; }
 
   @keyframes navItemFadeIn {
     from {

@@ -9,6 +9,16 @@
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import {
+  HANUKKAH_TITLE,
+  HANUKKAH_INTRO,
+  HANUKKAH_TIERS,
+  HANUKKAH_DAYS,
+  HANUKKAH_STEPS,
+  HANUKKAH_NOTE,
+  HANUKKAH_CLOSING,
+  formatTierPrice,
+} from "../src/lib/hanukkah.js";
 import { parseCSV, normalizeProduct } from "../src/lib/api.js";
 import {
   SITE_URL,
@@ -94,6 +104,7 @@ const navHtml = `<header>
 <nav aria-label="Main">
 <a href="/">Home</a>
 <a href="/menu">Menu</a>
+<a href="/hanukkah">Hanukkah Pre-Order</a>
 <a href="/contact">Contact Us</a>
 </nav>
 </header>`;
@@ -154,6 +165,33 @@ ${items}
   return shell(`<h1>Menu</h1>
 <p>Explore our cakes, pastries, breads, and one-bite creations — crafted fresh at Lumière Patisserie.</p>
 ${sections.join("\n")}`);
+}
+
+// Mirrors src/pages/Hanukkah.jsx: title, steps, pickup days, flavours by tier.
+function hanukkahBody() {
+  const steps = HANUKKAH_STEPS.map((s) => `<li><strong>${escapeHtml(s.title)}</strong>: ${escapeHtml(s.text)}</li>`).join("\n");
+  const days = HANUKKAH_DAYS.map((d) => `<li>${escapeHtml(d.label)}</li>`).join("\n");
+  const tiers = HANUKKAH_TIERS.map((t) => {
+    const items = t.flavours.map((f) => `<li>${escapeHtml(f.name)}</li>`).join("\n");
+    return `<section>
+<h2>${escapeHtml(t.label)}: ${escapeHtml(formatTierPrice(t.price))} each</h2>
+<ul>
+${items}
+</ul>
+</section>`;
+  }).join("\n");
+  return shell(`<h1>${escapeHtml(HANUKKAH_TITLE)}</h1>
+<p>${escapeHtml(HANUKKAH_INTRO)}</p>
+<ol>
+${steps}
+</ol>
+<h2>Pickup days</h2>
+<ul>
+${days}
+</ul>
+<p><strong>${escapeHtml(HANUKKAH_NOTE.title)}.</strong> ${escapeHtml(HANUKKAH_NOTE.text)}</p>
+${tiers}
+<p>${escapeHtml(HANUKKAH_CLOSING.title)} ${escapeHtml(HANUKKAH_CLOSING.text)}</p>`);
 }
 
 // Mirrors src/pages/Contact.jsx (title, lede, phone, address, hours).
@@ -225,6 +263,11 @@ outputs.push({
   urlPath: "/menu",
   file: path.join(DIST, "menu", "index.html"),
   html: renderPage({ meta: pageMeta("menu"), jsonLd: null, body: menuBody() }),
+});
+outputs.push({
+  urlPath: "/hanukkah",
+  file: path.join(DIST, "hanukkah", "index.html"),
+  html: renderPage({ meta: pageMeta("hanukkah"), jsonLd: null, body: hanukkahBody() }),
 });
 outputs.push({
   urlPath: "/contact",
@@ -302,6 +345,7 @@ redirects.push(
 const rewrites = [
   { source: "/", destination: "/_home.html" },
   { source: "/menu", destination: "/menu/index.html" },
+  { source: "/hanukkah", destination: "/hanukkah/index.html" },
   { source: "/contact", destination: "/contact/index.html" },
   { source: "/product/:slug", destination: "/product/:slug/index.html" },
 ];

@@ -36,3 +36,13 @@
 - `main` at `9241efd` deployed by Railway in about 2.5 minutes.
 - Checked on https://www.lumierepatisserie.ca: `/`, `/menu`, `/contact`, `/product/tiramisu-cake` serve their own title and canonical in the raw HTML; `/abc` returns 404; `robots.txt` and `sitemap.xml` (75 URLs) load; `/collections/boulangerie` → `/menu#bread`, `/collections/gateaux-cakes` → `/menu#cakes`, `/products/fraisier` → `/menu`, `/pages/about` → `/`, `/drinks-menu` → `/drinks-menu.html` (loads). Menu tabs at 375px: a tap highlights only the tapped tab, a visible tab doesn't move, scrolling into Breads highlights Breads; no JS errors.
 - Still open: the bare domain `lumierepatisserie.ca` doesn't resolve (registrar DNS); confirm hours and price range with the shop; test on a real phone.
+
+## Session — 2026-11-11 (Hanukkah pre-order page)
+- **Tool used:** Claude Code
+- **Branch:** `feat/hanukkah-preorder` (not pushed, not merged).
+- **What was done:** New page `/hanukkah` ("Hanukkah 2026 sufganiyot pre-order") built from the approved mockup `tasks/hanukkah-mockups/option-c.html`: title row with button, 3-step strip, pickup-day chips, Classic ($3.95) and Fancy ($7.25) flavour grids, closing bar, sticky "Pre-order now" bar on mobile. No pickup time anywhere (owner change). Tapping a flavour opens a hand-written lightbox (name, tier, price; Esc, backdrop, arrow keys; focus returns to the tile; body scroll locked). The header nav has a fourth item "Hanukkah Pre-Order" after Menu (desktop and mobile menu); a small `Header.css` rule keeps four items on one row between 601px and 1000px. SEO: own title, description, canonical, prerendered HTML (`dist/hanukkah/index.html`), sitemap entry (76 URLs) and a serve.json rewrite, same as `/menu`. All content lives in `src/lib/hanukkah.js`.
+- **Form URL:** `HANUKKAH_FORM_URL` in `src/lib/hanukkah.js` is empty, so every pre-order button shows a disabled "Pre-orders open soon".
+- **Images:** `public/images/hanukkah/<slug>.jpg` (800px, fetched by the Google Form script), `<slug>.webp` (800px) and `<slug>-400.webp`, 11 flavours, about 1.4 MB total.
+- **Verified:** build passes (76 pages), lint 35 errors (unchanged). Browser check at 1440px and 375px; screenshots in `tasks/hanukkah-mockups/built/`.
+- **What's next:** Paste the Google Form URL into the constant, then merge and deploy.
+- **Blockers:** Google Form URL.

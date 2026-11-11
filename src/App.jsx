@@ -4,6 +4,7 @@ import Header from "./components/Header.jsx";
 import Footer from "./components/Footer.jsx";
 import Home from "./pages/Home.jsx";
 import Menu from "./pages/Menu.jsx";
+import Hanukkah from "./pages/Hanukkah.jsx";
 import Contact from "./pages/Contact.jsx";
 import ScrollToTop from "./components/ScrollToTop.jsx";
 import ProductPage from "./pages/Products/Product";
@@ -25,6 +26,7 @@ function MainContent() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/menu" element={<Menu />} />
+        <Route path="/hanukkah" element={<Hanukkah />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/pages/contact" element={<Navigate to="/contact" replace />} />
         <Route path="/products" element={<ProductsRedirect />} />
