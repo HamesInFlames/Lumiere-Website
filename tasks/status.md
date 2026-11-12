@@ -49,9 +49,9 @@
 - **Tool used:** Claude Code
 - **Branch:** `feat/hanukkah-preorder`, also pushed as `testing-for-Hanukkah-preorder` (Railway Testing environment); merged into `main` on 2026-11-11 with the form link still empty, at the owner's request.
 - **What was done:** New page `/hanukkah` ("Hanukkah 2026 sufganiyot pre-order") built from the approved mockup `tasks/hanukkah-mockups/option-c.html`: title row with button, a bold full-width order-ahead notice ("Order at least 2 days before pickup", butter-yellow bar) directly under it, 3-step strip, pickup-day chips (Fri Dec 4 to Fri Dec 11, closed Mon Dec 7), Classic ($3.95) and Fancy ($7.25) flavour grids, closing bar, sticky "Pre-order now" bar on mobile. No pickup time anywhere (owner change). Tapping a flavour opens a hand-written lightbox (name, tier, price; Esc, backdrop, arrow keys; focus returns to the tile; body scroll locked). The header nav has a fourth item "Hanukkah Pre-Order" after Menu (desktop and mobile menu); a small `Header.css` rule keeps four items on one row between 601px and 1000px. SEO: own title, description, canonical, prerendered HTML (`dist/hanukkah/index.html`), sitemap entry (76 URLs) and a serve.json rewrite, same as `/menu`. All content lives in `src/lib/hanukkah.js`.
-- **Form URL:** `HANUKKAH_FORM_URL` in `src/lib/hanukkah.js` is empty, so every pre-order button shows a disabled "Pre-orders open soon".
+- **Form URL:** `HANUKKAH_FORM_URL` in `src/lib/hanukkah.js` now holds the live Google Form link (form created 2026-11-11 in the Kim Consultant Google account). Test order H26-0001 produced the order row, kitchen totals and confirmation email. The buttons render "Pre-order now" and open the form in a new tab.
 - **Images:** `public/images/hanukkah/<slug>.jpg` (800px, fetched by the Google Form script), `<slug>.webp` (800px) and `<slug>-400.webp`, 11 flavours, about 1.4 MB total.
 - **Verified:** build passes (76 pages), lint 35 errors (unchanged). Pickup ends Fri Dec 11 everywhere (no "Dec 12" left in page, raw HTML or meta); notice moved from beside the Classic photos to the top, in the prerendered HTML too. Browser check at 1440px and 375px; screenshots in `tasks/hanukkah-mockups/built/`.
 - **Local only:** `tasks/hanukkah-mockups/` (mockups and screenshots) is not committed.
-- **What's next:** Create the Google Form (owner approves Google access, then Set up runs), paste its URL into the constant, check on Testing, then deploy.
-- **Blockers:** Google Form URL.
+- **What's next:** Owner checks the buttons on Testing, then push to main.
+- **Blockers:** None.

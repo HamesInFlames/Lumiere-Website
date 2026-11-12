@@ -4,9 +4,9 @@
 // scripts/prerender.js under plain Node.
 
 // >>> PASTE THE GOOGLE FORM URL HERE <<<
-// While this is an empty string every "Pre-order now" button shows a disabled
-// "Pre-orders open soon" state instead of a link.
-export const HANUKKAH_FORM_URL = "";
+// Once this is set, every "Pre-order now" button links to the form in a new tab.
+// While it is an empty string, buttons show a disabled "Pre-orders open soon" state.
+export const HANUKKAH_FORM_URL = "https://docs.google.com/forms/d/e/1FAIpQLSdW6JbpyMUD_k6a8jj68ViyUmIPnR57jVafjx6tm9PZ1CdkIA/viewform";
 
 export const HANUKKAH_TITLE = "Hanukkah 2026 sufganiyot pre-order";
 export const HANUKKAH_INTRO = "Hanukkah sufganiyot / donuts. Pre-order only, pay at pickup in the shop.";
