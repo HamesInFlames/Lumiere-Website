@@ -24,6 +24,7 @@ export const imageMap = {
   "/images/cakes/Lemon Pistachio Meringue Cake.png": "/optimized/images/cakes/Lemon Pistachio Meringue Cake.webp",
   "/images/cakes/Raspberry Pistachio Cake.png": "/optimized/images/cakes/Raspberry Pistachio Cake.webp",
   "/images/cakes/Strawberry Cheesecake.png": "/optimized/images/cakes/Strawberry Cheesecake.webp",
+  "/images/cakes/Strawberry Cheesecake 2026.jpg": "/optimized/images/cakes/Strawberry Cheesecake 2026.webp",
   "/images/cakes/Tiramisu Cake.png": "/optimized/images/cakes/Tiramisu Cake.webp",
   "/images/one-biters/One Biters 12pc.png": "/optimized/images/one-biters/One Biters 12pc.webp",
   "/images/one-biters/One Biters 4pc.png": "/optimized/images/one-biters/One Biters 4pc.webp",

@@ -37,13 +37,21 @@
 - Checked on https://www.lumierepatisserie.ca: `/`, `/menu`, `/contact`, `/product/tiramisu-cake` serve their own title and canonical in the raw HTML; `/abc` returns 404; `robots.txt` and `sitemap.xml` (75 URLs) load; `/collections/boulangerie` → `/menu#bread`, `/collections/gateaux-cakes` → `/menu#cakes`, `/products/fraisier` → `/menu`, `/pages/about` → `/`, `/drinks-menu` → `/drinks-menu.html` (loads). Menu tabs at 375px: a tap highlights only the tapped tab, a visible tab doesn't move, scrolling into Breads highlights Breads; no JS errors.
 - Still open: the bare domain `lumierepatisserie.ca` doesn't resolve (registrar DNS); confirm hours and price range with the shop; test on a real phone.
 
+## Session — 2026-11-05 (new photo mock: Strawberry Cheesecake)
+- **Tool used:** Claude Code
+- **Branch:** `ccr-6fa48463-7ae3sj`, ready to merge into `main` (James asked for it live; merging is his step). The Railway sandbox environment idea was dropped for now.
+- **What was done:** New photo for the full-size Strawberry Cheesecake (whole cake + slice on marble). The site shows every product in a square frame with `object-fit: cover`, so a plain swap would cut off the cake and the slice. Made a 1600×1600 version by stretching the empty marble above and below the cake (no AI fill, nothing on the cake changed), and smoothed the blocky JPEG patch in the top-left corner of the marble. New files sit next to the old ones (old photo kept for rollback): `public/images/cakes/Strawberry Cheesecake 2026.jpg` (1600², 311 KB) and `public/optimized/images/cakes/Strawberry Cheesecake 2026.webp` (1000², 50 KB, quality 82). Pointed `products.csv`, the `api.js` fallback and `imageMap.js` at it.
+- **Verified:** `npm run build` passes (75 pages). Lint 35 errors (unchanged). Product page and /menu at 1440px and 375px: whole cake and slice visible, no console errors.
+- **What's next:** Merge into `main`, then check the live product page once Railway finishes deploying. Repeat the same treatment as new photos arrive. The new photo is a wider shot, so the cake looks smaller in its card than the old-style neighbours until those are re-shot too.
+- **Blockers:** None.
+
 ## Session — 2026-11-11 (Hanukkah pre-order page)
 - **Tool used:** Claude Code
-- **Branch:** `feat/hanukkah-preorder` (not pushed, not merged).
+- **Branch:** `feat/hanukkah-preorder`, also pushed as `testing-for-Hanukkah-preorder` (Railway Testing environment); merged into `main` on 2026-11-11 with the form link still empty, at the owner's request.
 - **What was done:** New page `/hanukkah` ("Hanukkah 2026 sufganiyot pre-order") built from the approved mockup `tasks/hanukkah-mockups/option-c.html`: title row with button, a bold full-width order-ahead notice ("Order at least 2 days before pickup", butter-yellow bar) directly under it, 3-step strip, pickup-day chips (Fri Dec 4 to Fri Dec 11, closed Mon Dec 7), Classic ($3.95) and Fancy ($7.25) flavour grids, closing bar, sticky "Pre-order now" bar on mobile. No pickup time anywhere (owner change). Tapping a flavour opens a hand-written lightbox (name, tier, price; Esc, backdrop, arrow keys; focus returns to the tile; body scroll locked). The header nav has a fourth item "Hanukkah Pre-Order" after Menu (desktop and mobile menu); a small `Header.css` rule keeps four items on one row between 601px and 1000px. SEO: own title, description, canonical, prerendered HTML (`dist/hanukkah/index.html`), sitemap entry (76 URLs) and a serve.json rewrite, same as `/menu`. All content lives in `src/lib/hanukkah.js`.
 - **Form URL:** `HANUKKAH_FORM_URL` in `src/lib/hanukkah.js` is empty, so every pre-order button shows a disabled "Pre-orders open soon".
 - **Images:** `public/images/hanukkah/<slug>.jpg` (800px, fetched by the Google Form script), `<slug>.webp` (800px) and `<slug>-400.webp`, 11 flavours, about 1.4 MB total.
 - **Verified:** build passes (76 pages), lint 35 errors (unchanged). Pickup ends Fri Dec 11 everywhere (no "Dec 12" left in page, raw HTML or meta); notice moved from beside the Classic photos to the top, in the prerendered HTML too. Browser check at 1440px and 375px; screenshots in `tasks/hanukkah-mockups/built/`.
 - **Local only:** `tasks/hanukkah-mockups/` (mockups and screenshots) is not committed.
-- **What's next:** Paste the Google Form URL into the constant, then merge and deploy.
+- **What's next:** Create the Google Form (owner approves Google access, then Set up runs), paste its URL into the constant, check on Testing, then deploy.
 - **Blockers:** Google Form URL.
